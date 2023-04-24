@@ -1,11 +1,13 @@
 const express = require("express");
 const cors = require("cors");
+const morgan = require("morgan");
 require("dotenv").config();
 const { Pool } = require("pg");
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use(morgan("dev"));
 
 const port = process.env.PORT || 3000;
 
@@ -32,10 +34,12 @@ app.get("/api/users", async (req, res) => {
 });
 
 // Get a specific user by id
-app.get('/api/users/:id', async (req, res) => {
+app.get("/api/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+    const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [
+      id,
+    ]);
     res.json(rows[0]);
   } catch (err) {
     console.error(err);
@@ -43,12 +47,11 @@ app.get('/api/users/:id', async (req, res) => {
   }
 });
 
-
 // Delete a user
-app.delete('/api/users/:id', async (req, res) => {
+app.delete("/api/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    await pool.query('DELETE FROM users WHERE id = $1', [id]);
+    await pool.query("DELETE FROM users WHERE id = $1", [id]);
     res.sendStatus(200);
   } catch (err) {
     console.error(err);
@@ -57,11 +60,15 @@ app.delete('/api/users/:id', async (req, res) => {
 });
 
 // Update an existing user
-app.put('/api/users/:id', async (req, res) => {
+app.put("/api/users/:id", async (req, res) => {
   try {
     const { id } = req.params;
     const { name, email } = req.body;
-    await pool.query('UPDATE users SET name = $1, email = $2 WHERE id = $3', [name, email, id]);
+    await pool.query("UPDATE users SET name = $1, email = $2 WHERE id = $3", [
+      name,
+      email,
+      id,
+    ]);
     res.sendStatus(200);
   } catch (err) {
     console.error(err);
