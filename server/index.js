@@ -31,6 +31,16 @@ app.get("/api/users", async (req, res) => {
   }
 });
 
-
+// Get a specific user by id
+app.get('/api/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { rows } = await pool.query('SELECT * FROM users WHERE id = $1', [id]);
+    res.json(rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
