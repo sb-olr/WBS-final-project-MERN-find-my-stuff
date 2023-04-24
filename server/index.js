@@ -43,4 +43,30 @@ app.get('/api/users/:id', async (req, res) => {
   }
 });
 
+
+// Delete a user
+app.delete('/api/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await pool.query('DELETE FROM users WHERE id = $1', [id]);
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
+// Update an existing user
+app.put('/api/users/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, email } = req.body;
+    await pool.query('UPDATE users SET name = $1, email = $2 WHERE id = $3', [name, email, id]);
+    res.sendStatus(200);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
 app.listen(port, () => console.log(`Listening on port ${port}`));
