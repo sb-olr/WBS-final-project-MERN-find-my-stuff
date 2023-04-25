@@ -66,12 +66,12 @@ router.delete("/:id", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email } = req.body;
-    await pool.query("UPDATE users SET name = $1, email = $2 WHERE id = $3", [
-      name,
-      email,
-      id,
-    ]);
+    const { name, email, password, nickname } = req.body;
+    const updated_at = new Date();
+    await pool.query(
+      "UPDATE users SET name = $1, email = $2, password = $3, nickname = $4, updated_at = $5 WHERE id = $6",
+      [name, email, password, nickname, updated_at, id]
+    );
     res.sendStatus(200);
   } catch (err) {
     console.error(err);
