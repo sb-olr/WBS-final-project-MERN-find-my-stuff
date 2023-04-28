@@ -22,10 +22,8 @@ function SignIn({ setToken }) {
 
     try {
       // Send a POST request to the server with the user's credentials
-      const response = await axios.post("http://localhost:3001/login", {
-        // username: uname.value,
+      const response = await axios.post("http://localhost:8000/api/login", {
         email: useremail.value,
-
         password: pass.value,
       });
 

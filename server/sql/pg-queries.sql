@@ -4,7 +4,6 @@ CREATE TABLE users
   email TEXT NOT NULL UNIQUE,
   password TEXT NOT NULL,
   name TEXT NOT NULL,
-  nickname TEXT NOT NULL,
   active BOOLEAN NOT NULL DEFAULT TRUE,
   admin BOOLEAN NOT NULL DEFAULT FALSE,
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
@@ -32,7 +31,6 @@ CREATE TABLE items
   quantity INTEGER NOT NULL DEFAULT 1,
   owner TEXT,
   space_id INTEGER REFERENCES spaces(id),
-  user_id INTEGER REFERENCES users(id),
   created_at TIMESTAMP NOT NULL DEFAULT NOW(),
   updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
@@ -40,16 +38,16 @@ CREATE TABLE items
 INSERT
 INTO users
 
-(email, password, name, nickname, active, admin
+(email, password, name, active, admin
 )
 VALUES
 
-('admin@example.com', 'admin', 'admin', 'admin', TRUE, TRUE
+('admin@example.com', 'admin', 'admin', TRUE, TRUE
 ),
-('user1@example.com', 'password1', 'John Doe', 'Johnny', TRUE, FALSE),
-('user2@example.com', 'password2', 'Jane Smith', 'Janie', TRUE, FALSE),
-('user3@example.com', 'password3', 'Bob Johnson', 'Bobby', TRUE, FALSE),
-('user4@example.com', 'password4', 'Alice Lee', 'Ali', TRUE, FALSE);
+('user1@example.com', 'password1', 'John Doe', TRUE, FALSE),
+('user2@example.com', 'password2', 'Jane Smith', TRUE, FALSE),
+('user3@example.com', 'password3', 'Bob Johnson', TRUE, FALSE),
+('user4@example.com', 'password4', 'Alice Lee', TRUE, FALSE);
 
 INSERT
 INTO spaces

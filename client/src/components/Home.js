@@ -18,7 +18,7 @@ const Home = () => {
               Home Inventory
             </h2>
             <p className="text-gray-500 py-4 max-w-md">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Amet
+              Lorem ITEMS, dolor sit amet consectetur adipisicing elit. Amet
               iusto quisquam eius enim, deleniti assumenda rem sed fuga labore
               commodi.
             </p>
@@ -45,8 +45,8 @@ const Home = () => {
             />
           </div>
         </div>
-        <Features />
       </div>
+      <Features />
       <Footer />
     </>
   );

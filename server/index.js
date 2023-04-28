@@ -3,6 +3,7 @@ const cors = require("cors");
 const morgan = require("morgan");
 require("dotenv").config();
 const usersRouter = require("./routes/users");
+const loginRouter = require("./routes/login");
 
 const app = express();
 app.use(cors());
@@ -16,5 +17,6 @@ app.get("/", (req, res) => {
 });
 
 app.use('/api/users', usersRouter);
+app.use("/api/login", loginRouter);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
