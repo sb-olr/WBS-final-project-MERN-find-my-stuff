@@ -1,4 +1,4 @@
-import React, { useState,useNavigate } from "react";
+import React, { useState } from "react";
 // import Footer from "./Footer";
 import closet from "../Assets/hanger.png";
 import addnew from "../Assets/AddNew.png";
@@ -33,10 +33,10 @@ const Items = () => {
       style: "shadow-blue-600",
     },
   ];
-  const navigate= useNavigate
+  // const navigate= useNavigate
 const handleAddNewItemClick = () => {
   // Navigate to the "NewSpace" component
-  navigate("/items/newitem");
+  // navigate("/items/newitem");
   // navigate("/AddNewSpace", {
   //   state: setSpaces,
   // });

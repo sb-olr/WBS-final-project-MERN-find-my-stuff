@@ -161,6 +161,7 @@ const AddNewItem = () => {
                 </div>
                 <div className="col-12">
                   <button
+                    onSubmit={handleSubmit}
                     type="submit"
                     className="btn btn-primary px-8 bg-gradient-to-b from-green-900 to-green-800"
                   >

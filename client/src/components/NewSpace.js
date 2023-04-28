@@ -110,12 +110,14 @@ console.log(selectedFile?.name)
 
                 <div class="mt-6 flex items-center justify-end gap-x-2">
                   <button
+                    onSubmit={handleSubmit}
                     type="submit"
                     class="text-white bg-gradient-to-b from-green-900 to-green-800 px-8 py-2 my-4 mx-auto flex items-center rounded-md hover:scale-110 duration-300"
                   >
                     Save
                   </button>
                   <button
+                    onSubmit={handleSubmit}
                     type="submit"
                     class="text-white bg-gradient-to-b from-red-900 to-red-800 px-6 py-2 my-4 mx-auto flex items-center rounded-md hover:scale-110 duration-300"
                   >
