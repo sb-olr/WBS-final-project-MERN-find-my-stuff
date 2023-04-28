@@ -35,13 +35,8 @@ CREATE TABLE items
   updated_at TIMESTAMP NOT NULL DEFAULT NOW()
 );
 
-INSERT
-INTO users
-
-(email, password, name, active, admin
-)
-VALUES
-
+INSERT INTO users (email, password, name, active, admin
+) VALUES
 ('admin@example.com', 'admin', 'admin', TRUE, TRUE
 ),
 ('user1@example.com', 'password1', 'John Doe', TRUE, FALSE),
@@ -49,11 +44,7 @@ VALUES
 ('user3@example.com', 'password3', 'Bob Johnson', TRUE, FALSE),
 ('user4@example.com', 'password4', 'Alice Lee', TRUE, FALSE);
 
-INSERT
-INTO spaces
-  (name, description, user_id)
-VALUES
-
+INSERT INTO spaces (name, description, user_id) VALUES
 ('Kitchen', 'The kitchen is the heart of the home', 1
 ),
 ('Living Room', 'The living room is the place to relax', 1),
