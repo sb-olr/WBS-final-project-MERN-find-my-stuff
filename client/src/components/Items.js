@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState,useNavigate } from "react";
 // import Footer from "./Footer";
 import closet from "../Assets/hanger.png";
-import office from "../Assets/office-supplies.png";
 import addnew from "../Assets/AddNew.png";
+import ItemsCards from "./itemsCards";
+
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
+// import AddNewItem from "./NewItems";
 
 const Items = () => {
+  const [newItem, setNewItem] = useState([]);
+  const [items, setItems] = useState([
+    {
+      name: "name",
+      id: 2,
+    },
+    {
+      name: "name2",
+      id: 3,
+    },
+  ]);
   const itemsindex = [
     {
       id: 1,
@@ -13,20 +27,21 @@ const Items = () => {
       style: "shadow-yellow-500",
     },
     {
-      id: 2,
-      src: office,
-      title: "Office",
-      style: "shadow-blue-500",
-    },
-  
-
-    {
       id: 3,
       src: addnew,
       title: "New Item",
       style: "shadow-blue-600",
     },
   ];
+  const navigate= useNavigate
+const handleAddNewItemClick = () => {
+  // Navigate to the "NewSpace" component
+  navigate("/items/newitem");
+  // navigate("/AddNewSpace", {
+  //   state: setSpaces,
+  // });
+  //setShowAddNewSpace(true)
+};
 
   return (
     <div
@@ -40,22 +55,34 @@ const Items = () => {
           </h4>
         </div>
 
-        <div className="flex justify-end">
-          <h4 className="text-4xl py-6 font-bold border-b-4 border-gray-500 p-2 inline">
-            Filter
-          </h4>
-        </div>
-
         <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-8 text-center py08 px-12 pt-5 sm:px-0">
           {itemsindex.map(({ id, src, title, style }) => (
             <div
               key={id}
               className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full ${style}`}
             >
-              <img src={src} alt="" className="w-20 mx-auto" />
-              <p className="mt-4 text-white">{title}</p>
+            
+              {id === 3 ? ( // Check if the current item is "New Item"
+                <div>
+                  <Link to="/AddNewItem">
+                    {/* Wrap the image and text in a Link */}
+                    <img src={src} alt="" className="w-20 mx-auto" />
+                    <p className="mt-4 text-white">{title}</p>
+                  </Link>
+                </div>
+              ) : (
+                <>
+                  <img src={src} alt="" className="w-20 mx-auto" />
+                  <p className="mt-4 text-white">{title}</p>
+                </>
+              )}
             </div>
           ))}
+          <div>
+            {items.map((item) => (
+              <ItemsCards item={item} />
+            ))}
+          </div>
         </div>
       </div>
       {/* <Footer /> */}
@@ -63,4 +90,3 @@ const Items = () => {
   );
 };
 export default Items;
-

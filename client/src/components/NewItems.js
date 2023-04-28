@@ -78,6 +78,19 @@ const AddNewItem = () => {
                 </div>
               </div>
             </div>
+            <div className="flex justify-center items-center">
+              <div class="col-md-4">
+                <label for="inputSpaces" class="form-label">
+                  Item Name
+                </label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputSpaces"
+                  placeholder="item name"
+                />
+              </div>
+            </div>
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
               <h4>Item Details</h4>
               <form class="row g-3">
@@ -85,12 +98,16 @@ const AddNewItem = () => {
                   <label for="inputSpaces" class="form-label">
                     Spaces
                   </label>
-                  <input
+                  <select
                     type="text"
                     class="form-control"
                     id="inputSpaces"
                     placeholder="Space name"
-                  />
+                  >
+                    <option> Kitchen</option>
+                    <option>Office</option>
+                    <option>Closet</option>
+                  </select>
                 </div>
                 <div class="col-md-2">
                   <label for="inputQuantity" class="form-label">
@@ -149,7 +166,7 @@ const AddNewItem = () => {
                   >
                     Save
                   </button>
-                  <span style={{ margin: "0 10px" }}></span>
+                  <span style={{ margin: "0 30px" }}></span>
                   <button
                     type="submit"
                     className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"

@@ -8,6 +8,10 @@ import Items from "./components/Items";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import AddNewSpace from "./components/NewSpace";
+import AddNewItem from "./components/NewItems";
+import SpacesItems from "./components/SpaceItems";
+
+
 import Layout from "./components/Layout";
 
 const App = () => {
@@ -27,13 +31,21 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/Spaces" element={<Layout />}>
-            <Route index element={<Spaces spaces={spaces} setSpaces={setSpaces} />} />
-            <Route path="new" element={<AddNewSpace spaces={spaces} setSpaces={setSpaces}  />} />
+            <Route
+              index
+              element={<Spaces spaces={spaces} setSpaces={setSpaces} />}
+            />
+            <Route
+              path="new"
+              element={<AddNewSpace spaces={spaces} setSpaces={setSpaces} />}
+            />
           </Route>
           <Route path="/Items" element={<Items />} />
           <Route path="/SignIn" element={<SignIn setToken={setToken} />} />
           <Route path="/SignUp" element={<SignUp setToken={setToken} />} />
           {/* <Route path="/AddNewSpace" element={<AddNewSpace />} /> */}
+          <Route path="/AddNewItem" element={<AddNewItem />} />
+          <Route path="/SpacesItems" element={<SpacesItems />} />
         </Routes>
       </main>
       <div></div>

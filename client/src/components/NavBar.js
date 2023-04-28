@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet,useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = ({ token }) => {
+  const navigate = useNavigate();
+
   // state variables
   const [nav, setNav] = useState(false); // controls mobile navigation
 
@@ -14,11 +16,13 @@ const NavBar = ({ token }) => {
   const links = [
     { id: 3, link: "Spaces", path: "/spaces" },
     { id: 4, link: "Items", path: "/items" },
+    { id: 4, link: "SpacesItems", path: "/spacesItems" },
   ];
   // handle sign out
   const handelsingout = () => {
     if (token) {
       localStorage.clear("token"); // clear token from local storage
+      navigate("/")
       window.location.reload(); // reload the window to sign out the user
     }
   };
@@ -92,7 +96,7 @@ const NavBar = ({ token }) => {
         </div>
         {/* for small screen */}
         {nav && (
-          <ul className="flex flex-col justify-center items-center absolute top-0 left-0 w-full h-screen bg-gradient-to-b from-black to-gray-800 text-gray-500">
+          <ul className="flex flex-col justify-center items-center absolute top-0 left-0 w-full min-h-screen bg-gradient-to-b from-black to-gray-800 text-gray-500">
             {/* loop through the navigation links */}
             {/* show navigation links after the user logs in */}
             <NavLink
