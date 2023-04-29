@@ -4,15 +4,10 @@ import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = ({ token }) => {
   const navigate = useNavigate();
-
-  // state variables
-  const [nav, setNav] = useState(false); // controls mobile navigation
-
-  // get token from local storage
-
+  const [nav, setNav] = useState(false)
+  const [search, setSearch] = useState("")
+  
   // const token = localStorage.getItem("token");
-
-  // navigation links
   const links = [
     { id: 3, link: "Spaces", path: "/spaces" },
     { id: 4, link: "Items", path: "/items" },
@@ -26,7 +21,15 @@ const NavBar = ({ token }) => {
       window.location.reload(); // reload the window to sign out the user
     }
   };
-  // render the navigation bar
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      console.log(search);
+      // do something with the search value
+    };
+   const handleChange = (e) => {
+     setSearch(e.target.value);
+     console.log(search)
+   };
 
   return (
     <>
@@ -39,13 +42,17 @@ const NavBar = ({ token }) => {
         {token && (
           <div className="search pt-2 max-w-sm">
             <label>
-              <input
-                type="text"
-                name="name"
-                placeholder="Search"
-                className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
-                // onChange={(e) => setSearchQuery(e.target.value)}
-              ></input>
+              <form onSubmit={handleSubmit}>
+                <input
+                  onChange={handleChange}
+                  type="text"
+                  name="search"
+                  value={search}
+                  placeholder="Search"
+                  className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
+                  // onChange={(e) => setSearchQuery(e.target.value)}
+                ></input>
+              </form>
             </label>
           </div>
         )}
