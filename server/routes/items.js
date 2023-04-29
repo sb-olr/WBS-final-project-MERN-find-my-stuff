@@ -3,17 +3,20 @@ const itemsController = require("../controllers/itemsController");
 
 const router = express.Router();
 
-// Get all spaces
-router.get("/all", spacesController.getAllSpaces);
+// Get all items
+router.get("/all", itemsController.getAllItems);
 
-// Add a new space
-router.post("/", spacesController.addSpace);
+// Get all items for a specific space
+router.get("/spaces/:space-id", itemsController.getItemsBySpaceID);
 
-// Get a specific space by id
-router.get("/:id", spacesController.getSpace);
+// Add a new item
+router.post("/", itemsController.addItem);
 
-// Delete a space
-router.delete("/:id", spacesController.deleteSpace);
+// Get a specific item by id
+router.get("/:id", itemsController.getItem);
+
+// Delete an item
+router.delete("/:id", itemsController.deleteItem);
 
 // Update an existing user
 router.put("/:id");
