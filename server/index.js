@@ -4,6 +4,7 @@ const morgan = require("morgan");
 require("dotenv").config();
 const usersRouter = require("./routes/users");
 const spacesRouter = require("./routes/spaces");
+const itemsRouter = require("./routes/items");
 const loginRouter = require("./routes/login");
 const verifyJWTToken = require("./middleware/verifyJWTToken");
 
@@ -20,6 +21,7 @@ app.get("/", (req, res) => {
 
 app.use("/api/users", usersRouter);
 app.use("/api/spaces", verifyJWTToken, spacesRouter);
+app.use("/api/items", verifyJWTToken, itemsRouter);
 app.use("/api/login", loginRouter);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
