@@ -1,5 +1,5 @@
 const express = require("express");
-const itemsController = require("../controllers/itemsController");
+const itemsController = require("../controllers/items");
 
 const router = express.Router();
 
@@ -7,7 +7,7 @@ const router = express.Router();
 router.get("/all", itemsController.getAllItems);
 
 // Get all items for a specific space
-router.get("/spaces/:space-id", itemsController.getItemsBySpaceID);
+router.get("/spaces/:spaceId", itemsController.getItemsBySpaceId);
 
 // Add a new item
 router.post("/", itemsController.addItem);

@@ -1,5 +1,5 @@
 const express = require("express");
-const spacesController = require("../controllers/spacesController");
+const spacesController = require("../controllers/spaces");
 
 const router = express.Router();
 

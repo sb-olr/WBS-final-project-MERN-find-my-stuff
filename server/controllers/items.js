@@ -3,7 +3,7 @@ const pool = require("../db/pg");
 const getAllItems = async (req, res) => {
   try {
     const { rows } = await pool.query(
-      "SELECT * FROM items where user_id = $1",
+      "SELECT * FROM items WHERE space_id IN (SELECT id FROM spaces WHERE user_id = $1)",
       [req.user.id]
     );
     res.json(rows);
@@ -11,10 +11,25 @@ const getAllItems = async (req, res) => {
     console.error(err);
     res.sendStatus(500);
   }
-}
+};
+
+const getItemsBySpaceId = async (req, res) => {
+  try {
+    const { rows } = await pool.query(
+      "SELECT * FROM items where user_id = $1 AND space_id = $2",
+      [req.user.id, spaceId]
+    );
+    res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+};
 
 const addItem = async (req, res) => {
   try {
+    const { spaceId } = req.params;
+
     const { name, description, quantity, owner, value, space_id, img_url } =
       req.body;
     await pool.query(
@@ -69,9 +84,9 @@ const updateItem = async (req, res) => {
   }
 };
 
-
 module.exports = {
   getAllItems,
+  getItemsBySpaceId,
   addItem,
   getItem,
   deleteItem,

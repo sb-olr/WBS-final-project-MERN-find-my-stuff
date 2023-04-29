@@ -50,3 +50,9 @@ INSERT INTO spaces (name, description, user_id) VALUES
 ('Living Room', 'The living room is the place to relax', 1),
 ('Bedroom', 'The bedroom is the place to sleep', 1),
 ('Bathroom', 'The bathroom is the place to wash', 1);
+
+
+INSERT INTO items
+  (name, space_id, description, img_url, value, quantity, owner)
+VALUES
+  ('Fridge', 1, 'A fridge to keep food cold', 'https://images.unsplash.com/photo-151055788', 500.00, 1, 'None')
