@@ -15,6 +15,7 @@ const getAllItems = async (req, res) => {
 
 const getItemsBySpaceId = async (req, res) => {
   try {
+    const { spaceId } = req.params;
     const { rows } = await pool.query(
       "SELECT * FROM items where user_id = $1 AND space_id = $2",
       [req.user.id, spaceId]
