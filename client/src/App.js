@@ -10,6 +10,7 @@ import SignUp from "./components/SignUp";
 import AddNewSpace from "./components/NewSpace";
 import AddNewItem from "./components/NewItems";
 import SpacesItems from "./components/SpaceItems";
+import { ItemsProvider } from "./context/useContext";
 
 
 import Layout from "./components/Layout";
@@ -28,25 +29,27 @@ const App = () => {
     <div className="App">
       <NavBar token={token} />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/Spaces" element={<Layout />}>
-            <Route
-              index
-              element={<Spaces spaces={spaces} setSpaces={setSpaces} />}
-            />
-            <Route
-              path="new"
-              element={<AddNewSpace spaces={spaces} setSpaces={setSpaces} />}
-            />
-          </Route>
-          <Route path="/Items" element={<Items />} />
-          <Route path="/SignIn" element={<SignIn setToken={setToken} />} />
-          <Route path="/SignUp" element={<SignUp setToken={setToken} />} />
-          {/* <Route path="/AddNewSpace" element={<AddNewSpace />} /> */}
-          <Route path="/AddNewItem" element={<AddNewItem />} />
-          <Route path="/SpacesItems" element={<SpacesItems />} />
-        </Routes>
+        <ItemsProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/Spaces" element={<Layout />}>
+              <Route
+                index
+                element={<Spaces spaces={spaces} setSpaces={setSpaces} />}
+              />
+              <Route
+                path="new"
+                element={<AddNewSpace spaces={spaces} setSpaces={setSpaces} />}
+              />
+            </Route>
+            <Route path="/Items" element={<Items />} />
+            <Route path="/SignIn" element={<SignIn setToken={setToken} />} />
+            <Route path="/SignUp" element={<SignUp setToken={setToken} />} />
+            {/* <Route path="/AddNewSpace" element={<AddNewSpace />} /> */}
+            <Route path="/AddNewItem" element={<AddNewItem />} />
+            <Route path="/SpacesItems" element={<SpacesItems />} />
+          </Routes>
+        </ItemsProvider>
       </main>
       <div></div>
     </div>

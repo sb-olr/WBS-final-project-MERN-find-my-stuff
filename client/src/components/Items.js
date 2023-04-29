@@ -1,31 +1,23 @@
 import React, { useState } from "react";
 // import Footer from "./Footer";
-import closet from "../Assets/hanger.png";
+// import closet from "../Assets/hanger.png";
 import addnew from "../Assets/AddNew.png";
-import ItemsCards from "./itemsCards";
+// import ItemsCards from "./itemsCards";
+import { useItems } from "../context/useContext";
 
 import { Link } from "react-router-dom"; // Import Link from react-router-dom
 // import AddNewItem from "./NewItems";
 
 const Items = () => {
-  const [newItem, setNewItem] = useState([]);
-  const [items, setItems] = useState([
-    {
-      name: "name",
-      id: 2,
-    },
-    {
-      name: "name2",
-      id: 3,
-    },
-  ]);
+  const {items} = useItems()
+
   const itemsindex = [
-    {
-      id: 1,
-      src: closet,
-      title: "Closet",
-      style: "shadow-yellow-500",
-    },
+    // {
+    //   id: 1,
+    //   src: closet,
+    //   title: "Closet",
+    //   style: "shadow-yellow-500",
+    // },
     {
       id: 3,
       src: addnew,
@@ -42,15 +34,16 @@ const handleAddNewItemClick = () => {
   // });
   //setShowAddNewSpace(true)
 };
+console.log(items)
 
   return (
     <div
       name="itemsindex"
-      className="bg-gradient-to-b from-gray-800 to-black w-full h-screen "
+      className="bg-gradient-to-b from-gray-800 to-black w-full pt-16 min-h-screen "
     >
       <div className="max-w-screen-lg mx-auto p-4 pt-5 flex flex-col justify-center w-full h-full text-white">
         <div className="text-center">
-          <h4 className="text-4xl py-6 font-bold border-b-4 border-gray-500 p-2 inline">
+          <h4 className="text-4xl py-6 pt-8 font-bold border-b-4 border-gray-500 p-2 inline">
             Items
           </h4>
         </div>
@@ -78,11 +71,11 @@ const handleAddNewItemClick = () => {
               )}
             </div>
           ))}
-          <div>
+          {/* <div>
             {items.map((item) => (
               <ItemsCards item={item} />
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
       {/* <Footer /> */}

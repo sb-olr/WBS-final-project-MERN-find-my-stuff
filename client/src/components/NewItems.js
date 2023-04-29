@@ -1,22 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useItems } from "../context/useContext";
+import Items from "./Items";
 
 const AddNewItem = () => {
-  const [selectedFile, setSelectedFile] = useState({});
+  const { setItems, items } = useItems();
+  const [newItem, setNewItem] = useState({
+    fileupload: "",
+    itemname: "",
+    spacename: "",
+    quantity: 0,
+    price: 0,
+    description: "",
+    owner: "",
+  });
 
-  const handleFileChange = (event) => {
+  // Handle changes to the file input field
+  const handleInputChange = (event) => {
     event.preventDefault();
-    setSelectedFile(event.target.files[0]);
-    // setSpaces(selectedFile);
+    setNewItem({
+      ...newItem,
+      [event.target.name]: [event.target.value],
+    });
   };
+  console.log(newItem);
+  // console.log(newItem.spacename);
 
+  // Handle form submission
   const handleSubmit = (event) => {
     event.preventDefault();
+    setItems([...items, newItem]);
   };
 
-  useEffect(() => {
-    console.log(selectedFile?.name);
-  }, [selectedFile]);
-
+  // Use effect hook to log the selected file name when it changes
+  // // useEffect(() => {
+  // //   console.log(selectedFile?.name);
+  // }, [newItem]);
   return (
     <>
       <div
@@ -53,19 +71,21 @@ const AddNewItem = () => {
                           // htmlFor="file-upload"
                           className="relative cursor-pointer rounded-md text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                         >
-                          <span>
+                          {/* <span>
                             {selectedFile?.name
                               ? selectedFile?.name
                               : `Upload a
                                 file`}
-                          </span>
+                          </span> */}
 
+                          <span>Upload a file</span>
                           <input
-                            // id="file-upload"
-                            // name="file-upload"
+                            onChange={handleInputChange}
+                            value={newItem.fileupload}
+                            id="fileupload"
+                            name="fileupload"
                             type="file"
                             className="sr-only"
-                            onChange={handleFileChange}
                           />
                         </label>
                         <p className="pl-1">or drag and drop </p>
@@ -80,10 +100,10 @@ const AddNewItem = () => {
             </div>
             <div className="flex justify-center items-center">
               <div class="col-md-4">
-                <label for="inputSpaces" class="form-label">
-                  Item Name
-                </label>
                 <input
+                  name="itemname"
+                  onChange={handleInputChange}
+                  value={newItem.itemname}
                   type="text"
                   class="form-control"
                   id="inputSpaces"
@@ -91,6 +111,7 @@ const AddNewItem = () => {
                 />
               </div>
             </div>
+
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
               <h4>Item Details</h4>
               <form class="row g-3">
@@ -99,6 +120,9 @@ const AddNewItem = () => {
                     Spaces
                   </label>
                   <select
+                    onChange={handleInputChange}
+                    value={newItem.spacename}
+                    name="spacename"
                     type="text"
                     class="form-control"
                     id="inputSpaces"
@@ -109,50 +133,69 @@ const AddNewItem = () => {
                     <option>Closet</option>
                   </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                   <label for="inputQuantity" class="form-label">
                     Quantity
                   </label>
                   <input
+                    onChange={handleInputChange}
+                    value={newItem.quantity}
+                    name="quantity"
                     type="number"
                     class="form-control"
                     id="inputQuantity"
                   />
                 </div>
-                <div class="col-3">
+                <div class="col-md-4">
                   <label for="inputPrice" class="form-label">
                     Price
                   </label>
                   <input
+                    onChange={handleInputChange}
+                    value={newItem.price}
+                    name="price"
                     type="price"
                     class="form-control"
                     id="inputPrice"
                     placeholder="Price"
                   />
                 </div>
-                <div class="col-10">
+                <div class="col-12">
                   <label for="inputDescription" class="form-label">
                     Description
                   </label>
                   <input
+                    onChange={handleInputChange}
+                    value={newItem.description}
+                    name="description"
                     type="text"
                     class="form-control"
                     id="inputDescription"
                     placeholder="Item description"
                   />
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <label for="inputDate" class="form-label">
                     Date
                   </label>
-                  <input type="date" class="form-control" id="inputDate" />
+                  <input
+                    onChange={handleInputChange}
+                    value={newItem.date}
+                    name="date"
+                    type="date"
+                    class="form-control"
+                    id="inputDate"
+                  />
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <label for="inputOwner" class="form-label">
                     Owner
                   </label>
                   <input
+                    onChange={handleInputChange}
+                    value={newItem.owner}
+                    name="owner"
                     type="text"
                     class="form-control"
                     id="inputOwner"
@@ -169,6 +212,7 @@ const AddNewItem = () => {
                   </button>
                   <span style={{ margin: "0 30px" }}></span>
                   <button
+                    onSubmit={handleSubmit}
                     type="submit"
                     className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
                   >
