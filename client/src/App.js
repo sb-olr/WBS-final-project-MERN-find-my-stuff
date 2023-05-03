@@ -23,8 +23,18 @@ const App = () => {
     //   src: closet,
     //   title: "Closet",
     //   style: "shadow-yellow-500",
+    //   items: [
+    //    {
+//          name: 'Shirt'
+    // },
+    //    {},
+    //    {},
+    //    {},
+    //    {},
+    //  ]
     // },
   ]);
+  const [selectedSpace, setSelectedSpace] = useState(1);
   return (
     <div className="App">
       <NavBar token={token} />

@@ -24,6 +24,7 @@ const AddNewItem = () => {
   // })
   // }
   // Handle changes to the file input field
+  
   const handleInputChange = (event) => {
     event.preventDefault();
     setNewItem({
@@ -226,15 +227,4 @@ export default AddNewItem;
 
 
 
-  // Handle changes to the file input field
-  // const handleInputChange = (event) => {
-  //   event.preventDefault();
-  //     setNewItem({
-  //       ...newItem,
-  //         [event.target.name]: event.target.value,
-  //   });
-  // };
-  // console.log(newItem.fileupload.substring(12));
-  // console.log(newItem.spacename);
-
-  // Handle form submission
+  
