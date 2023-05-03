@@ -1,21 +1,61 @@
-import React, { useState, useEffect } from "react";
+import React, { useRef } from "react";
+import { useNavigate } from "react-router-dom";
+// import { useItems } from "../context/useContext";
+import axios from "axios";
 
 const AddNewItem = () => {
-  const [selectedFile, setSelectedFile] = useState({});
+  const navigate = useNavigate();
+    const {
+      nameRef,
+      quantityRef,
+      valueRef,
+      space_idRef,
+      ownerRef,
+      img_urlRef,
+      dateRef,
+      descriptionRef,
+    } = useRef();
 
-  const handleFileChange = (event) => {
-    event.preventDefault();
-    setSelectedFile(event.target.files[0]);
-    // setSpaces(selectedFile);
-  };
+    // const { setItems, items } = useItems();
+    //   const [newItem, setNewItem] = useState({
+    //     img_url: "",
+    //     name: "",
+    //     space_id: "",
+    //     quantity: 0,
+    //     value: 0,
+    //     description: "",
+    //     owner: "",
+    //   });
 
+//     function fetchdata() {
+// const response= fetch('abc').then(data => data.json());
+// setNewItem({
+// spacename: response.spacename
+// })
+// }
   const handleSubmit = (event) => {
     event.preventDefault();
+     const { data } = axios.post("/api/items/", {
+       name: nameRef.current.value,
+       quantity: quantityRef.current.value,
+       value: valueRef.current.value,
+       space_id: space_idRef.current.value,
+       description: descriptionRef.current.value,
+       owner: ownerRef.current.value,
+       date: dateRef.current.value,
+       img_url: img_urlRef.current.value,
+     });
+        navigate("/items") 
   };
-
-  useEffect(() => {
-    console.log(selectedFile?.name);
-  }, [selectedFile]);
+  const handleCancel = (event) => {
+    event.preventDefault();
+      navigate("/items");
+  };
+        // console.log(items);
+  // Use effect hook to log the selected file name when it changes
+  // // useEffect(() => {
+  // //   console.log(selectedFile?.name);
+  // }, [newItem]);
 
   return (
     <>
@@ -53,19 +93,25 @@ const AddNewItem = () => {
                           // htmlFor="file-upload"
                           className="relative cursor-pointer rounded-md text-white focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-600 focus-within:ring-offset-2 hover:text-indigo-500"
                         >
-                          <span>
+                          {/* <span>
                             {selectedFile?.name
                               ? selectedFile?.name
                               : `Upload a
                                 file`}
-                          </span>
-
+                          </span> */}
+                          {/* <span>
+                            {newItem.img_url
+                              ? newItem.img_url.substring(12)
+                              : `Upload a
+                                file`}
+                          </span> */}
                           <input
-                            // id="file-upload"
-                            // name="file-upload"
+                            // onChange={handleInputChange}
+                            // value={newItem.img_url}
+                            id="img_url"
+                            name="img_url"
                             type="file"
                             className="sr-only"
-                            onChange={handleFileChange}
                           />
                         </label>
                         <p className="pl-1">or drag and drop </p>
@@ -78,64 +124,111 @@ const AddNewItem = () => {
                 </div>
               </div>
             </div>
+            <div className="flex justify-center items-center">
+              <div class="col-md-4">
+                <input
+                  name="name"
+                  // onChange={handleInputChange}
+                  ref={nameRef}
+                  // value={newItem.name}
+                  type="text"
+                  class="form-control"
+                  id="inputSpaces"
+                  placeholder="item name"
+                />
+              </div>
+            </div>
+
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
               <h4>Item Details</h4>
-              <form class="row g-3">
+              <form onSubmit={handleSubmit} class="row g-3">
                 <div class="col-md-5">
-                  <label for="inputSpaces" class="form-label">
+                  <label for="inputSpace_id" class="form-label">
                     Spaces
                   </label>
-                  <input
+                  <select
+                    // onChange={handleInputChange}
+                    ref={space_idRef}
+                    // value={newItem.space_id}
+                    name="space_id"
                     type="text"
                     class="form-control"
-                    id="inputSpaces"
+                    id="inputSpace_id"
                     placeholder="Space name"
-                  />
+                  >
+                    <option> Kitchen</option>
+                    <option>Office</option>
+                    <option>Closet</option>
+                  </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                   <label for="inputQuantity" class="form-label">
                     Quantity
                   </label>
                   <input
+                    // onChange={handleInputChange}
+                    ref={quantityRef}
+                    // value={newItem.quantity}
+                    name="quantity"
                     type="number"
                     class="form-control"
                     id="inputQuantity"
                   />
                 </div>
-                <div class="col-3">
-                  <label for="inputPrice" class="form-label">
-                    Price
+                <div class="col-md-4">
+                  <label for="inputValue" class="form-label">
+                    Value
                   </label>
                   <input
-                    type="price"
+                    // onChange={handleInputChange}
+                    ref={valueRef}
+                    // value={newItem.value}
+                    name="value"
+                    type="value"
                     class="form-control"
-                    id="inputPrice"
-                    placeholder="Price"
+                    id="inputValue"
+                    placeholder="value"
                   />
                 </div>
-                <div class="col-10">
+                <div class="col-12">
                   <label for="inputDescription" class="form-label">
                     Description
                   </label>
                   <input
+                    // onChange={handleInputChange}
+                    ref={descriptionRef}
+                    // value={newItem.description}
+                    name="description"
                     type="text"
                     class="form-control"
                     id="inputDescription"
                     placeholder="Item description"
                   />
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <label for="inputDate" class="form-label">
                     Date
                   </label>
-                  <input type="date" class="form-control" id="inputDate" />
+                  <input
+                    // onChange={handleInputChange}
+                    ref={dateRef}
+                    // value={newItem.date}
+                    name="date"
+                    type="date"
+                    class="form-control"
+                    id="inputDate"
+                  />
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-md-6">
                   <label for="inputOwner" class="form-label">
                     Owner
                   </label>
                   <input
+                    // onChange={handleInputChange}
+                    ref={ownerRef}
+                    // value={newItem.owner}
+                    name="owner"
                     type="text"
                     class="form-control"
                     id="inputOwner"
@@ -144,13 +237,15 @@ const AddNewItem = () => {
                 </div>
                 <div className="col-12">
                   <button
+                    onClick={handleSubmit}
                     type="submit"
                     className="btn btn-primary px-8 bg-gradient-to-b from-green-900 to-green-800"
                   >
                     Save
                   </button>
-                  <span style={{ margin: "0 10px" }}></span>
+                  <span style={{ margin: "0 30px" }}></span>
                   <button
+                    onClick={handleCancel}
                     type="submit"
                     className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
                   >
@@ -166,3 +261,18 @@ const AddNewItem = () => {
   );
 };
 export default AddNewItem;
+
+
+
+  // Handle changes to the file input field
+  // const handleInputChange = (event) => {
+  //   event.preventDefault();
+  //     setNewItem({
+  //       ...newItem,
+  //         [event.target.name]: event.target.value,
+  //   });
+  // };
+  // console.log(newItem.fileupload.substring(12));
+  // console.log(newItem.spacename);
+
+  // Handle form submission

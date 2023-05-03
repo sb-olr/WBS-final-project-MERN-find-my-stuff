@@ -12,11 +12,12 @@ function SignUp({ setToken }) {
     event.preventDefault();
 
     const { name, email, pass } = event.target.elements;
+    console.log(email.value);
 
     try {
-      const response = await axios.post("http://localhost:3001/signup", {
-        username: name.value,
-        useremail: email.value,
+      const response = await axios.post("http://localhost:3001/login", {
+        name: name.value,
+        email: email.value,
         password: pass.value,
       });
 
@@ -40,8 +41,8 @@ function SignUp({ setToken }) {
         setErrorMessages({
           name: "email",
           message: "Invalid email format. Please use a valid email address.",
-        });} 
-        else {
+        });
+      } else {
         setErrorMessages({
           name: "pass",
           message: "An unexpected error occurred. Please try again later.",
