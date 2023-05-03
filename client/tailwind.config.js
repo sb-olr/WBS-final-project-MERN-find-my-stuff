@@ -10,7 +10,9 @@ module.exports = {
         "text-clr": "#fff",
         bg: "#ecf1fe",
       },
-      fontFamily: { inter: "Inter" },
+      fontFamily: {
+        signature: ["Great Vibes"],
+      },
     },
     fontSize: { "21xl": "40px", "29xl": "48px", "13xl": "32px" },
   },
