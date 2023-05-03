@@ -1,20 +1,31 @@
-import React, { useState } from "react";
+import React, { useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { useItems } from "../context/useContext";
-// import Items from "./Items";
+// import { useItems } from "../context/useContext";
+import axios from "axios";
 
 const AddNewItem = () => {
   const navigate = useNavigate();
-    const { setItems, items } = useItems();
-      const [newItem, setNewItem] = useState({
-        fileupload: "",
-        itemname: "",
-        spacename: "",
-        quantity: 0,
-        price: 0,
-        description: "",
-        owner: "",
-    });
+    const {
+      nameRef,
+      quantityRef,
+      valueRef,
+      space_idRef,
+      ownerRef,
+      img_urlRef,
+      dateRef,
+      descriptionRef,
+    } = useRef();
+
+    // const { setItems, items } = useItems();
+    //   const [newItem, setNewItem] = useState({
+    //     img_url: "",
+    //     name: "",
+    //     space_id: "",
+    //     quantity: 0,
+    //     value: 0,
+    //     description: "",
+    //     owner: "",
+    //   });
 
 //     function fetchdata() {
 // const response= fetch('abc').then(data => data.json());
@@ -22,30 +33,25 @@ const AddNewItem = () => {
 // spacename: response.spacename
 // })
 // }
-
-  // Handle changes to the file input field
-  const handleInputChange = (event) => {
-    event.preventDefault();
-      setNewItem({
-        ...newItem,
-          [event.target.name]: event.target.value,
-    });
-  };
-  console.log(newItem.fileupload.substring(12));
-  // console.log(newItem.spacename);
-
-  // Handle form submission
-
   const handleSubmit = (event) => {
     event.preventDefault();
-      setItems(...items, newItem);
+     const { data } = axios.post("/api/items/", {
+       name: nameRef.current.value,
+       quantity: quantityRef.current.value,
+       value: valueRef.current.value,
+       space_id: space_idRef.current.value,
+       description: descriptionRef.current.value,
+       owner: ownerRef.current.value,
+       date: dateRef.current.value,
+       img_url: img_urlRef.current.value,
+     });
         navigate("/items") 
   };
   const handleCancel = (event) => {
     event.preventDefault();
       navigate("/items");
   };
-        console.log(items);
+        // console.log(items);
   // Use effect hook to log the selected file name when it changes
   // // useEffect(() => {
   // //   console.log(selectedFile?.name);
@@ -93,17 +99,17 @@ const AddNewItem = () => {
                               : `Upload a
                                 file`}
                           </span> */}
-                          <span>
-                            {newItem.fileupload
-                              ? newItem.fileupload.substring(12)
+                          {/* <span>
+                            {newItem.img_url
+                              ? newItem.img_url.substring(12)
                               : `Upload a
                                 file`}
-                          </span>
+                          </span> */}
                           <input
-                            onChange={handleInputChange}
-                            value={newItem.fileupload}
-                            id="fileupload"
-                            name="fileupload"
+                            // onChange={handleInputChange}
+                            // value={newItem.img_url}
+                            id="img_url"
+                            name="img_url"
                             type="file"
                             className="sr-only"
                           />
@@ -121,9 +127,10 @@ const AddNewItem = () => {
             <div className="flex justify-center items-center">
               <div class="col-md-4">
                 <input
-                  name="itemname"
-                  onChange={handleInputChange}
-                  value={newItem.itemname}
+                  name="name"
+                  // onChange={handleInputChange}
+                  ref={nameRef}
+                  // value={newItem.name}
                   type="text"
                   class="form-control"
                   id="inputSpaces"
@@ -134,18 +141,19 @@ const AddNewItem = () => {
 
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
               <h4>Item Details</h4>
-              <form class="row g-3">
+              <form onSubmit={handleSubmit} class="row g-3">
                 <div class="col-md-5">
-                  <label for="inputSpaces" class="form-label">
+                  <label for="inputSpace_id" class="form-label">
                     Spaces
                   </label>
                   <select
-                    onChange={handleInputChange}
-                    value={newItem.spacename}
-                    name="spacename"
+                    // onChange={handleInputChange}
+                    ref={space_idRef}
+                    // value={newItem.space_id}
+                    name="space_id"
                     type="text"
                     class="form-control"
-                    id="inputSpaces"
+                    id="inputSpace_id"
                     placeholder="Space name"
                   >
                     <option> Kitchen</option>
@@ -158,8 +166,9 @@ const AddNewItem = () => {
                     Quantity
                   </label>
                   <input
-                    onChange={handleInputChange}
-                    value={newItem.quantity}
+                    // onChange={handleInputChange}
+                    ref={quantityRef}
+                    // value={newItem.quantity}
                     name="quantity"
                     type="number"
                     class="form-control"
@@ -167,17 +176,18 @@ const AddNewItem = () => {
                   />
                 </div>
                 <div class="col-md-4">
-                  <label for="inputPrice" class="form-label">
-                    Price
+                  <label for="inputValue" class="form-label">
+                    Value
                   </label>
                   <input
-                    onChange={handleInputChange}
-                    value={newItem.price}
-                    name="price"
-                    type="price"
+                    // onChange={handleInputChange}
+                    ref={valueRef}
+                    // value={newItem.value}
+                    name="value"
+                    type="value"
                     class="form-control"
-                    id="inputPrice"
-                    placeholder="Price"
+                    id="inputValue"
+                    placeholder="value"
                   />
                 </div>
                 <div class="col-12">
@@ -185,8 +195,9 @@ const AddNewItem = () => {
                     Description
                   </label>
                   <input
-                    onChange={handleInputChange}
-                    value={newItem.description}
+                    // onChange={handleInputChange}
+                    ref={descriptionRef}
+                    // value={newItem.description}
                     name="description"
                     type="text"
                     class="form-control"
@@ -199,8 +210,9 @@ const AddNewItem = () => {
                     Date
                   </label>
                   <input
-                    onChange={handleInputChange}
-                    value={newItem.date}
+                    // onChange={handleInputChange}
+                    ref={dateRef}
+                    // value={newItem.date}
                     name="date"
                     type="date"
                     class="form-control"
@@ -213,8 +225,9 @@ const AddNewItem = () => {
                     Owner
                   </label>
                   <input
-                    onChange={handleInputChange}
-                    value={newItem.owner}
+                    // onChange={handleInputChange}
+                    ref={ownerRef}
+                    // value={newItem.owner}
                     name="owner"
                     type="text"
                     class="form-control"
@@ -248,3 +261,18 @@ const AddNewItem = () => {
   );
 };
 export default AddNewItem;
+
+
+
+  // Handle changes to the file input field
+  // const handleInputChange = (event) => {
+  //   event.preventDefault();
+  //     setNewItem({
+  //       ...newItem,
+  //         [event.target.name]: event.target.value,
+  //   });
+  // };
+  // console.log(newItem.fileupload.substring(12));
+  // console.log(newItem.spacename);
+
+  // Handle form submission
