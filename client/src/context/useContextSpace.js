@@ -1,24 +1,17 @@
 import { createContext, useContext, useState } from "react";
 
-const ItemsContext = createContext();
-const useItems = () => useContext(ItemsContext);
+const SpacesContext = createContext();
+const useSpaces = () => useContext(SpacesContext);
 
-const ItemsProvider = ({ children }) => {
-  const [items, setItems] = useState([
-    // {
-    //     name: "name",
-    //     id: 2,
-    // },
-    // {
-    //     name: "name2",
-    //     id: 3,
-    // },
+const SpacesProvider = ({ children }) => {
+  const [spaces, setSpaces] = useState([
+
   ]);
   return (
-    <ItemsContext.Provider value={{ items, setItems }}>
+    <SpacesContext.Provider value={{ spaces, setSpaces }}>
       {children}
-    </ItemsContext.Provider>
+    </SpacesContext.Provider>
   );
 };
 
-export { useItems, ItemsContext, ItemsProvider };
+export { useSpaces, SpacesContext, SpacesProvider };

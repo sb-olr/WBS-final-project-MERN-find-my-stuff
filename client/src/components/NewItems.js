@@ -1,40 +1,56 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useItems } from "../context/useContext";
-import Items from "./Items";
+// import Items from "./Items";
 
 const AddNewItem = () => {
-  const { setItems, items } = useItems();
-  const [newItem, setNewItem] = useState({
-    fileupload: "",
-    itemname: "",
-    spacename: "",
-    quantity: 0,
-    price: 0,
-    description: "",
-    owner: "",
-  });
+  const navigate = useNavigate();
+    const { setItems, items } = useItems();
+      const [newItem, setNewItem] = useState({
+        fileupload: "",
+        itemname: "",
+        spacename: "",
+        quantity: 0,
+        price: 0,
+        description: "",
+        owner: "",
+    });
+
+//     function fetchdata() {
+// const response= fetch('abc').then(data => data.json());
+// setNewItem({
+// spacename: response.spacename
+// })
+// }
 
   // Handle changes to the file input field
   const handleInputChange = (event) => {
     event.preventDefault();
-    setNewItem({
-      ...newItem,
-      [event.target.name]: [event.target.value],
+      setNewItem({
+        ...newItem,
+          [event.target.name]: event.target.value,
     });
   };
-  console.log(newItem);
+  console.log(newItem.fileupload.substring(12));
   // console.log(newItem.spacename);
 
   // Handle form submission
+
   const handleSubmit = (event) => {
     event.preventDefault();
-    setItems([...items, newItem]);
+      setItems(...items, newItem);
+        navigate("/items") 
   };
-
+  const handleCancel = (event) => {
+    event.preventDefault();
+      navigate("/items");
+  };
+        console.log(items);
   // Use effect hook to log the selected file name when it changes
   // // useEffect(() => {
   // //   console.log(selectedFile?.name);
   // }, [newItem]);
+
   return (
     <>
       <div
@@ -77,8 +93,12 @@ const AddNewItem = () => {
                               : `Upload a
                                 file`}
                           </span> */}
-
-                          <span>Upload a file</span>
+                          <span>
+                            {newItem.fileupload
+                              ? newItem.fileupload.substring(12)
+                              : `Upload a
+                                file`}
+                          </span>
                           <input
                             onChange={handleInputChange}
                             value={newItem.fileupload}
@@ -204,7 +224,7 @@ const AddNewItem = () => {
                 </div>
                 <div className="col-12">
                   <button
-                    onSubmit={handleSubmit}
+                    onClick={handleSubmit}
                     type="submit"
                     className="btn btn-primary px-8 bg-gradient-to-b from-green-900 to-green-800"
                   >
@@ -212,7 +232,7 @@ const AddNewItem = () => {
                   </button>
                   <span style={{ margin: "0 30px" }}></span>
                   <button
-                    onSubmit={handleSubmit}
+                    onClick={handleCancel}
                     type="submit"
                     className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
                   >

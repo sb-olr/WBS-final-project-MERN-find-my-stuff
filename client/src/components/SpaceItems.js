@@ -1,6 +1,6 @@
 import React from 'react';
 // import closet from "../Assets/hanger.png";
-import addnew from "../Assets/AddNew.png";
+// import addnew from "../Assets/AddNew.png";
 
 export default function SpaceItems() {
   const itemsindex = [
@@ -10,12 +10,12 @@ export default function SpaceItems() {
       title: "Closet",
       style: "shadow-yellow-500",
     },
-    {
-      id: 3,
-      src: addnew,
-      title: "New Item",
-      style: "shadow-blue-600",
-    },
+    // {
+    //   id: 3,
+    //   src: addnew,
+    //   title: "New Item",
+    //   style: "shadow-blue-600",
+    // },
   ];
   return (
     <div>
@@ -23,7 +23,7 @@ export default function SpaceItems() {
         name="spaces"
         className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen pt-20 "
       >
-        <div className="max-w-screen-lg mx-auto p-4 pt-1 flex flex-col justify-center w-full h-full text-white">
+        <div className="max-w-screen-lg mx-auto p-4 pt-1 flex flex-col text-white">
           <div>
             <h4 className="text-4xl py-6  font-bold border-b-4 border-gray-500 p-2 inline">
               Spaces Items
