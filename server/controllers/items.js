@@ -1,70 +1,72 @@
-const pool = require("../db/pg");
+const itemController = require("../models/items");
 
 const getAllItems = async (req, res) => {
   try {
-    const { rows } = await pool.query(
-      "SELECT * FROM items WHERE space_id IN (SELECT id FROM spaces WHERE user_id = $1)",
-      [req.user.id]
-    );
+    const rows = await itemController.getItems();
     res.json(rows);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
 const getItemsBySpaceId = async (req, res) => {
   try {
     const { spaceId } = req.params;
-    const { rows } = await pool.query(
-      "SELECT * FROM items where user_id = $1 AND space_id = $2",
-      [req.user.id, spaceId]
-    );
+    const rows = await itemController.getItemsBySpaceId(spaceId);
     res.json(rows);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
 const addItem = async (req, res) => {
   try {
-    const { spaceId } = req.params;
+    // const { spaceId } = req.params;
 
     const { name, description, quantity, owner, value, space_id, img_url } =
       req.body;
-    await pool.query(
-      "INSERT INTO items (name, description, quantity, owner, value, item_id, img_url) VALUES ($1, $2, $3, $4, $5, $6, $7)",
-      [name, description, quantity, owner, value, space_id, img_url]
+
+    if (!name || !description || !quantity || !owner || !space_id)
+      return res.status(500).json({ error: "All fields compulsory!" });
+
+    const item = await itemController.addItem(
+      name,
+      description,
+      quantity,
+      owner,
+      value,
+      space_id,
+      img_url
     );
-    res.sendStatus(201);
+    res.status(201).json(user);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
 const getItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { rows } = await pool.query("SELECT * FROM items WHERE id = $1", [
-      id,
-    ]);
-    res.json(rows[0]);
+    const user = await itemController.getItem(id);
+    res.json(user);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
 const deleteItem = async (req, res) => {
   try {
     const { id } = req.params;
-    await pool.query("DELETE FROM items WHERE id = $1", [id]);
-    res.sendStatus(200);
+
+    await itemController.deleteItem(id);
+    res.status(200);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
@@ -73,15 +75,24 @@ const updateItem = async (req, res) => {
     const { id } = req.params;
     const { name, description, quantity, owner, value, space_id, img_url } =
       req.body;
-    const updated_at = new Date();
-    await pool.query(
-      "UPDATE users SET name = $1, description = $2, quantity = $3, owner = $4, value = $5, space_id = $6, img_url = $7, updated_at = NOW() WHERE id = $8",
-      [name, description, quantity, owner, value, space_id, img_url, id]
+    if (!name || !description || !quantity || !owner || !space_id)
+      return res.status(500).json({ error: "All fields compulsory!" });
+
+    await itemController.updateItem(
+      id,
+      name,
+      description,
+      quantity,
+      owner,
+      value,
+      space_id,
+      img_url
     );
-    res.sendStatus(200);
+
+    res.status(200);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 

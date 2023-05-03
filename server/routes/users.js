@@ -10,8 +10,11 @@ router.get("/all", usersController.getAllUsers);
 // Add a new user
 router.post("/", usersController.addUser);
 
-// Get a specific user by id
+// Get current user
 router.get("/", verifyJWTToken, usersController.getUser);
+
+// Get a specific user by id (for testing) (to implement)
+// router.get("/:id", verifyJWTToken, usersController.getUser);
 
 // Delete a user
 router.delete("/", verifyJWTToken, usersController.deleteUser);

@@ -1,5 +1,6 @@
+// Todo: split spaces model logic
+
 const pool = require("../db/pg");
-const { updateUser } = require("./users");
 
 const getAllSpaces = async (req, res) => {
   try {
@@ -10,18 +11,18 @@ const getAllSpaces = async (req, res) => {
     res.json(rows);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
-}
+};
 
 const addSpace = async (req, res) => {
   try {
     const { name } = req.body;
     await pool.query("INSERT INTO spaces (name) VALUES ($1)", [name]);
-    res.sendStatus(201);
+    res.status(201);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
@@ -34,7 +35,7 @@ const getSpace = async (req, res) => {
     res.json(rows[0]);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
@@ -42,10 +43,10 @@ const deleteSpace = async (req, res) => {
   try {
     const { id } = req.params;
     await pool.query("DELETE FROM spaces WHERE id = $1", [id]);
-    res.sendStatus(200);
+    res.status(200);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
@@ -58,10 +59,10 @@ const updateSpace = async (req, res) => {
       "UPDATE users SET name = $1, updated_at = $2 WHERE id = $3",
       [name, updated_at, id]
     );
-    res.sendStatus(200);
+    res.status(200);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
