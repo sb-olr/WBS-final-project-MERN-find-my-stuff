@@ -6,6 +6,7 @@ import "../styles.css";
 
 // Define the SignIn component
 function SignIn({ setToken }) {
+  console.log(process.env);
   // - errorMessages will hold any error messages that occur during form submission
   // - isSubmitted will be set to true when the user successfully logs in
   const [errorMessages, setErrorMessages] = useState({});
@@ -22,10 +23,13 @@ function SignIn({ setToken }) {
 
     try {
       // Send a POST request to the server with the user's credentials
-      const response = await axios.post("http://localhost:8000/api/login", {
-        email: useremail.value,
-        password: pass.value,
-      });
+      const response = await axios.post(
+        process.env.REACT_APP_API_URL + "/login",
+        {
+          email: useremail.value,
+          password: pass.value,
+        }
+      );
 
       // Get the JWT token from the response
       const { token } = response.data;
@@ -42,24 +46,24 @@ function SignIn({ setToken }) {
     } catch (error) {
       console.log(error);
       // If there was an error, set errorMessages to the appropriate message
-      const { message } = error.response.data;
+      // const { message } = error.response.data;
 
-      if (message.toLowerCase() === "invalid email") {
-        setErrorMessages({
-          name: "useremail",
-          message: "Invalid email.",
-        });
-      } else if (message === "invalid password") {
-        setErrorMessages({
-          name: "pass",
-          message: "Incorrect password.",
-        });
-      } else {
-        setErrorMessages({
-          name: "other",
-          message: "An unexpected error occurred. Please try again.",
-        });
-      }
+      // if (message.toLowerCase() === "invalid email") {
+      //   setErrorMessages({
+      //     name: "useremail",
+      //     message: "Invalid email.",
+      //   });
+      // } else if (message === "invalid password") {
+      //   setErrorMessages({
+      //     name: "pass",
+      //     message: "Incorrect password.",
+      //   });
+      // } else {
+      //   setErrorMessages({
+      //     name: "other",
+      //     message: "An unexpected error occurred. Please try again.",
+      //   });
+      // }
     }
   };
 

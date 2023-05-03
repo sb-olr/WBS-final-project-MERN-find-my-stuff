@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { NavLink, Outlet,useNavigate } from "react-router-dom";
+import logo from "../Assets/logo.png";
+
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = ({ token }) => {
@@ -31,13 +33,22 @@ const NavBar = ({ token }) => {
    const handleChange = (e) => {
      setSearch(e.target.value);
    };
-    console.log(search);
+  console.log(search);
 
   return (
     <>
       <div className="flex justify-between items-cebter w-full h-20 pt-2 px-4 text-white bg-black fixed">
         <div>
-          <h1 className="text-5xl font-signature ml-2">My Stuff</h1>
+          {/* <img
+            // src="https://mylogo.tailorbrands.com/share/8322517971"
+            src={logo}
+            alt="img"
+            style={{
+              backgroundColor: "gray",
+              height: "70%",
+              objectFit: "contain",
+            }}
+          /> */}
         </div>
 
         {/* search input */}
@@ -49,10 +60,7 @@ const NavBar = ({ token }) => {
                   type="text"
                   name="search"
                   value={search}
-                  onChange={(e)=>handleChange
-                  (e)
-                  }
-
+                  onChange={(e) => handleChange(e)}
                   placeholder="Search"
                   className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
                 ></input>
