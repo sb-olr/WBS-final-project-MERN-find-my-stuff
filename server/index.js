@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 });
 
 app.get("/api", (req, res) => {
-  res.send("Use /api/login to sign in");
+  res.send("Use /api/users/login to sign in");
 });
 
 app.use("/api/users", usersRouter);
