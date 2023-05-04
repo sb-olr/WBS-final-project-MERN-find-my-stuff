@@ -36,11 +36,10 @@ export default function SpaceItems() {
   return (
     <>
       {/* // return the following JSX code */}
-      <div className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen pt-20">
+      <div className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen pt-10">
         {/* // define a div with a background gradient */}
         <div className="w-3/5 mx-auto p-4 pt-1 flex flex-col text-white">
           <div className="shadow-md hover:scale-105 duration-500 rounded-full shadow-yellow-500 flex flex-col items-center mx-6 w-32 my-16">
-          
             <img
               src={spaces[0].icon}
               alt={spaces[0].alt}
@@ -48,39 +47,33 @@ export default function SpaceItems() {
             />
             <p className="mt-2 text-white">{spaces[0].name}</p>
           </div>
-        
-          {spaces.map(
-            (
-              space 
-            ) => (
-              <div key={space.name} className="flex flex-wrap justify-between">
-               
-                {space.items.map(({ id, src, title }) => (
-                  
-                  <div
-                    key={id}
-                    className="shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center w-32 m-4"
-                  >
 
-                    <Link
-                      to={title === "New Item" ? "/SpacesNewItem" : ""}
-                      className="no-underline hover:no-underline"
-                    >
-                      {/* // define a Link component with a conditional path
+          {spaces.map((space) => (
+            <div key={space.name} className="flex flex-wrap justify-between">
+              {space.items.map(({ id, src, title }) => (
+                <div
+                  key={id}
+                  // className="shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center w-32 m-4"
+                  className="shadow-md hover:scale-105 duration-500 rounded-full shadow-yellow-500 flex flex-col items-center mx-6 w-32 my-16"
+                  >
+                  <Link
+                    to={title === "New Item" ? "/SpacesNewItem" : ""}
+                    className="no-underline hover:no-underline"
+                  >
+                    {/* // define a Link component with a conditional path
                           depending on the item's title */}
-                      <img
-                        src={src}
-                        alt={title}
-                        className="w-20 h-20 mx-auto object-cover"
-                      />
-                      {/* // add an image for the item */}
-                      <p className="mt-4 text-white">{title}</p>
-                    </Link>
-                  </div>
-                ))}
-              </div>
-            )
-          )}
+                    <img
+                      src={src}
+                      alt={title}
+                      className="w-20 h-20 mx-auto object-cover"
+                    />
+                    {/* // add an image for the item */}
+                    <p className="mt-4 text-white">{title}</p>
+                  </Link>
+                </div>
+              ))}
+            </div>
+          ))}
         </div>
       </div>
     </>
