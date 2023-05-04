@@ -16,7 +16,11 @@ app.use(morgan("dev"));
 const port = process.env.PORT || 8000;
 
 app.get("/", (req, res) => {
-  res.send("Welcome!");
+  res.send("Welcome! use /api to access the API");
+});
+
+app.get("/api", (req, res) => {
+  res.send("Use /api/login to sign in");
 });
 
 app.use("/api/users", usersRouter);

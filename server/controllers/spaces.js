@@ -1,70 +1,74 @@
-const pool = require("../db/pg");
-const { updateUser } = require("./users");
+// Todo: authorization checks
+const spaceModel = require("../models/spaces");
 
 const getAllSpaces = async (req, res) => {
   try {
-    const { rows } = await pool.query(
-      "SELECT * FROM spaces where user_id = $1",
-      [req.user.id]
-    );
+    const { id: user_id } = req.user;
+    const rows = await spaceModel.getSpaces(user_id);
     res.json(rows);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
-}
+};
 
 const addSpace = async (req, res) => {
   try {
-    const { name } = req.body;
-    await pool.query("INSERT INTO spaces (name) VALUES ($1)", [name]);
-    res.sendStatus(201);
+    const { id: user_id } = req.user;
+    const { name, description, img_url } = req.body;
+    if (!name) {
+      throw new Error("Name is required");
+    }
+    const newSpace = await spaceModel.addSpace(
+      name,
+      user_id,
+      description,
+      img_url
+    );
+    res.status(201).json(newSpace);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
 const getSpace = async (req, res) => {
   try {
     const { id } = req.params;
-    const { rows } = await pool.query("SELECT * FROM spaces WHERE id = $1", [
-      id,
-    ]);
-    res.json(rows[0]);
+    const space = await spaceModel.getSpace(id);
+    if (!space) {
+      res.status(404).json({ error: "Space not found" });
+      return;
+    }
+    res.json(space);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
 
 const deleteSpace = async (req, res) => {
   try {
     const { id } = req.params;
-    await pool.query("DELETE FROM spaces WHERE id = $1", [id]);
-    res.sendStatus(200);
+    spaceModel.deleteSpace(id);
+    res.status(200).json({ message: "Space deleted" });
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500).json({ error: "Something went wrong" });
   }
 };
 
 const updateSpace = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
-    const updated_at = new Date();
-    await pool.query(
-      "UPDATE users SET name = $1, updated_at = $2 WHERE id = $3",
-      [name, updated_at, id]
-    );
-    res.sendStatus(200);
+    const { name, description, img_url } = req.body;
+    const newSpace = await spaceModel.updateSpace(id, name, description, img_url);
+    res.json(newSpace);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500);
   }
 };
-
 
 module.exports = {
   getAllSpaces,
