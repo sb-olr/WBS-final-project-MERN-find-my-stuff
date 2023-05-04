@@ -10,19 +10,19 @@ const Features = () => {
       id: 1,
       src: item,
       title: "Easy to add items",
-      style: "shadow-yellow-500",
+      style: "shadow-blue-600",
     },
     {
       id: 2,
       src: file,
       title: "Quck Search",
-      style: "shadow-blue-500",
+      style: "shadow-blue-600",
     },
     {
       id: 3,
       src: takephoto,
       title: "Easy Upload",
-      style: "shadow-yellow-500",
+      style: "shadow-blue-600",
     },
 
     {
@@ -40,7 +40,7 @@ const Features = () => {
     >
       <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
         <div>
-          <h4 className="text-4xl font-bold border-b-4 border-gray-500 p-2 inline">
+          <h4 className="text-4xl font-bold border-b-4 border-gray-500 p-2 inline pt-4">
             Features
           </h4>
           <p className="py-6">We offer you a smooth experience </p>

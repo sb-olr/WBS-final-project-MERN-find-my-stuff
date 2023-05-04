@@ -1,20 +1,26 @@
-import React, { useRef } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-const AddNewSpace = () => {
+const AddNewSpace = ({ setSpaces }) => {
   const navigate = useNavigate();
-  const nameRef = useRef();
-  const photoRef = useRef();
+  // const nameRef = useRef();
+  // const photoRef = useRef();
+
+  const [spacephoto, setSpacephoto] = useState("");
+  const [spacename, setSpacename] = useState("");
 
   const handleSubmit = (event) => {
-    //here you need to take the information from your form
+    //here need to take the information from your form
     //and do a post request to the api to creat e a new space
     event.preventDefault();
     const { data } = axios.post("/api/spaces/", {
-      name: nameRef.current.value,
-      photo: photoRef.current.value,
+      // name: nameRef.current.value,
+      // photo: photoRef.current.value,
+      name: spacename,
+      photo: spacephoto,
     });
+    setSpaces(data && data);
 
     navigate("/spaces");
   };
@@ -28,21 +34,36 @@ const AddNewSpace = () => {
     <div>
       <div
         name="spaces"
-        className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen"
+        className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen "
       >
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
           <div>
             <form onSubmit={handleSubmit}>
               <div className="space-y-12">
-                <div className="border-b border-gray-900/10 pb-[0] ml-40 mr-40">
-                  <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div className="col-span-full">
-                      {/* <label
-                        htmlFor="upload-photo"
-                        className="block text-sm pt-20 font-medium leading-6 text-white"
-                      >
-                        Add New Space
-                      </label> */}
+                <div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                  {/* <input
+                    id="img_url"
+                    name="img_url"
+                    type="file"
+                    className="sr-only"
+                  /> */}
+                  <div className="col-span-full">
+                    <div className="flex justify-center items-center">
+                      <div className="col-md-4 pt-20">
+                        <label htmlFor="inputPhoto" className="form-label">
+                          Photo
+                        </label>
+                        <input
+                          // ref={photoRef}
+                          name="spacephoto"
+                          type="file"
+                          accept="image/*"
+                          className="form-control"
+                          id="inputPhoto"
+                          value={spacephoto}
+                          onChange={(e) => setSpacephoto(e.target.value)}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -52,30 +73,18 @@ const AddNewSpace = () => {
                       Name
                     </label>
                     <input
-                      ref={nameRef}
+                      // ref={nameRef}
                       name="spacename"
                       type="text"
                       className="form-control"
                       id="inputSpaces"
                       placeholder="space name"
-                    />
-                  </div>
-                  <div className="col-md-4">
-                    <label htmlFor="inputPhoto" className="form-label">
-                      Photo
-                    </label>
-                    <input
-                      ref={photoRef}
-                      name="spacephoto"
-                      type="file"
-                      accept="image/*"
-                      className="form-control"
-                      id="inputPhoto"
+                      value={spacename}
+                      onChange={(e) => setSpacename(e.target.value)}
                     />
                   </div>
                 </div>
-
-                <div className="mt-6 flex items-center justify-end gap-x-2">
+                <div className="mt-6 flex items-center justify-center">
                   <button
                     onClick={handleSubmit}
                     type="submit"

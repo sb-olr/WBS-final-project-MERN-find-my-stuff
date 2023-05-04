@@ -10,9 +10,9 @@ import SignUp from "./components/SignUp";
 import AddNewSpace from "./components/NewSpace";
 import AddNewItem from "./components/NewItems";
 import SpacesItems from "./components/SpaceItems";
+import SpacesNewItem from "./components/SpacesNewItem";
 import { ItemsProvider } from "./context/useContext";
 import { SpacesProvider } from "./context/useContextSpace";
-
 import Layout from "./components/Layout";
 
 const App = () => {
@@ -61,6 +61,7 @@ const App = () => {
               {/* <Route path="/AddNewSpace" element={<AddNewSpace />} /> */}
               <Route path="/AddNewItem" element={<AddNewItem />} />
               <Route path="/SpacesItems" element={<SpacesItems />} />
+              <Route path="/SpacesNewItem" element={<SpacesNewItem />} />
             </Routes>
           </SpacesProvider>
         </ItemsProvider>
