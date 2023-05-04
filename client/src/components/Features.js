@@ -10,19 +10,19 @@ const Features = () => {
       id: 1,
       src: item,
       title: "Easy to add items",
-      style: "shadow-yellow-500",
+      style: "shadow-blue-600",
     },
     {
       id: 2,
       src: file,
       title: "Quck Search",
-      style: "shadow-blue-500",
+      style: "shadow-blue-600",
     },
     {
       id: 3,
       src: takephoto,
       title: "Easy Upload",
-      style: "shadow-yellow-500",
+      style: "shadow-blue-600",
     },
 
     {
@@ -36,7 +36,7 @@ const Features = () => {
   return (
     <div
       name="feature"
-      className="bg-gradient-to-b from-gray-800 to-black w-full h-screen"
+      className="bg-gradient-to-b from-gray-800 to-black w-full"
     >
       <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
         <div>

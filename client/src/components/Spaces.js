@@ -58,8 +58,8 @@ const Spaces = ({ spaces, setSpaces }) => {
               }`}
               onClick={handleAddNewSpaceClick}
             >
-              <img src={addnew} alt="Add New Space" className="w-20 mx-auto " />
-              <p className="mt-4 text-white ">New Space</p>
+              <img src={addnew} alt="Add New Space" className="w-20 mx-auto" />
+              <p className="mt-4 text-white">New Space</p>
             </div>
           </div>
         )}
