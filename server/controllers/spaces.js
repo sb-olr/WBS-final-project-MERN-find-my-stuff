@@ -1,10 +1,10 @@
 // Todo: authorization checks
-const spaceController = require("../models/spaces");
+const spaceModel = require("../models/spaces");
 
 const getAllSpaces = async (req, res) => {
   try {
     const { id: user_id } = req.user;
-    const rows = await spaceController.getSpaces(user_id);
+    const rows = await spaceModel.getSpaces(user_id);
     res.json(rows);
   } catch (err) {
     console.error(err);
@@ -19,7 +19,7 @@ const addSpace = async (req, res) => {
     if (!name) {
       throw new Error("Name is required");
     }
-    const newSpace = await spaceController.addSpace(
+    const newSpace = await spaceModel.addSpace(
       name,
       user_id,
       description,
@@ -35,7 +35,11 @@ const addSpace = async (req, res) => {
 const getSpace = async (req, res) => {
   try {
     const { id } = req.params;
-    const space = await spaceController.getSpace(id);
+    const space = await spaceModel.getSpace(id);
+    if (!space) {
+      res.status(404).json({ error: "Space not found" });
+      return;
+    }
     res.json(space);
   } catch (err) {
     console.error(err);
@@ -46,19 +50,19 @@ const getSpace = async (req, res) => {
 const deleteSpace = async (req, res) => {
   try {
     const { id } = req.params;
-    spaceController.deleteSpace(id);
-    res.status(200);
+    spaceModel.deleteSpace(id);
+    res.status(200).json({ message: "Space deleted" });
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.status(500).json({ error: "Something went wrong" });
   }
 };
 
 const updateSpace = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name } = req.body;
-    const newSpace = spaceController.updateSpace(id, name);
+    const { name, description, img_url } = req.body;
+    const newSpace = await spaceModel.updateSpace(id, name, description, img_url);
     res.json(newSpace);
   } catch (err) {
     console.error(err);

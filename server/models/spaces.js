@@ -21,13 +21,17 @@ const getSpace = async (id) => {
 };
 
 const deleteSpace = async (id) => {
+  
     await pool.query("DELETE FROM spaces WHERE id = $1", [id]);
     return true;
 };
 
-const updateSpace = async (id, name) => {
-    const updated_at = new Date();
-    const {rows} = await pool.query("UPDATE spaces SET name = $1, updated_at = $2 WHERE id = $3 RETURNING *", [name, updated_at, id]);
-    return rows[0];
+const updateSpace = async (id, name, description, img_url) => {
+  const updated_at = new Date();
+  const { rows } = await pool.query(
+    "UPDATE spaces SET name = $1, description = $2, img_url = $3, updated_at = NOW() WHERE id = $4 RETURNING *",
+    [name, description, img_url, id]
+  );
+  return rows[0];
 };
 module.exports = { getSpaces, addSpace, getSpace, deleteSpace, updateSpace };

@@ -1,3 +1,5 @@
+const Jwt = require("jsonwebtoken");
+
 const userModel = require("../models/users");
 
 // Get all users
@@ -18,14 +20,34 @@ const addUser = async (req, res) => {
     if (!name || !email || !password)
       return res.status(500).json({ error: "All fields compulsory!" });
 
-
-      //todo hash password
+    //todo hash password
     const user = await userModel.addUser(name, email, password);
 
     return res.status(201).json(user);
   } catch (err) {
     console.error(err);
     return res.status(500);
+  }
+};
+
+// Login a user
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    if (!email || !password)
+      return res.status(500).json({ error: "All fields compulsory!" });
+
+    //todo: hash password
+
+    const user = await userModel.loginUser(email, password);
+    if (!user) return res.status(401).json({ error: "Invalid credentials" });
+
+    //sign a token with user Id
+    const token = Jwt.sign({ id: user.id }, process.env.JWT_SECRET);
+    res.json(token);
+  } catch (err) {
+    console.error(err);
+    return res.sendStatus(500);
   }
 };
 
@@ -45,7 +67,7 @@ const getUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.user;
-    res.status(200).json('message', 'User deleted successfully');
+    res.status(200).json("message", "User deleted successfully");
   } catch (err) {
     console.error(err);
     res.status(500);
@@ -72,6 +94,7 @@ const updateUser = async (req, res) => {
 module.exports = {
   getAllUsers,
   addUser,
+  loginUser,
   getUser,
   deleteUser,
   updateUser,

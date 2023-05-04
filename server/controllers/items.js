@@ -1,9 +1,23 @@
-const itemController = require("../models/items");
+// Todo: authorization checks
+
+const itemModel = require("../models/items");
 
 const getAllItems = async (req, res) => {
   try {
-    const rows = await itemController.getItems();
+    const rows = await itemModel.getItems(req.user.id);
     res.json(rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500);
+  }
+};
+
+const getItem = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const item = await itemModel.getItem(id);
+    if (!item) res.status(404).json({ error: "Item not found" });
+    res.json(item);
   } catch (err) {
     console.error(err);
     res.status(500);
@@ -13,7 +27,7 @@ const getAllItems = async (req, res) => {
 const getItemsBySpaceId = async (req, res) => {
   try {
     const { spaceId } = req.params;
-    const rows = await itemController.getItemsBySpaceId(spaceId);
+    const rows = await itemModel.getItemsBySpaceId(spaceId);
     res.json(rows);
   } catch (err) {
     console.error(err);
@@ -24,14 +38,13 @@ const getItemsBySpaceId = async (req, res) => {
 const addItem = async (req, res) => {
   try {
     // const { spaceId } = req.params;
-
     const { name, description, quantity, owner, value, space_id, img_url } =
       req.body;
 
     if (!name || !description || !quantity || !owner || !space_id)
       return res.status(500).json({ error: "All fields compulsory!" });
 
-    const item = await itemController.addItem(
+    const item = await itemModel.addItem(
       name,
       description,
       quantity,
@@ -40,18 +53,7 @@ const addItem = async (req, res) => {
       space_id,
       img_url
     );
-    res.status(201).json(user);
-  } catch (err) {
-    console.error(err);
-    res.status(500);
-  }
-};
-
-const getItem = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const user = await itemController.getItem(id);
-    res.json(user);
+    res.status(201).json(item);
   } catch (err) {
     console.error(err);
     res.status(500);
@@ -62,11 +64,11 @@ const deleteItem = async (req, res) => {
   try {
     const { id } = req.params;
 
-    await itemController.deleteItem(id);
-    res.status(200);
+    await itemModel.deleteItem(id);
+    res.sendStatus(200);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.sendStatus(500);
   }
 };
 
@@ -78,7 +80,7 @@ const updateItem = async (req, res) => {
     if (!name || !description || !quantity || !owner || !space_id)
       return res.status(500).json({ error: "All fields compulsory!" });
 
-    await itemController.updateItem(
+    const item = await itemModel.updateItem(
       id,
       name,
       description,
@@ -89,7 +91,7 @@ const updateItem = async (req, res) => {
       img_url
     );
 
-    res.status(200);
+    res.status(200).json(item);
   } catch (err) {
     console.error(err);
     res.status(500);

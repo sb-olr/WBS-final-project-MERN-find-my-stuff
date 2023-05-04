@@ -16,6 +16,6 @@ router.get("/:id", spacesController.getSpace);
 router.delete("/:id", spacesController.deleteSpace);
 
 // Update an existing user
-router.put("/:id");
+router.put("/:id", spacesController.updateSpace);
 
 module.exports = router;

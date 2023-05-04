@@ -14,6 +14,14 @@ const addUser = async (name, email, password) => {
   return user;
 };
 
+const loginUser = async (email, password) => {
+  const { rows } = await pool.query(
+    "SELECT * FROM users WHERE email = $1 AND password = $2",
+    [email, password]
+  );
+  return rows[0];
+};
+
 const getUser = async (id) => {
   const { rows } = await pool.query("SELECT * FROM users WHERE id = $1", [id]);
   return rows[0];
@@ -31,4 +39,4 @@ const editUser = async (id, name, email, password) => {
   return rows;
 };
 
-module.exports = { getUsers, addUser, getUser, editUser, deleteUser };
+module.exports = { getUsers, addUser, loginUser, getUser, editUser, deleteUser };
