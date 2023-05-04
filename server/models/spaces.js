@@ -7,10 +7,10 @@ const getSpaces = async (user_id) => {
   return rows;
 };
 
-const addSpace = async (name, user_id) => {
+const addSpace = async (name, user_id, description, img_url) => {
   const { rows } = await pool.query(
-    "INSERT INTO spaces (name, user_id) VALUES ($1, $2) RETURNING *",
-    [name, user_id]
+    "INSERT INTO spaces (name, user_id, description, img_url) VALUES ($1, $2, $3, $4) RETURNING *",
+    [name, user_id, description, img_url]
   );
   return rows[0];
 };

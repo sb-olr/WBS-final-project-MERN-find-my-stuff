@@ -15,8 +15,16 @@ const getAllSpaces = async (req, res) => {
 const addSpace = async (req, res) => {
   try {
     const { id: user_id } = req.user;
-    const { name } = req.body;
-    const newSpace = await spaceController.addSpace(name, user_id);
+    const { name, description, img_url } = req.body;
+    if (!name) {
+      throw new Error("Name is required");
+    }
+    const newSpace = await spaceController.addSpace(
+      name,
+      user_id,
+      description,
+      img_url
+    );
     res.status(201).json(newSpace);
   } catch (err) {
     console.error(err);
