@@ -49,6 +49,9 @@ const NavBar = ({ token }) => {
               objectFit: "contain",
             }}
           /> */}
+          <div>
+            <h1 className="text-5xl font-signature ml-2">My Stuff</h1>
+          </div>
         </div>
 
         {/* search input */}
