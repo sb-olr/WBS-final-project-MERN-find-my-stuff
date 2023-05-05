@@ -7,8 +7,8 @@ import Spaces from "./components/Spaces";
 import Items from "./components/Items";
 import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
-import AddNewSpace from "./components/NewSpace";
-import AddNewItem from "./components/NewItems";
+import AddNewSpace from "./components/EditSpace";
+import EditItem from "./components/EditItem";
 import SpacesItems from "./components/SpaceItems";
 import SpacesNewItem from "./components/SpacesNewItem";
 import { ItemsProvider } from "./context/useContext";
@@ -18,8 +18,6 @@ import AuthStateContext from "./context/AuthContext";
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [spaces, setSpaces] = useState([]);
-  const [selectedSpace, setSelectedSpace] = useState(1);
 
   return (
     <AuthStateContext>
@@ -27,30 +25,26 @@ const App = () => {
         <NavBar token={token} />
         <main>
           <ItemsProvider>
-            {/* <SpacesProvider> */}
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/Spaces" element={<Layout />}>
-                <Route
-                  index
-                  element={<Spaces spaces={spaces} setSpaces={setSpaces} />}
-                />
-                <Route
-                  path="new"
-                  element={
-                    <AddNewSpace spaces={spaces} setSpaces={setSpaces} />
-                  }
-                />
+              <Route path="/spaces" element={<Layout />}>
+                <Route index element={<Spaces />} />
+                <Route path="new" element={<AddNewSpace />} />
                 <Route path=":id" element={<AddNewSpace />} />
               </Route>
-              <Route path="/Items" element={<Items />} />
-              <Route path="/SignIn" element={<SignIn setToken={setToken} />} />
-              <Route path="/SignUp" element={<SignUp setToken={setToken} />} />
-              <Route path="/AddNewItem" element={<AddNewItem />} />
+
+              <Route path="/items" element={<Layout />}>
+                <Route index element={<Items />} />
+                <Route path="new" element={<EditItem />} />
+                <Route path=":id" element={<EditItem />} />
+              </Route>
+
+              <Route path="/SignIn" element={<SignIn />} />
+              <Route path="/SignUp" element={<SignUp />} />
+
               <Route path="/SpacesItems" element={<SpacesItems />} />
               <Route path="/SpacesNewItem" element={<SpacesNewItem />} />
             </Routes>
-            {/* </SpacesProvider> */}
           </ItemsProvider>
         </main>
         <div></div>

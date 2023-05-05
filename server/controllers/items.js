@@ -38,17 +38,15 @@ const getItemsBySpaceId = async (req, res) => {
 const addItem = async (req, res) => {
   try {
     // const { spaceId } = req.params;
-    const { name, description, quantity, owner, value, space_id, img_url } =
-      req.body;
+    const { name, description, quantity, value, space_id, img_url } = req.body;
 
-    if (!name || !description || !quantity || !owner || !space_id)
+    if (!name || !description || !quantity || !space_id)
       return res.status(500).json({ error: "All fields compulsory!" });
 
     const item = await itemModel.addItem(
       name,
       description,
       quantity,
-      owner,
       value,
       space_id,
       img_url
@@ -56,7 +54,7 @@ const addItem = async (req, res) => {
     res.status(201).json(item);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -75,9 +73,8 @@ const deleteItem = async (req, res) => {
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, quantity, owner, value, space_id, img_url } =
-      req.body;
-    if (!name || !description || !quantity || !owner || !space_id)
+    const { name, description, quantity, value, space_id, img_url } = req.body;
+    if (!name || !description || !quantity || !space_id)
       return res.status(500).json({ error: "All fields compulsory!" });
 
     const item = await itemModel.updateItem(
@@ -85,7 +82,6 @@ const updateItem = async (req, res) => {
       name,
       description,
       quantity,
-      owner,
       value,
       space_id,
       img_url
