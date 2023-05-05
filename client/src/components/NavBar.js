@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import { NavLink, Outlet,useNavigate } from "react-router-dom";
-import logo from "../Assets/logo.png";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 import { FaBars, FaTimes } from "react-icons/fa";
 
-const NavBar = ({ token }) => {
-  const navigate = useNavigate();
-  const [nav, setNav] = useState(false)
-  const [search, setSearch] = useState("")
-    const [showDropdown, setShowDropdown] = useState(false);
-  
+const NavBar = () => {
+  const { isAuthenticated, logout, loginUser } = useAuth();
+
+  const [nav, setNav] = useState(false);
+  const [search, setSearch] = useState("");
+  const [showDropdown, setShowDropdown] = useState(false);
+
   // const token = localStorage.getItem("token");
   const links = [
     { id: 3, link: "Spaces", path: "/spaces" },
@@ -18,44 +19,37 @@ const NavBar = ({ token }) => {
   ];
   // handle sign out
   const handelsingout = () => {
-    if (token) {
-      localStorage.clear("token"); // clear token from local storage
-        navigate("/")
-          window.location.reload(); // reload the window to sign out the user
-    }
+    setShowDropdown(false);
+    logout();
+    // if (token) {
+    //   localStorage.clear("token"); // clear token from local storage
+    //     navigate("/")
+    //       window.location.reload(); // reload the window to sign out the user
+    // }
   };
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // do something with the search value
-    };
-          // console.log(search);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-   const handleChange = (e) => {
-     setSearch(e.target.value);
-   };
+    // do something with the search value
+  };
+  // console.log(search);
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
   console.log(search);
 
   return (
     <>
       <div className="flex justify-between items-cebter w-full h-20 pt-2 px-4 text-white bg-black fixed">
         <div>
-          {/* <img
-            // src="https://mylogo.tailorbrands.com/share/8322517971"
-            src={logo}
-            alt="img"
-            style={{
-              backgroundColor: "gray",
-              height: "70%",
-              objectFit: "contain",
-            }}
-          /> */}
           <div>
             <h1 className="text-5xl font-signature ml-2">My Stuff</h1>
           </div>
         </div>
 
         {/* search input */}
-        {token && (
+        {isAuthenticated && (
           <div className="search pt-2 max-w-sm">
             <label>
               <form onSubmit={handleSubmit}>
@@ -88,7 +82,7 @@ const NavBar = ({ token }) => {
           >
             Home
           </NavLink>
-          {token &&
+          {isAuthenticated &&
             links.map(({ id, link, path }) => (
               <NavLink
                 key={id}
@@ -107,14 +101,14 @@ const NavBar = ({ token }) => {
 
           {/* show sign in or sign out button */}
           <NavLink
-            to={token ? `/` : `/SignIn`}
+            to={isAuthenticated ? `/` : `/SignIn`}
             className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-150 duration-200"
             activeClassName="text-white"
             style={{ textDecoration: "none" }}
           >
             <div className="relative ml-3">
               <div>
-                {token ? (
+                {isAuthenticated ? (
                   <button
                     type="button"
                     class="flex max-w-xs items-center rounded-full bg-gray-500 text-sm focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-1 focus:ring-offset-gray-800"
@@ -123,7 +117,7 @@ const NavBar = ({ token }) => {
                     aria-haspopup="true"
                     onClick={(e) => {
                       e.preventDefault();
-                      setShowDropdown(!showDropdown);
+                      setShowDropdown(() => !showDropdown);
                     }}
                   >
                     <span class="sr-only">Open user menu</span>
@@ -161,7 +155,7 @@ const NavBar = ({ token }) => {
                   `SignIn`
                 )}
               </div>
-              {showDropdown && token && (
+              {showDropdown && isAuthenticated && (
                 <div
                   class="absolute right-0 z-10 mt-2 w-30 origin-top-right rounded-md bg-white py-1 shadow-ring-1 ring-black ring-opacity-5 focus:outline-none"
                   role="menu"
@@ -210,7 +204,7 @@ const NavBar = ({ token }) => {
             >
               Home
             </NavLink>
-            {token &&
+            {isAuthenticated &&
               links.map(({ id, link, path }) => (
                 <NavLink
                   key={id}
@@ -231,7 +225,7 @@ const NavBar = ({ token }) => {
 
             {/* show sign in or sign out button */}
             <NavLink
-              to={token ? `/` : `/SignIn`}
+              to={isAuthenticated ? `/` : `/SignIn`}
               className="px-4 cursor-pointer capitalize py-6 text-4xl"
               activeClassName="text-white"
               // style={{ textDecoration: "none" }}
@@ -245,7 +239,7 @@ const NavBar = ({ token }) => {
                 setNav(!nav);
               }}
             >
-              {token ? `Signout` : `SignIn`}
+              {isAuthenticated ? `Signout` : `SignIn`}
             </NavLink>
           </ul>
         )}

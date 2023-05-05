@@ -12,35 +12,22 @@ import AddNewItem from "./components/NewItems";
 import SpacesItems from "./components/SpaceItems";
 import SpacesNewItem from "./components/SpacesNewItem";
 import { ItemsProvider } from "./context/useContext";
-import { SpacesProvider } from "./context/useContextSpace";
+// import { SpacesProvider } from "./context/useContextSpace";
 import Layout from "./components/Layout";
+import AuthStateContext from "./context/AuthContext";
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
-  const [spaces, setSpaces] = useState([
-    // {
-    //   id: 1,
-    //   src: closet,
-    //   title: "Closet",
-    //   style: "shadow-yellow-500",
-    //   items: [
-    //    {
-//          name: 'Shirt'
-    // },
-    //    {},
-    //    {},
-    //    {},
-    //    {},
-    //  ]
-    // },
-  ]);
+  const [spaces, setSpaces] = useState([]);
   const [selectedSpace, setSelectedSpace] = useState(1);
+
   return (
-    <div className="App">
-      <NavBar token={token} />
-      <main>
-        <ItemsProvider>
-          <SpacesProvider>
+    <AuthStateContext>
+      <div className="App">
+        <NavBar token={token} />
+        <main>
+          <ItemsProvider>
+            {/* <SpacesProvider> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/Spaces" element={<Layout />}>
@@ -54,20 +41,21 @@ const App = () => {
                     <AddNewSpace spaces={spaces} setSpaces={setSpaces} />
                   }
                 />
+                <Route path=":id" element={<AddNewSpace />} />
               </Route>
               <Route path="/Items" element={<Items />} />
               <Route path="/SignIn" element={<SignIn setToken={setToken} />} />
               <Route path="/SignUp" element={<SignUp setToken={setToken} />} />
-              {/* <Route path="/AddNewSpace" element={<AddNewSpace />} /> */}
               <Route path="/AddNewItem" element={<AddNewItem />} />
               <Route path="/SpacesItems" element={<SpacesItems />} />
               <Route path="/SpacesNewItem" element={<SpacesNewItem />} />
             </Routes>
-          </SpacesProvider>
-        </ItemsProvider>
-      </main>
-      <div></div>
-    </div>
+            {/* </SpacesProvider> */}
+          </ItemsProvider>
+        </main>
+        <div></div>
+      </div>
+    </AuthStateContext>
   );
 };
 
