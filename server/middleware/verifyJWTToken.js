@@ -1,4 +1,5 @@
-// const Jwt = require("jsonwebtoken");
+const Jwt = require("jsonwebtoken");
+const userModel = require("../models/users");
 
 const verifyJWTToken = async (req, res, next) => {
   try {
@@ -11,12 +12,12 @@ const verifyJWTToken = async (req, res, next) => {
     const token = authorization.split(" ")[1];
     // console.log(token);
 
-    //const { id } = Jwt.verify(token, process.env.JWT_SECRET);
+    const { id } = Jwt.verify(token, process.env.JWT_SECRET);
 
-    //const user = await AuthUser.findById(id);
-    //if (!user) return next("User does not exist");
-    
-    req.user = { id: 1 };
+    const user = await userModel.getUser(id);
+    if (!user) return next("User does not exist");
+
+    req.user = user;
 
     next();
   } catch (e) {

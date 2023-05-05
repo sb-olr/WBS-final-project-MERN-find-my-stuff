@@ -8,10 +8,16 @@ const router = express.Router();
 router.get("/all", usersController.getAllUsers);
 
 // Add a new user
-router.post("/", usersController.addUser);
+router.post("/signup", usersController.addUser);
 
-// Get a specific user by id
-router.get("/", verifyJWTToken, usersController.getUser);
+// Login
+router.post("/login", usersController.loginUser);
+
+// Get current user
+router.get("/me", verifyJWTToken, usersController.getUser);
+
+// Get a specific user by id (for testing) (to implement)
+// router.get("/:id", verifyJWTToken, usersController.getUser);
 
 // Delete a user
 router.delete("/", verifyJWTToken, usersController.deleteUser);
