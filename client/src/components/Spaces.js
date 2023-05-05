@@ -23,46 +23,51 @@ const Spaces = () => {
   }, []);
 
   return (
-    <div
-      name="spaces"
-      className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen pt-20"
-    >
-      <div className="max-w-screen-lg mx-auto p-4 pt-1 flex flex-col justify-center w-full h-full text-white ">
-        <div>
-          <h4 className="text-4xl py-6  font-bold border-b-4 border-gray-500  p-2 inline">
-            Spaces
-          </h4>
-        </div>
+    <>
+      <div className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen pt-10">
+        <div className="w-3/4 mx-auto p-4 mt-20 flex flex-col text-white">
+          {/* <div>
+            <h4 className="text-4xl py-6 font-bold border-b-4 border-gray-500  p-2 inline">
+              Spaces
+            </h4>
+          </div> */}
 
-        <div
-          className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center w-40 hover:cursor-pointer ${
-            spaces?.slice(-1)[0]?.style
-          }`}
-          onClick={() => navigate("/spaces/new")}
-        >
-          <img
-            src={addnew}
-            alt="Add New Space"
-            className="w-20 h-20 mx-auto object-cover"
-          />
-          <p className="mt-4 text-white">New Space</p>
-        </div>
+          <div
+            className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center w-40 hover:cursor-pointer ${
+              spaces?.slice(-1)[0]?.style
+            }`}
+            onClick={() => navigate("/spaces/new")}
+          >
+            <img
+              src={addnew}
+              alt="Add New Space"
+              className="w-20 h-20 mx-auto object-cover"
+            />
+            <p className="mt-4 text-white">New Space</p>
+          </div>
 
-        <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-8 text-center py08 px-12 pt-5 sm:px-0">
-          {spaces &&
-            spaces.map(({ id, src, name, style }) => (
-              <Link key={id} to={`/spaces/${id}`}>
+          <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-8 text-center py-8 px-4 pt-5 sm:px-0">
+            {spaces &&
+              spaces.map(({ id, src, name, style }) => (
                 <div
-                  className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center w-40`}
+                  key={id}
+                  className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center`}
                 >
-                  <img src={src} alt={name} className="w-20" />
-                  <p className="mt-4 text-white">{name}</p>
+                  <div>
+                    <Link
+                      to={`/spaces/${id}`}
+                      className="no-underline hover:no-underline"
+                    >
+                      {/* <img src={src} alt={name} className="w-20 h-20" /> */}
+                      <p className="mt-4 text-white">{name}</p>
+                    </Link>
+                  </div>
                 </div>
-              </Link>
-            ))}
+              ))}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

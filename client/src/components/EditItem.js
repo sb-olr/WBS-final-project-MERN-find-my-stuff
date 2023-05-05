@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 
@@ -13,7 +12,7 @@ const AddNewItem = () => {
   const quantityRef = useRef();
   const valueRef = useRef();
   const descriptionRef = useRef();
-  const dateRef = useRef();
+  // const dateRef = useRef();
   const { id } = useParams();
 
   const [newItem, setNewItem] = useState({
@@ -101,20 +100,20 @@ const AddNewItem = () => {
         name="spaces"
         className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen flex items-center justify-center"
       >
-        <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
+        <div className="max-w-screen-lg mx-auto p-4 flex flex-col mt-5 justify-center w-full h-full text-white">
           <div className="space-y-12">
             <div className="flex justify-center items-center">
               <div class="col-md-4">
                 <label htmlFor="inputSpaces" className="form-label">
-                  Name
+                  Image
                 </label>
                 <input
                   name="name"
-                  ref={nameRef}
+                  // ref={nameRef}
                   type="text"
                   class="form-control"
                   id="inputSpaces"
-                  placeholder="item name"
+                  placeholder="image"
                 />
               </div>
             </div>
@@ -122,7 +121,20 @@ const AddNewItem = () => {
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
               <h4>Item Details</h4>
               <form onSubmit={handleSubmit} class="row g-3">
-                <div class="col-md-5">
+                <div class="col-md-6">
+                  <label htmlFor="inputSpaces" className="form-label">
+                    Name
+                  </label>
+                  <input
+                    name="name"
+                    ref={nameRef}
+                    type="text"
+                    class="form-control"
+                    id="inputSpaces"
+                    placeholder="item name"
+                  />
+                </div>
+                <div class="col-md-6">
                   <label for="inputSpace_id" class="form-label">
                     Spaces
                   </label>
@@ -140,7 +152,7 @@ const AddNewItem = () => {
                       ))}
                   </select>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-6">
                   <label for="inputQuantity" class="form-label">
                     Quantity
                   </label>
@@ -152,14 +164,14 @@ const AddNewItem = () => {
                     id="inputQuantity"
                   />
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                   <label for="inputValue" class="form-label">
                     Value
                   </label>
                   <input
                     ref={valueRef}
                     name="value"
-                    type="value"
+                    type="number"
                     class="form-control"
                     id="inputValue"
                     placeholder="value"
