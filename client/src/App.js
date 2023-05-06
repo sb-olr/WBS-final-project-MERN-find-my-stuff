@@ -14,45 +14,50 @@ import { ItemsProvider } from "./context/useContext";
 // import { SpacesProvider } from "./context/useContextSpace";
 import Layout from "./components/Layout";
 import AuthStateContext from "./context/AuthContext";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
 
   return (
-    <AuthStateContext>
-      <div className="App">
-        <NavBar token={token} />
-        <main>
-          <ItemsProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/spaces" element={<Layout />}>
-                <Route index element={<Spaces />} />
-                <Route path="new" element={<AddNewSpace />} />
-                <Route path="edit/:id" element={<AddNewSpace />} />
-                <Route path="details/:id" element={<SpacesDetails />} />
-              </Route>
+    <Router>
+      <AuthStateContext>
+        <div className="App">
+          <NavBar token={token} />
+          <main>
+            <ItemsProvider>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/spaces" element={<Layout />}>
+                  <Route index element={<Spaces />} />
+                  <Route path="new" element={<AddNewSpace />} />
+                  <Route path="edit/:id" element={<AddNewSpace />} />
+                  <Route path="details/:id" element={<SpacesDetails />} />
+                </Route>
 
-              <Route path="/items" element={<Layout />}>
-                <Route index element={<Items />} />
-                <Route path="new" element={<EditItem />} />
-                <Route path=":id" element={<EditItem />} />
-              </Route>
+                <Route path="/items" element={<Layout />}>
+                  <Route index element={<Items />} />
+                  <Route path="new" element={<EditItem />} />
+                  <Route path=":id" element={<EditItem />} />
+                </Route>
 
-              <Route path="/SignIn" element={<SignIn />} />
-              <Route path="/SignUp" element={<SignUp />} />
+                <Route path="/search/:term" element={<Items />} />
 
-              {/* <Route path="/SpacesItems" element={<Layout />}>
+                <Route path="/SignIn" element={<SignIn />} />
+                <Route path="/SignUp" element={<SignUp />} />
+
+                {/* <Route path="/SpacesItems" element={<Layout />}>
                 <Route index element={<SpacesItems />} />
                 <Route path="new" element={<SpacesNewItem />} />
                 <Route path=":id" element={<SpacesNewItem />} />
               </Route> */}
-            </Routes>
-          </ItemsProvider>
-        </main>
-        <div></div>
-      </div>
-    </AuthStateContext>
+              </Routes>
+            </ItemsProvider>
+          </main>
+          <div></div>
+        </div>
+      </AuthStateContext>
+    </Router>
   );
 };
 

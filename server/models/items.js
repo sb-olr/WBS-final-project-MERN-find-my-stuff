@@ -1,12 +1,20 @@
 const pool = require("../db/pg");
 
-const getItems = async (id) => {
-  const { rows } = await pool.query(
-    `SELECT items.* FROM items
+const getItems = async (id, term = null) => {
+  let query = `SELECT items.* FROM items
     JOIN spaces ON items.space_id = spaces.id 
-    WHERE  (spaces.user_id = $1 )`,
-    [id]
-  );
+    WHERE  (spaces.user_id = $1 )`;
+
+  const queryParams = [id];
+
+  if (term) {
+    query += " AND items.name LIKE $2";
+    queryParams.push("%" + term + "%");
+  }
+
+  console.log(queryParams);
+  const { rows } = await pool.query(query, queryParams);
+
   return rows;
 };
 

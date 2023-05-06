@@ -4,7 +4,10 @@ const itemModel = require("../models/items");
 
 const getAllItems = async (req, res) => {
   try {
-    const rows = await itemModel.getItems(req.user.id);
+    const {
+      query: { term },
+    } = req;
+    const rows = await itemModel.getItems(req.user.id, term);
     res.json(rows);
   } catch (err) {
     console.error(err);

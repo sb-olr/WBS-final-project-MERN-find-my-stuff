@@ -1,30 +1,28 @@
-import React, { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import React, { useRef, useState } from "react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = () => {
+  const searchRef = useRef();
   const { isAuthenticated, logout, loginUser } = useAuth();
+  const navigate = useNavigate();
 
   const [nav, setNav] = useState(false);
-  const [search, setSearch] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
   const links = [
     { id: 3, link: "Spaces", path: "/spaces" },
     { id: 4, link: "Items", path: "/items" },
   ];
-  const handelsingout = () => {
+  const handleSignout = () => {
     setShowDropdown(false);
     logout();
   };
-  const handleSubmit = (e) => {
+  const handleSearch = (e) => {
     e.preventDefault();
-  };
-
-  const handleChange = (e) => {
-    setSearch(e.target.value);
+    navigate("/search/" + searchRef.current.value, { replace: true });
   };
 
   return (
@@ -39,15 +37,15 @@ const NavBar = () => {
         {isAuthenticated && (
           <div className="search pt-2 max-w-sm">
             <label>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSearch}>
                 <input
                   type="text"
                   name="search"
-                  value={search}
-                  onChange={(e) => handleChange(e)}
+                  ref={searchRef}
                   placeholder="Search"
                   className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
-                ></input>
+                />
+                <button type="submit">Search</button>
               </form>
             </label>
           </div>
@@ -155,7 +153,7 @@ const NavBar = () => {
                     role="menuitem"
                     tabIndex="-1"
                     id="user-menu-item-1"
-                    onClick={handelsingout}
+                    onClick={handleSignout}
                   >
                     Signout
                   </button>
@@ -222,7 +220,7 @@ const NavBar = () => {
                   : { color: "gray", textDecoration: "none" }
               }
               onClick={() => {
-                handelsingout();
+                handleSignout();
                 setNav(!nav);
               }}
             >

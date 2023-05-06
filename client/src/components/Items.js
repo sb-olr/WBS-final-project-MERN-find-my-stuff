@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import addnew from "../Assets/AddNew.png";
 import { useItems } from "../context/useContext";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 import axios from "axios";
 import useAuth from "../hooks/useAuth.js";
@@ -10,13 +10,22 @@ const Items = () => {
   const { token } = useAuth();
   const [items, setItems] = useState([]);
   const navigate = useNavigate();
+  const { term } = useParams();
 
   useEffect(() => {
+    let params = {};
+    if (term) {
+      params = {
+        term: term,
+      };
+    }
+
     axios
       .get(process.env.REACT_APP_API_URL + "/items/all", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
+        params: params,
       })
       .then(({ data }) => {
         setItems(data);
