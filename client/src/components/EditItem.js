@@ -12,7 +12,6 @@ const AddNewItem = () => {
   const quantityRef = useRef();
   const valueRef = useRef();
   const descriptionRef = useRef();
-  // const dateRef = useRef();
   const { id } = useParams();
 
   const [newItem, setNewItem] = useState({
@@ -22,7 +21,6 @@ const AddNewItem = () => {
     quantity: 0,
     value: 0,
     description: "",
-    owner: "",
   });
 
   const handleInputChange = (event) => {
@@ -44,7 +42,6 @@ const AddNewItem = () => {
       quantity: quantityRef.current.value,
       value: valueRef.current.value,
       description: descriptionRef.current.value,
-      // date: dateRef.current.value,
     };
     if (id) {
       url += id;
@@ -102,22 +99,6 @@ const AddNewItem = () => {
       >
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col mt-5 justify-center w-full h-full text-white">
           <div className="space-y-12">
-            <div className="flex justify-center items-center">
-              <div class="col-md-4">
-                <label htmlFor="inputSpaces" className="form-label">
-                  Image
-                </label>
-                <input
-                  name="name"
-                  // ref={nameRef}
-                  type="text"
-                  class="form-control"
-                  id="inputSpaces"
-                  placeholder="image"
-                />
-              </div>
-            </div>
-
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
               <h4>Item Details</h4>
               <form onSubmit={handleSubmit} class="row g-3">
@@ -146,6 +127,7 @@ const AddNewItem = () => {
                     id="inputSpace_id"
                     placeholder="Space name"
                   >
+                    <option value="-1">No Space</option>
                     {spaces &&
                       spaces.map((space) => (
                         <option value={space.id}> {space.name}</option>

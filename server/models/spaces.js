@@ -16,14 +16,24 @@ const addSpace = async (name, user_id, description, img_url) => {
 };
 
 const getSpace = async (id) => {
-  const { rows } = await pool.query("SELECT * FROM spaces WHERE id = $1", [id]);
+  const { rows } = await pool.query("SELECT * FROM spaces WHERE id = $1", [
+    parseInt(id),
+  ]);
+
   return rows[0];
 };
 
 const deleteSpace = async (id) => {
-  
-    await pool.query("DELETE FROM spaces WHERE id = $1", [id]);
-    return true;
+  const space = await getSpace(id);
+  if (space.name === "no space") {
+    throw new Error("Can't delete default space");
+  }
+
+  await pool.query("DELETE FROM spaces WHERE id = $1 AND name != 'no space'", [
+    id,
+  ]);
+
+  return true;
 };
 
 const updateSpace = async (id, name, description, img_url) => {

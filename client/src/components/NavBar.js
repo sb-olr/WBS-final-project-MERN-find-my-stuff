@@ -11,33 +11,22 @@ const NavBar = () => {
   const [search, setSearch] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
 
-  // const token = localStorage.getItem("token");
   const links = [
     { id: 3, link: "Spaces", path: "/spaces" },
     { id: 4, link: "Items", path: "/items" },
-    { id: 4, link: "SpacesItems", path: "/spacesItems" },
+    { id: 5, link: "SpacesItems", path: "/spacesItems" },
   ];
-  // handle sign out
   const handelsingout = () => {
     setShowDropdown(false);
     logout();
-    // if (token) {
-    //   localStorage.clear("token"); // clear token from local storage
-    //     navigate("/")
-    //       window.location.reload(); // reload the window to sign out the user
-    // }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    // do something with the search value
   };
-  // console.log(search);
 
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
-  console.log(search);
 
   return (
     <>
@@ -48,7 +37,6 @@ const NavBar = () => {
           </div>
         </div>
 
-        {/* search input */}
         {isAuthenticated && (
           <div className="search pt-2 max-w-sm">
             <label>
@@ -73,7 +61,7 @@ const NavBar = () => {
           <NavLink
             to="/"
             className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-150 duration-200"
-            activeClassName="text-white"
+            activeclassname="text-white"
             style={({ isActive }) =>
               isActive
                 ? { color: "white", textDecoration: "none" }
@@ -88,7 +76,7 @@ const NavBar = () => {
                 key={id}
                 to={path}
                 className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-150 duration-200"
-                activeClassName="text-white"
+                activeclassname="text-white"
                 style={({ isActive }) =>
                   isActive
                     ? { color: "white", textDecoration: "none" }
@@ -103,7 +91,7 @@ const NavBar = () => {
           <NavLink
             to={isAuthenticated ? `/` : `/SignIn`}
             className="px-4 cursor-pointer capitalize font-medium text-gray-500 hover:scale-150 duration-200"
-            activeClassName="text-white"
+            activeclassname="text-white"
             style={{ textDecoration: "none" }}
           >
             <div className="relative ml-3">
@@ -111,7 +99,7 @@ const NavBar = () => {
                 {isAuthenticated ? (
                   <button
                     type="button"
-                    class="flex max-w-xs items-center rounded-full bg-gray-500 text-sm focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-1 focus:ring-offset-gray-800"
+                    className="flex max-w-xs items-center rounded-full bg-gray-500 text-sm focus:outline-none focus:ring-1 focus:ring-white focus:ring-offset-1 focus:ring-offset-gray-800"
                     id="user-menu-button"
                     aria-expanded="false"
                     aria-haspopup="true"
@@ -120,7 +108,7 @@ const NavBar = () => {
                       setShowDropdown(() => !showDropdown);
                     }}
                   >
-                    <span class="sr-only">Open user menu</span>
+                    <span className="sr-only">Open user menu</span>
                     {/* <img
                       class="h-8 w-8 rounded-full"
                       src="http://www.w3.org/2000/svg"
@@ -137,13 +125,13 @@ const NavBar = () => {
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       stroke="currentColor"
-                      class="w-6 h-6"
+                      className="w-6 h-6"
                     >
                       <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                       />
                     </svg>
@@ -157,14 +145,14 @@ const NavBar = () => {
               </div>
               {showDropdown && isAuthenticated && (
                 <div
-                  class="absolute right-0 z-10 mt-2 w-30 origin-top-right rounded-md bg-white py-1 shadow-ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  className="absolute right-0 z-10 mt-2 w-30 origin-top-right rounded-md bg-white py-1 shadow-ring-1 ring-black ring-opacity-5 focus:outline-none"
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="user-menu-button"
                   tabindex="-1"
                 >
                   <button
-                    class="block px-5 bg-white py-1 text-sm text-gray-500"
+                    className="block px-5 bg-white py-1 text-sm text-gray-500"
                     role="menuitem"
                     tabindex="-1"
                     id="user-menu-item-1"
@@ -193,7 +181,7 @@ const NavBar = () => {
             <NavLink
               to="/"
               className="px-4 pt-0 cursor-pointer capitalize py-6 text-4xl"
-              activeClassName="text-white"
+              activeclassname="text-white"
               // style={{ textDecoration: "none" }}
               style={({ isActive }) =>
                 isActive
@@ -210,7 +198,7 @@ const NavBar = () => {
                   key={id}
                   to={path}
                   className="px-4 cursor-pointer capitalize py-6 text-4xl"
-                  activeClassName="text-white"
+                  activeclassname="text-white"
                   // style={{ textDecoration: "none" }}
                   style={({ isActive }) =>
                     isActive
@@ -227,7 +215,7 @@ const NavBar = () => {
             <NavLink
               to={isAuthenticated ? `/` : `/SignIn`}
               className="px-4 cursor-pointer capitalize py-6 text-4xl"
-              activeClassName="text-white"
+              activeclassname="text-white"
               // style={{ textDecoration: "none" }}
               style={({ isActive }) =>
                 isActive

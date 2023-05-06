@@ -1,6 +1,7 @@
 const Jwt = require("jsonwebtoken");
 
 const userModel = require("../models/users");
+const spaceModel = require("../models/spaces");
 
 // Get all users
 const getAllUsers = async (req, res) => {
@@ -23,6 +24,8 @@ const addUser = async (req, res) => {
     //todo hash password
     const user = await userModel.addUser(name, email, password);
 
+    await spaceModel.addSpace("no space", user.id, "Default User Space");
+
     return res.status(201).json(user);
   } catch (err) {
     console.error(err);
@@ -44,7 +47,7 @@ const loginUser = async (req, res) => {
 
     //sign a token with user Id
     const token = Jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    res.json({token});
+    res.json({ token });
   } catch (err) {
     console.error(err);
     return res.sendStatus(500);

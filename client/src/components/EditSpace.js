@@ -94,7 +94,7 @@ const AddNewSpace = () => {
                   </div>
                 </div>
 
-                <div class="mt-6 flex items-center justify-end gap-x-2">
+                <div class="mt-6 flex items-center justify-center gap-x-1 px-5">
                   <button
                     onClick={handleSubmit}
                     type="submit"

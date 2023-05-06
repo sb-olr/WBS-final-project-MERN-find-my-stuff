@@ -9,7 +9,7 @@ import SignIn from "./components/SignIn";
 import SignUp from "./components/SignUp";
 import AddNewSpace from "./components/EditSpace";
 import EditItem from "./components/EditItem";
-import SpacesItems from "./components/SpaceItems";
+import SpacesDetails from "./components/SpaceDetails";
 import SpacesNewItem from "./components/SpacesNewItem";
 import { ItemsProvider } from "./context/useContext";
 // import { SpacesProvider } from "./context/useContextSpace";
@@ -30,7 +30,8 @@ const App = () => {
               <Route path="/spaces" element={<Layout />}>
                 <Route index element={<Spaces />} />
                 <Route path="new" element={<AddNewSpace />} />
-                <Route path=":id" element={<AddNewSpace />} />
+                <Route path="edit/:id" element={<AddNewSpace />} />
+                <Route path="details/:id" element={<SpacesDetails />} />
               </Route>
 
               <Route path="/items" element={<Layout />}>
@@ -42,8 +43,11 @@ const App = () => {
               <Route path="/SignIn" element={<SignIn />} />
               <Route path="/SignUp" element={<SignUp />} />
 
-              <Route path="/SpacesItems" element={<SpacesItems />} />
-              <Route path="/SpacesNewItem" element={<SpacesNewItem />} />
+              {/* <Route path="/SpacesItems" element={<Layout />}>
+                <Route index element={<SpacesItems />} />
+                <Route path="new" element={<SpacesNewItem />} />
+                <Route path=":id" element={<SpacesNewItem />} />
+              </Route> */}
             </Routes>
           </ItemsProvider>
         </main>

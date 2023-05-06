@@ -4,7 +4,7 @@ const getItems = async (id) => {
   const { rows } = await pool.query(
     `SELECT items.* FROM items
     JOIN spaces ON items.space_id = spaces.id 
-    WHERE  spaces.user_id = $1`,
+    WHERE  (spaces.user_id = $1 )`,
     [id]
   );
   return rows;
@@ -14,6 +14,7 @@ const getItemsBySpaceId = async (spaceId) => {
   const { rows } = await pool.query("SELECT * FROM items where space_id = $1", [
     spaceId,
   ]);
+
   return rows;
 };
 
