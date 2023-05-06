@@ -14,21 +14,17 @@ const AddNewItem = () => {
   const descriptionRef = useRef();
   const { id } = useParams();
 
-  const [newItem, setNewItem] = useState({
-    img_url: "",
-    name: "",
-    space_id: "",
-    quantity: 0,
-    value: 0,
-    description: "",
-  });
-
-  const handleInputChange = (event) => {
+  const handleDelete = async (event) => {
+    //TODO: ask confirm
     event.preventDefault();
-    setNewItem({
-      ...newItem,
-      [event.target.name]: event.target.value,
+
+    await axios.delete(process.env.REACT_APP_API_URL + "/items/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
+
+    navigate("/items");
   };
 
   const handleSubmit = async (event) => {
@@ -127,8 +123,7 @@ const AddNewItem = () => {
                     id="inputSpace_id"
                     placeholder="Space name"
                   >
-                    <option value="-1">No Space</option>
-                    {spaces &&
+                    {spaces && 
                       spaces.map((space) => (
                         <option value={space.id}> {space.name}</option>
                       ))}
@@ -200,6 +195,13 @@ const AddNewItem = () => {
                     className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
                   >
                     Cancel
+                  </button>
+                  <button
+                    onClick={handleDelete}
+                    type="submit"
+                    className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
+                  >
+                    Delete
                   </button>
                 </div>
               </form>

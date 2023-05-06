@@ -10,7 +10,6 @@ import SignUp from "./components/SignUp";
 import AddNewSpace from "./components/EditSpace";
 import EditItem from "./components/EditItem";
 import SpacesDetails from "./components/SpaceDetails";
-import SpacesNewItem from "./components/SpacesNewItem";
 import { ItemsProvider } from "./context/useContext";
 // import { SpacesProvider } from "./context/useContextSpace";
 import Layout from "./components/Layout";

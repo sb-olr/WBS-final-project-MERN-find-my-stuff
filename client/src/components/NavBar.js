@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
 import { FaBars, FaTimes } from "react-icons/fa";
@@ -14,7 +14,6 @@ const NavBar = () => {
   const links = [
     { id: 3, link: "Spaces", path: "/spaces" },
     { id: 4, link: "Items", path: "/items" },
-    { id: 5, link: "SpacesItems", path: "/spacesItems" },
   ];
   const handelsingout = () => {
     setShowDropdown(false);
@@ -149,12 +148,12 @@ const NavBar = () => {
                   role="menu"
                   aria-orientation="vertical"
                   aria-labelledby="user-menu-button"
-                  tabindex="-1"
+                  tabIndex="-1"
                 >
                   <button
                     className="block px-5 bg-white py-1 text-sm text-gray-500"
                     role="menuitem"
-                    tabindex="-1"
+                    tabIndex="-1"
                     id="user-menu-item-1"
                     onClick={handelsingout}
                   >
