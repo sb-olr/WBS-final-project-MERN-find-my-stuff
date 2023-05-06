@@ -16,6 +16,7 @@ import Layout from "./components/Layout";
 import AuthStateContext from "./context/AuthContext";
 import { BrowserRouter as Router } from "react-router-dom";
 
+
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token"));
 

@@ -2,12 +2,27 @@ import React, { useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
+import { TbAlienFilled } from "react-icons/tb";
 
 const AddNewSpace = () => {
   const { token } = useAuth();
   const navigate = useNavigate();
   const nameRef = useRef();
   const { id } = useParams();
+  const options = [
+    {
+      icon: "attention",
+      name: "Important",
+    },
+    {
+      icon: "comment",
+      name: "Annoucemtns",
+    },
+    {
+      icon: "conversation",
+      name: "Discussion",
+    },
+  ];
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -81,6 +96,7 @@ const AddNewSpace = () => {
                 <div className="flex justify-center items-center">
                   <div class="col-md-4">
                     <label for="inputSpaces" class="form-label">
+                      <TbAlienFilled />
                       Name
                     </label>
                     <input
