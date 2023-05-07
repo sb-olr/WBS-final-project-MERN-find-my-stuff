@@ -1,12 +1,20 @@
 const pool = require("../db/pg");
 
-const getItems = async (id) => {
-  const { rows } = await pool.query(
-    `SELECT items.* FROM items
+const getItems = async (id, term = null) => {
+  let query = `SELECT items.* FROM items
     JOIN spaces ON items.space_id = spaces.id 
-    WHERE  spaces.user_id = $1`,
-    [id]
-  );
+    WHERE  (spaces.user_id = $1 )`;
+
+  const queryParams = [id];
+
+  if (term) {
+    query += " AND items.name LIKE $2";
+    queryParams.push("%" + term + "%");
+  }
+
+  console.log(queryParams);
+  const { rows } = await pool.query(query, queryParams);
+
   return rows;
 };
 
@@ -14,6 +22,7 @@ const getItemsBySpaceId = async (spaceId) => {
   const { rows } = await pool.query("SELECT * FROM items where space_id = $1", [
     spaceId,
   ]);
+
   return rows;
 };
 
@@ -21,14 +30,13 @@ const addItem = async (
   name,
   description,
   quantity,
-  owner,
   value,
   space_id,
   img_url
 ) => {
   const { rows: user } = await pool.query(
-    "INSERT INTO items (name, description, quantity, owner, value, space_id, img_url) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-    [name, description, quantity, owner, value, space_id, img_url]
+    "INSERT INTO items (name, description, quantity,  value, space_id, img_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
+    [name, description, quantity, value, space_id, img_url]
   );
   return user;
 };
@@ -47,14 +55,13 @@ const updateItem = async (
   name,
   description,
   quantity,
-  owner,
   value,
   space_id,
   img_url
 ) => {
   const { rows: user } = await pool.query(
-    "UPDATE items SET name = $1, description = $2, quantity = $3, owner = $4, value = $5, space_id = $6, img_url = $7, updated_at = NOW() WHERE id = $8 RETURNING *",
-    [name, description, quantity, owner, value, space_id, img_url, id]
+    "UPDATE items SET name = $1, description = $2, quantity = $3, value = $4, space_id = $5, img_url = $6, updated_at = NOW() WHERE id = $7 RETURNING *",
+    [name, description, quantity, value, space_id, img_url, id]
   );
   return user;
 };

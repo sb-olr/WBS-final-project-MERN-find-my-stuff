@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // Import the axios library for making HTTP requests
 import axios from "axios";
 import "../styles.css";
+import useAuth from "../hooks/useAuth";
 
 // Define the SignIn component
 function SignIn({ setToken }) {
@@ -11,56 +12,36 @@ function SignIn({ setToken }) {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
+  const { loading, error, signInUser, logout } = useAuth();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   // Define the function that will be called when the user submits the form
   const handleSubmit = async (event) => {
-    // Prevent the form from submitting normally
     event.preventDefault();
 
-    // Get the username and password from the form input fields
-    const { useremail, pass } = event.target.elements;
+    await signInUser(emailRef.current.value, passwordRef.current.value);
 
-    try {
-      // Send a POST request to the server with the user's credentials
-      const response = await axios.post("http://localhost:8000/api/login", {
-        email: useremail.value,
-        password: pass.value,
-      });
+    //   // If there was an error, set errorMessages to the appropriate message
+    //   const { message } = error.response.data;
 
-      // Get the JWT token from the response
-      const { token } = response.data;
-      console.log("token", token);
-      console.log("response", response.data);
-
-      // If a token was received, save it in localStorage and set isSubmitted to true
-      if (token) {
-        localStorage.setItem("token", token);
-        setIsSubmitted(true);
-        setToken(token);
-        navigate("/");
-      }
-    } catch (error) {
-      console.log(error);
-      // If there was an error, set errorMessages to the appropriate message
-      const { message } = error.response.data;
-
-      if (message.toLowerCase() === "invalid email") {
-        setErrorMessages({
-          name: "useremail",
-          message: "Invalid email.",
-        });
-      } else if (message === "invalid password") {
-        setErrorMessages({
-          name: "pass",
-          message: "Incorrect password.",
-        });
-      } else {
-        setErrorMessages({
-          name: "other",
-          message: "An unexpected error occurred. Please try again.",
-        });
-      }
-    }
+    //   if (message.toLowerCase() === "invalid email") {
+    //     setErrorMessages({
+    //       name: "useremail",
+    //       message: "Invalid email.",
+    //     });
+    //   } else if (message === "invalid password") {
+    //     setErrorMessages({
+    //       name: "pass",
+    //       message: "Incorrect password.",
+    //     });
+    //   } else {
+    //     setErrorMessages({
+    //       name: "other",
+    //       message: "An unexpected error occurred. Please try again.",
+    //     });
+    //   }
+    // }
   };
 
   // Define a helper function to render error messages for form fields
@@ -81,6 +62,7 @@ function SignIn({ setToken }) {
             name="useremail"
             placeholder="Email"
             required
+            ref={emailRef}
           />
           {renderErrorMessage("useremail")}
         </div>
@@ -92,6 +74,7 @@ function SignIn({ setToken }) {
             name="pass"
             placeholder="Password"
             required
+            ref={passwordRef}
           />
           {renderErrorMessage("pass")}
         </div>
@@ -108,7 +91,7 @@ function SignIn({ setToken }) {
   // entire component
 
   useEffect(() => {
-    localStorage.clear("token");
+    logout(false);
   }, []);
 
   return (
@@ -126,4 +109,3 @@ function SignIn({ setToken }) {
   );
 }
 export default SignIn;
-

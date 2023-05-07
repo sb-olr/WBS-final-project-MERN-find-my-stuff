@@ -15,11 +15,14 @@ function SignUp({ setToken }) {
     console.log(email.value);
 
     try {
-      const response = await axios.post("http://localhost:3001/login", {
-        name: name.value,
-        email: email.value,
-        password: pass.value,
-      });
+      const response = await axios.post(
+        "http://localhost:8000/api/users/login",
+        {
+          name: name.value,
+          email: email.value,
+          password: pass.value,
+        }
+      );
 
       const { token } = response.data;
 

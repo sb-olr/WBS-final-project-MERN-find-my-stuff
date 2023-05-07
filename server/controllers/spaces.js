@@ -50,11 +50,11 @@ const getSpace = async (req, res) => {
 const deleteSpace = async (req, res) => {
   try {
     const { id } = req.params;
-    spaceModel.deleteSpace(id);
+    await spaceModel.deleteSpace(id);
     res.status(200).json({ message: "Space deleted" });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Something went wrong" });
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -62,7 +62,12 @@ const updateSpace = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description, img_url } = req.body;
-    const newSpace = await spaceModel.updateSpace(id, name, description, img_url);
+    const newSpace = await spaceModel.updateSpace(
+      id,
+      name,
+      description,
+      img_url
+    );
     res.json(newSpace);
   } catch (err) {
     console.error(err);

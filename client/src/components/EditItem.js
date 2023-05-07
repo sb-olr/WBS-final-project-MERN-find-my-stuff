@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 
-const SpacesNewItem = () => {
+const AddNewItem = () => {
   const { token } = useAuth();
   const navigate = useNavigate();
   const [spaces, setSpaces] = useState([]);
@@ -14,21 +14,17 @@ const SpacesNewItem = () => {
   const descriptionRef = useRef();
   const { id } = useParams();
 
-  const [newItem, setNewItem] = useState({
-    img_url: "",
-    name: "",
-    space_id: "",
-    quantity: 0,
-    value: 0,
-    description: "",
-  });
-
-  const handleInputChange = (event) => {
+  const handleDelete = async (event) => {
+    //TODO: ask confirm
     event.preventDefault();
-    setNewItem({
-      ...newItem,
-      [event.target.name]: event.target.value,
+
+    await axios.delete(process.env.REACT_APP_API_URL + "/items/" + id, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
     });
+
+    navigate("/items");
   };
 
   const handleSubmit = async (event) => {
@@ -58,7 +54,7 @@ const SpacesNewItem = () => {
       });
     }
 
-    navigate("/SpaceItems");
+    navigate("/items");
   };
 
   useEffect(() => {
@@ -127,7 +123,7 @@ const SpacesNewItem = () => {
                     id="inputSpace_id"
                     placeholder="Space name"
                   >
-                    {spaces &&
+                    {spaces && 
                       spaces.map((space) => (
                         <option value={space.id}> {space.name}</option>
                       ))}
@@ -194,11 +190,18 @@ const SpacesNewItem = () => {
                   </button>
                   <span style={{ margin: "0 30px" }}></span>
                   <button
-                    onClick={() => navigate("/SpaceItems")}
+                    onClick={() => navigate("/items")}
                     type="submit"
                     className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
                   >
                     Cancel
+                  </button>
+                  <button
+                    onClick={handleDelete}
+                    type="submit"
+                    className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
+                  >
+                    Delete
                   </button>
                 </div>
               </form>
@@ -209,4 +212,4 @@ const SpacesNewItem = () => {
     </>
   );
 };
-export default SpacesNewItem;
+export default AddNewItem;

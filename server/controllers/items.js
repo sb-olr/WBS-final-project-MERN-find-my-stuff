@@ -4,7 +4,10 @@ const itemModel = require("../models/items");
 
 const getAllItems = async (req, res) => {
   try {
-    const rows = await itemModel.getItems(req.user.id);
+    const {
+      query: { term },
+    } = req;
+    const rows = await itemModel.getItems(req.user.id, term);
     res.json(rows);
   } catch (err) {
     console.error(err);
@@ -31,24 +34,25 @@ const getItemsBySpaceId = async (req, res) => {
     res.json(rows);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.status(500).json({ message: err.message });
   }
 };
 
 const addItem = async (req, res) => {
   try {
     // const { spaceId } = req.params;
-    const { name, description, quantity, owner, value, space_id, img_url } =
-      req.body;
+    let { name, description, quantity, value, space_id, img_url } = req.body;
 
-    if (!name || !description || !quantity || !owner || !space_id)
-      return res.status(500).json({ error: "All fields compulsory!" });
+    if (!name) return res.status(500).json({ error: "All fields compulsory!" });
+
+    if (space_id === "-1") {
+      space_id = null;
+    }
 
     const item = await itemModel.addItem(
       name,
       description,
       quantity,
-      owner,
       value,
       space_id,
       img_url
@@ -56,7 +60,7 @@ const addItem = async (req, res) => {
     res.status(201).json(item);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -68,24 +72,25 @@ const deleteItem = async (req, res) => {
     res.sendStatus(200);
   } catch (err) {
     console.error(err);
-    res.sendStatus(500);
+    res.status(500).json({ message: err.message });
   }
 };
 
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, quantity, owner, value, space_id, img_url } =
-      req.body;
-    if (!name || !description || !quantity || !owner || !space_id)
-      return res.status(500).json({ error: "All fields compulsory!" });
+    let { name, description, quantity, value, space_id, img_url } = req.body;
+    if (!name) return res.status(500).json({ error: "All fields compulsory!" });
+
+    if (space_id === "-1") {
+      space_id = null;
+    }
 
     const item = await itemModel.updateItem(
       id,
       name,
       description,
       quantity,
-      owner,
       value,
       space_id,
       img_url
