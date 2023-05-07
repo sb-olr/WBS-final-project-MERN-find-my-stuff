@@ -39,29 +39,10 @@ const Spaces = () => {
             />
             <p className="mb-4 mt-3 text-white">New Space</p>
           </div>
-          {/* <div>
-            <h4 className="text-4xl py-6 font-bold border-b-4 border-gray-500  p-2 inline">
-              Spaces
-            </h4>
-          </div> */}
-          {/* 
-          <div
-            className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center w-40 hover:cursor-pointer ${
-              spaces?.slice(-1)[0]?.style
-            }`}
-            onClick={() => navigate("/spaces/new")}
-          >
-            <img
-              src={addnew}
-              alt="Add New Space"
-              className="w-20 h-20 mx-auto object-cover"
-            />
-            <p className="mt-4 text-white">New Space</p>
-          </div> */}
 
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-8 text-center py-8 px-4 pt-5 sm:px-0">
             {spaces &&
-              spaces.map(({ id, src, name, style }) => (
+              spaces.map(({ id, img_url, name, style }) => (
                 <div
                   key={id}
                   className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-blue-800 flex flex-col items-center`}
@@ -71,7 +52,7 @@ const Spaces = () => {
                       to={`/spaces/details/${id}`}
                       className="no-underline hover:no-underline"
                     >
-                      {/* <img src={src} alt={name} className="w-20 h-20" /> */}
+                      {<i aria-hidden="true" class={img_url + " big icon"}></i>}
                       <p className="mt-4 text-white">{name}</p>
                     </Link>
                   </div>

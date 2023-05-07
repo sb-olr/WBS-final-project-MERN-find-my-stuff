@@ -10,10 +10,10 @@ const getSpaces = async (user_id) => {
   return rows;
 };
 
-const addSpace = async (name, user_id, description, img_url) => {
+const addSpace = async (name, user_id, description, icon) => {
   const { rows } = await pool.query(
     "INSERT INTO spaces (name, user_id, description, img_url) VALUES ($1, $2, $3, $4) RETURNING *",
-    [name, user_id, description, img_url]
+    [name, user_id, description, icon]
   );
   return rows[0];
 };
@@ -48,10 +48,10 @@ const deleteSpace = async (id) => {
   return true;
 };
 
-const updateSpace = async (id, name, description, img_url) => {
+const updateSpace = async (id, name, description, icon) => {
   const { rows } = await pool.query(
     "UPDATE spaces SET name = $1, description = $2, img_url = $3, updated_at = NOW() WHERE id = $4 RETURNING *",
-    [name, description, img_url, id]
+    [name, description, icon, id]
   );
   return rows[0];
 };

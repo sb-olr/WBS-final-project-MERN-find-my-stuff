@@ -15,15 +15,15 @@ const getAllSpaces = async (req, res) => {
 const addSpace = async (req, res) => {
   try {
     const { id: user_id } = req.user;
-    const { name, description, img_url } = req.body;
-    if (!name) {
-      throw new Error("Name is required");
+    const { name, description, icon } = req.body;
+    if (!name || !icon) {
+      throw new Error("Name & icon are required");
     }
     const newSpace = await spaceModel.addSpace(
       name,
       user_id,
       description,
-      img_url
+      icon
     );
     res.status(201).json(newSpace);
   } catch (err) {
@@ -61,13 +61,13 @@ const deleteSpace = async (req, res) => {
 const updateSpace = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, description, img_url } = req.body;
-    const newSpace = await spaceModel.updateSpace(
-      id,
-      name,
-      description,
-      img_url
-    );
+    const { name, description, icon } = req.body;
+
+    if (!name || !icon) {
+      throw new Error("Name & icon are required");
+    }
+
+    const newSpace = await spaceModel.updateSpace(id, name, description, icon);
     res.json(newSpace);
   } catch (err) {
     console.error(err);
