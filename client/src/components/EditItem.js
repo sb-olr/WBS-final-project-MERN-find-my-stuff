@@ -13,25 +13,28 @@ const AddNewItem = () => {
   const valueRef = useRef();
   const descriptionRef = useRef();
   const { id } = useParams();
-
+  
   const handleDelete = async (event) => {
-    //TODO: ask confirm
-    event.preventDefault();
-
-    await axios.delete(process.env.REACT_APP_API_URL + "/items/" + id, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const confirmed = window.confirm(
+      "Are you sure you want to delete this item?"
+    );
+    if (confirmed) {
+      try {
+        await axios.delete(process.env.REACT_APP_API_URL + "/items/" + id, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
     navigate("/items");
+      } catch (error) {
+        console.error(error);
+      }
+    }
   };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
-
     let url = "/items/";
-
     const data = {
       name: nameRef.current.value,
       space_id: spaceRef.current.value,
@@ -123,7 +126,7 @@ const AddNewItem = () => {
                     id="inputSpace_id"
                     placeholder="Space name"
                   >
-                    {spaces && 
+                    {spaces &&
                       spaces.map((space) => (
                         <option value={space.id}> {space.name}</option>
                       ))}
@@ -188,7 +191,8 @@ const AddNewItem = () => {
                   >
                     Save
                   </button>
-                  <span style={{ margin: "0 30px" }}></span>
+                  <span style={{ margin: "0 10px" }}></span>{" "}
+                  {/* Adjust the margin value as per your preference */}
                   <button
                     onClick={() => navigate("/items")}
                     type="submit"
@@ -196,6 +200,8 @@ const AddNewItem = () => {
                   >
                     Cancel
                   </button>
+                  <span style={{ margin: "0 10px" }}></span>{" "}
+                  {/* Adjust the margin value as per your preference */}
                   <button
                     onClick={handleDelete}
                     type="submit"

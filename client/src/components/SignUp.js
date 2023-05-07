@@ -16,7 +16,7 @@ function SignUp({ setToken }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:8000/api/users/login",
+        "http://localhost:8000/api/users/signup",
         {
           name: name.value,
           email: email.value,

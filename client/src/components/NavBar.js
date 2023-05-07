@@ -38,14 +38,25 @@ const NavBar = () => {
           <div className="search pt-2 max-w-sm">
             <label>
               <form onSubmit={handleSearch}>
-                <input
-                  type="text"
-                  name="search"
-                  ref={searchRef}
-                  placeholder="Search"
-                  className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
-                />
-                <button type="submit">Search</button>
+                <div className="flex gap-2">
+                  {" "}
+                  {/* Added a container div with flex and gap */}
+                  <input
+                    type="text"
+                    name="search"
+                    ref={searchRef}
+                    placeholder="Search"
+                    className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
+                    style={{ marginRight: "0.5rem" }} // Added right margin to the input
+                  />
+                  <button
+                    type="submit"
+                    className="btn btn-primary px-2 py-1 bg-gradient-to-b from-gray-900 to-black-800"
+                    style={{ fontSize: "0.8rem" }}
+                  >
+                    Search
+                  </button>
+                </div>
               </form>
             </label>
           </div>
