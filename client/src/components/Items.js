@@ -38,7 +38,6 @@ const Items = () => {
       name="itemsindex"
       className="bg-gradient-to-b from-gray-800 to-black w-full pt-16 min-h-screen "
     >
-      {/* <div className="max-w-screen-lg mx-auto p-4 pt-5 flex flex-col justify-center w-full h-full text-white"> */}
       <div className="w-3/4 mx-auto p-4 mt-10 flex flex-col text-white">
         <div
           className={`shadow-md hover:scale-105 duration-500 rounded-full shadow-yellow-500 flex flex-col items-center mx-6 w-32 my-16" hover:cursor-pointer ${
@@ -46,22 +45,15 @@ const Items = () => {
           }`}
           onClick={() => navigate("/items/new")}
         >
-          <img
-            src={addnew}
-            alt="Add New Item"
-            className="w-18 h-18 mx-auto object-cover"
-          />
+          {<i aria-hidden="true" class="add big icon"></i>}
           <p className="mb-4 mt-3 text-white">New Item</p>
         </div>
 
-        {/* <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-8 text-center py08 px-12 pt-2 sm:px-0 "> */}
         <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-8 text-center py-8 px-4 pt-5 sm:px-0">
           {items &&
-            items.map(({ id, src, name, style }) => (
+            items.map(({ id, img_url, name, style }) => (
               <div
                 key={id}
-                //   className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center w-40`}
-                // >
                 className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center`}
               >
                 <div>
@@ -69,11 +61,8 @@ const Items = () => {
                     to={"/items/" + id}
                     className="no-underline hover:no-underline"
                   >
-                    <img
-                      src={src}
-                      alt=""
-                      className="flex flex-col items-center w-18 mx-auto"
-                    />
+                    {<i aria-hidden="true" class={img_url + " big icon"}></i>}
+
                     <p className="mt-4 text-white">{name}</p>
                   </Link>
                 </div>

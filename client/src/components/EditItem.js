@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
+import { Dropdown } from "semantic-ui-react";
+import { itemIconOptions } from "../utils/icons";
 
 const AddNewItem = () => {
   const { token } = useAuth();
@@ -13,7 +15,12 @@ const AddNewItem = () => {
   const valueRef = useRef();
   const descriptionRef = useRef();
   const { id } = useParams();
-  
+  const [icon, setIcon] = useState(null);
+
+  const handleIconChange = (event, { value }) => {
+    setIcon(value);
+  };
+
   const handleDelete = async (event) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this item?"
@@ -26,7 +33,7 @@ const AddNewItem = () => {
           },
         });
 
-    navigate("/items");
+        navigate("/items");
       } catch (error) {
         console.error(error);
       }
@@ -35,27 +42,26 @@ const AddNewItem = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     let url = "/items/";
+
     const data = {
       name: nameRef.current.value,
       space_id: spaceRef.current.value,
       quantity: quantityRef.current.value,
       value: valueRef.current.value,
       description: descriptionRef.current.value,
+      icon: icon,
     };
+    let method = "post";
+
     if (id) {
       url += id;
-      await axios.put(process.env.REACT_APP_API_URL + url, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    } else {
-      await axios.post(process.env.REACT_APP_API_URL + url, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      method = "put";
     }
+    await axios[method](process.env.REACT_APP_API_URL + url, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     navigate("/items");
   };
@@ -85,6 +91,7 @@ const AddNewItem = () => {
           quantityRef.current.value = data.quantity;
           valueRef.current.value = data.value;
           descriptionRef.current.value = data.description;
+          setIcon(data.img_url);
         })
         .catch((error) => console.error(error));
     }
@@ -168,6 +175,18 @@ const AddNewItem = () => {
                     class="form-control"
                     id="inputDescription"
                     placeholder="Item description"
+                  />
+                </div>
+                <div class="col-md-6">
+                  <Dropdown
+                    onChange={handleIconChange}
+                    placeholder="Select Icon"
+                    fluid
+                    search
+                    selection
+                    required
+                    options={itemIconOptions}
+                    value={icon}
                   />
                 </div>
                 {/* <div class="col-md-6">

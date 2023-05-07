@@ -41,9 +41,10 @@ const getItemsBySpaceId = async (req, res) => {
 const addItem = async (req, res) => {
   try {
     // const { spaceId } = req.params;
-    let { name, description, quantity, value, space_id, img_url } = req.body;
+    let { name, description, quantity, value, space_id, icon } = req.body;
 
-    if (!name) return res.status(500).json({ error: "All fields compulsory!" });
+    if (!name || !icon)
+      return res.status(500).json({ error: "name & icon are compulsory!" });
 
     if (space_id === "-1") {
       space_id = null;
@@ -55,7 +56,7 @@ const addItem = async (req, res) => {
       quantity,
       value,
       space_id,
-      img_url
+      icon
     );
     res.status(201).json(item);
   } catch (err) {
@@ -79,8 +80,9 @@ const deleteItem = async (req, res) => {
 const updateItem = async (req, res) => {
   try {
     const { id } = req.params;
-    let { name, description, quantity, value, space_id, img_url } = req.body;
-    if (!name) return res.status(500).json({ error: "All fields compulsory!" });
+    let { name, description, quantity, value, space_id, icon } = req.body;
+    if (!name || !icon)
+      return res.status(500).json({ error: "name & icon are compulsory!" });
 
     if (space_id === "-1") {
       space_id = null;
@@ -93,7 +95,7 @@ const updateItem = async (req, res) => {
       quantity,
       value,
       space_id,
-      img_url
+      icon
     );
 
     res.status(200).json(item);
