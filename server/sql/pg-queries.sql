@@ -37,22 +37,18 @@ CREATE TABLE items
 
 INSERT INTO users (email, password, name, active, admin
 ) VALUES
-('admin@example.com', 'admin', 'admin', TRUE, TRUE
-),
-('user1@example.com', 'password1', 'John Doe', TRUE, FALSE),
-('user2@example.com', 'password2', 'Jane Smith', TRUE, FALSE),
-('user3@example.com', 'password3', 'Bob Johnson', TRUE, FALSE),
-('user4@example.com', 'password4', 'Alice Lee', TRUE, FALSE);
+('admin@admin.com', 'admin', 'admin', TRUE, TRUE
+);
 
 INSERT INTO spaces (name, description, user_id) VALUES
+('no space', 'Items without a home go here', 1),
 ('Kitchen', 'The kitchen is the heart of the home', 1
 ),
 ('Living Room', 'The living room is the place to relax', 1),
 ('Bedroom', 'The bedroom is the place to sleep', 1),
 ('Bathroom', 'The bathroom is the place to wash', 1);
 
-
 INSERT INTO items
   (name, space_id, description, img_url, value, quantity, owner)
 VALUES
-  ('Fridge', 1, 'A fridge to keep food cold', 'https://images.unsplash.com/photo-151055788', 500.00, 1, 'None')
+  ('Fridge', 1, 'A fridge to keep food cold', 'https://images.unsplash.com/photo-151055788', 500.00, 1, '')
