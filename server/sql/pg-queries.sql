@@ -51,4 +51,4 @@ INSERT INTO spaces (name, description, user_id) VALUES
 INSERT INTO items
   (name, space_id, description, img_url, value, quantity, owner)
 VALUES
-  ('Fridge', 1, 'A fridge to keep food cold', 'https://images.unsplash.com/photo-151055788', 500.00, 1, 'None')
+  ('Fridge', 1, 'A fridge to keep food cold', 'https://images.unsplash.com/photo-151055788', 500.00, 1, '')

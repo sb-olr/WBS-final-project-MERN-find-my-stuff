@@ -23,17 +23,23 @@ const addUser = async (req, res) => {
 
     //todo hash password
     const user = await userModel.addUser(name, email, password);
-
-    await spaceModel.addSpace("no space", user.id, "Default User Space");
+    if (user) {
+    const space = await spaceModel.addSpace(
+      "no space",
+      user.id,
+      "Default User Space",
+      "question circle"
+    )} else {
+      return res.status(500).json({ error: "User could not be created!" });
+    }
 
     //sign a token with user Id
     const token = Jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    // res.json({ token });
 
      res.status(201).json({token});
   } catch (err) {
     console.error(err);
-    return res.status(500);
+    return res.status(500).json({ error: "User could not be created!" });
   }
 };
 
