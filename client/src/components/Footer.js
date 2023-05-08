@@ -4,7 +4,6 @@ import facebook from "../Assets/facebook.png";
 import linkedin from "../Assets/linkedin.png";
 import instagram from "../Assets/instagram.png";
 
-
 const Footer = () => {
   return (
     <div

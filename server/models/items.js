@@ -26,17 +26,10 @@ const getItemsBySpaceId = async (spaceId) => {
   return rows;
 };
 
-const addItem = async (
-  name,
-  description,
-  quantity,
-  value,
-  space_id,
-  img_url
-) => {
+const addItem = async (name, description, quantity, value, space_id, icon) => {
   const { rows: user } = await pool.query(
     "INSERT INTO items (name, description, quantity,  value, space_id, img_url) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *",
-    [name, description, quantity, value, space_id, img_url]
+    [name, description, quantity, value, space_id, icon]
   );
   return user;
 };
@@ -57,11 +50,11 @@ const updateItem = async (
   quantity,
   value,
   space_id,
-  img_url
+  icon
 ) => {
   const { rows: user } = await pool.query(
     "UPDATE items SET name = $1, description = $2, quantity = $3, value = $4, space_id = $5, img_url = $6, updated_at = NOW() WHERE id = $7 RETURNING *",
-    [name, description, quantity, value, space_id, img_url, id]
+    [name, description, quantity, value, space_id, icon, id]
   );
   return user;
 };

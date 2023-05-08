@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-// Import the axios library for making HTTP requests
 import axios from "axios";
 import "../styles.css";
 import useAuth from "../hooks/useAuth";
@@ -87,8 +86,6 @@ function SignIn({ setToken }) {
       </form>
     </div>
   );
-
-  // entire component
 
   useEffect(() => {
     logout(false);

@@ -37,7 +37,7 @@ function SignUp({ setToken }) {
 
       if (message === "username taken") {
         setErrorMessages({
-          name: "name",
+          name: "email",
           message: "This email is already taken. Please use a different email.",
         });
       } else if (message === "invalid email format") {

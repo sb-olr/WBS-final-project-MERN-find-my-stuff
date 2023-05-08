@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
+import { Dropdown } from "semantic-ui-react";
+import { itemIconOptions } from "../utils/icons";
 
 const AddNewItem = () => {
   const { token } = useAuth();
@@ -13,7 +15,13 @@ const AddNewItem = () => {
   const valueRef = useRef();
   const descriptionRef = useRef();
   const { id } = useParams();
+  const [icon, setIcon] = useState(null);
   
+
+  const handleIconChange = (event, { value }) => {
+    setIcon(value);
+  };
+
   const handleDelete = async (event) => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this item?"
@@ -26,7 +34,7 @@ const AddNewItem = () => {
           },
         });
 
-    navigate("/items");
+        navigate("/items");
       } catch (error) {
         console.error(error);
       }
@@ -35,27 +43,26 @@ const AddNewItem = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     let url = "/items/";
+
     const data = {
       name: nameRef.current.value,
       space_id: spaceRef.current.value,
       quantity: quantityRef.current.value,
       value: valueRef.current.value,
       description: descriptionRef.current.value,
+      icon: icon,
     };
+    let method = "post";
+
     if (id) {
       url += id;
-      await axios.put(process.env.REACT_APP_API_URL + url, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    } else {
-      await axios.post(process.env.REACT_APP_API_URL + url, data, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      method = "put";
     }
+    await axios[method](process.env.REACT_APP_API_URL + url, data, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     navigate("/items");
   };
@@ -85,6 +92,7 @@ const AddNewItem = () => {
           quantityRef.current.value = data.quantity;
           valueRef.current.value = data.value;
           descriptionRef.current.value = data.description;
+          setIcon(data.img_url);
         })
         .catch((error) => console.error(error));
     }
@@ -100,8 +108,8 @@ const AddNewItem = () => {
           <div className="space-y-12">
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
               <h4>Item Details</h4>
-              <form onSubmit={handleSubmit} class="row g-3">
-                <div class="col-md-6">
+              <form onSubmit={handleSubmit} className="row g-3">
+                <div className="col-md-6">
                   <label htmlFor="inputSpaces" className="form-label">
                     Name
                   </label>
@@ -109,20 +117,20 @@ const AddNewItem = () => {
                     name="name"
                     ref={nameRef}
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="inputSpaces"
                     placeholder="item name"
                   />
                 </div>
-                <div class="col-md-6">
-                  <label for="inputSpace_id" class="form-label">
+                <div className="col-md-6">
+                  <label htmlFor="inputSpace_id" className="form-label">
                     Spaces
                   </label>
                   <select
                     ref={spaceRef}
                     name="space_id"
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="inputSpace_id"
                     placeholder="Space name"
                   >
@@ -132,42 +140,54 @@ const AddNewItem = () => {
                       ))}
                   </select>
                 </div>
-                <div class="col-md-6">
-                  <label for="inputQuantity" class="form-label">
+                <div className="col-md-6">
+                  <label htmlFor="inputQuantity" className="form-label">
                     Quantity
                   </label>
                   <input
                     ref={quantityRef}
                     name="quantity"
                     type="number"
-                    class="form-control"
+                    className="form-control"
                     id="inputQuantity"
                   />
                 </div>
-                <div class="col-md-6">
-                  <label for="inputValue" class="form-label">
+                <div className="col-md-6">
+                  <label htmlFor="inputValue" className="form-label">
                     Value
                   </label>
                   <input
                     ref={valueRef}
                     name="value"
                     type="number"
-                    class="form-control"
+                    className="form-control"
                     id="inputValue"
                     placeholder="value"
                   />
                 </div>
-                <div class="col-12">
-                  <label for="inputDescription" class="form-label">
+                <div className="col-12">
+                  <label htmlFor="inputDescription" className="form-label">
                     Description
                   </label>
                   <input
                     ref={descriptionRef}
                     name="description"
                     type="text"
-                    class="form-control"
+                    className="form-control"
                     id="inputDescription"
                     placeholder="Item description"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <Dropdown
+                    onChange={handleIconChange}
+                    placeholder="Select Icon"
+                    fluid
+                    search
+                    selection
+                    required
+                    options={itemIconOptions}
+                    value={icon}
                   />
                 </div>
                 {/* <div class="col-md-6">
@@ -192,7 +212,6 @@ const AddNewItem = () => {
                     Save
                   </button>
                   <span style={{ margin: "0 10px" }}></span>{" "}
-                  {/* Adjust the margin value as per your preference */}
                   <button
                     onClick={() => navigate("/items")}
                     type="submit"
@@ -201,7 +220,6 @@ const AddNewItem = () => {
                     Cancel
                   </button>
                   <span style={{ margin: "0 10px" }}></span>{" "}
-                  {/* Adjust the margin value as per your preference */}
                   <button
                     onClick={handleDelete}
                     type="submit"

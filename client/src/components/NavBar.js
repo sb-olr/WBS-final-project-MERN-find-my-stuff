@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = () => {
@@ -27,7 +26,7 @@ const NavBar = () => {
 
   return (
     <>
-      <div className="flex justify-between items-cebter w-full h-20 pt-2 px-4 text-white bg-black fixed">
+      <div className="flex justify-between items-cebter w-full h-20 pt-2 px-4 text-white bg-black fixed z-10">
         <div>
           <div>
             <h1 className="text-5xl font-signature ml-2">My Stuff</h1>
@@ -39,7 +38,6 @@ const NavBar = () => {
             <label>
               <form onSubmit={handleSearch}>
                 <div className="flex gap-2">
-                  {" "}
                   {/* Added a container div with flex and gap */}
                   <input
                     type="text"
@@ -47,7 +45,7 @@ const NavBar = () => {
                     ref={searchRef}
                     placeholder="Search"
                     className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
-                    style={{ marginRight: "0.5rem" }} // Added right margin to the input
+                    style={{ marginRight: "0.5rem" }}
                   />
                   <button
                     type="submit"
@@ -117,18 +115,6 @@ const NavBar = () => {
                     }}
                   >
                     <span className="sr-only">Open user menu</span>
-                    {/* <img
-                      class="h-8 w-8 rounded-full"
-                      src="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      strokeWidth={1.5}
-                      stroke="currentColor"
-                      className="w-6 h-6"
-                      alt=""
-                    /> */}
-                    {/* <img
-                      class="h-8 w-8 rounded-full" */}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -143,9 +129,6 @@ const NavBar = () => {
                         d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                       />
                     </svg>
-
-                    {/* alt=""
-                    ></img> */}
                   </button>
                 ) : (
                   `SignIn`
@@ -207,7 +190,6 @@ const NavBar = () => {
                   to={path}
                   className="px-4 cursor-pointer capitalize py-6 text-4xl"
                   activeclassname="text-white"
-                  // style={{ textDecoration: "none" }}
                   style={({ isActive }) =>
                     isActive
                       ? { color: "white", textDecoration: "none" }
@@ -240,10 +222,8 @@ const NavBar = () => {
           </ul>
         )}
       </div>
-
       <Outlet />
     </>
   );
 };
-
 export default NavBar;
