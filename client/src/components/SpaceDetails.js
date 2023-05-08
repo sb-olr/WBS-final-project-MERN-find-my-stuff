@@ -14,7 +14,7 @@ export default function SpaceDetails() {
   const [spaceItems, setSpaceItems] = useState([]); // State for storing space items
   const navigate = useNavigate();
 
-  const handleDeleteSpace = async (spaceName) => {
+  const handleDeleteSpace = async () => {
     const confirmed = window.confirm(
       "Are you sure you want to delete this space?"
     );
@@ -86,7 +86,7 @@ export default function SpaceDetails() {
           </NavLink>
           <button
             className="p-2 rounded-full bg-white-900 hover:bg-red-600"
-            onClick={() => handleDeleteSpace(space && space.name)}
+            onClick={(e) => handleDeleteSpace(e)}
           >
             <img src={deleteIcon} alt="Delete" className="w-7 h-7" />
           </button>

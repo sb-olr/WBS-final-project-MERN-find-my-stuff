@@ -144,9 +144,16 @@ const NavBar = () => {
                   aria-labelledby="user-menu-button"
                   tabIndex="-1"
                 >
-                  {loggedInUser.name}
                   <button
-                    className="block px-5 bg-white py-1 text-sm text-gray-500"
+                    className="block px-5 bg-white py-1 text-sm text-gray-500 "
+                    role="menuitem"
+                    tabIndex="-1"
+                    id="user-menu-item-1"
+                  >
+                    {loggedInUser.name}
+                  </button>
+                  <button
+                    className="block px-5 bg-white py-1 text-sm text-gray-500 "
                     role="menuitem"
                     tabIndex="-1"
                     id="user-menu-item-1"
