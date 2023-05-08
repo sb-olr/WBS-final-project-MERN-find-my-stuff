@@ -109,13 +109,13 @@ export default function SpaceDetails() {
           </div>
 
           {spaceItems &&
-            spaceItems.map(({ id, name, img_url }) => (
+            spaceItems.map(({ id, name, img_url, space_id }) => (
               <div
                 key={id}
                 className="shadow-md hover:scale-105 duration-500 rounded-full shadow-yellow-500 flex flex-col items-center mx-6 px-10 w-48 my-16"
               >
                 <Link
-                  to={"/items/" + id}
+                  to={"/items/" + id + "?space_id=" + space_id}
                   className="no-underline hover:no-underline my-1"
                 >
                   {<i aria-hidden="true" className={img_url + " big icon"}></i>}

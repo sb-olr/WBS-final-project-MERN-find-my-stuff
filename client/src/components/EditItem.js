@@ -221,15 +221,15 @@ const AddNewItem = () => {
                   >
                     Save
                   </button>
-                  <span style={{ margin: "0 10px" }}></span>{" "}
+                  <span style={{ margin: "0 10px" }}></span>
                   <button
-                    onClick={() => navigate("/items")}
+                    onClick={() => navigate("/spaces/details/" + space_id)}
                     type="submit"
                     className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
                   >
                     Cancel
                   </button>
-                  <span style={{ margin: "0 10px" }}></span>{" "}
+                  <span style={{ margin: "0 10px" }}></span>
                   <button
                     onClick={handleDelete}
                     type="submit"

@@ -5,7 +5,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = () => {
   const searchRef = useRef();
-  const { isAuthenticated, logout, loginUser } = useAuth();
+  const { isAuthenticated, logout, loggedInUser } = useAuth();
   const navigate = useNavigate();
 
   const [nav, setNav] = useState(false);
@@ -144,6 +144,7 @@ const NavBar = () => {
                   aria-labelledby="user-menu-button"
                   tabIndex="-1"
                 >
+                  {loggedInUser.name}
                   <button
                     className="block px-5 bg-white py-1 text-sm text-gray-500"
                     role="menuitem"

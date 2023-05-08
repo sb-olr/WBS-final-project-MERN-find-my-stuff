@@ -13,7 +13,7 @@ const AuthStateContext = ({ children }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loginUser, setLoginUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState(null);
 
   useEffect(() => {
     if (!isAuthenticated) {
@@ -21,7 +21,7 @@ const AuthStateContext = ({ children }) => {
         try {
           setLoading(true);
           const data = await getUserData();
-          setLoginUser(data);
+          setLoggedInUser(data);
           setIsAuthenticated(true);
           setLoading(false);
         } catch (error) {
@@ -113,7 +113,7 @@ const AuthStateContext = ({ children }) => {
         signUpUser,
         logout,
         getUserData,
-        loginUser,
+        loggedInUser,
       }}
     >
       {children}
