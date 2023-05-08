@@ -31,7 +31,7 @@ const Items = () => {
         setItems(data);
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [term]);
 
   return (
     <div
@@ -44,8 +44,14 @@ const Items = () => {
             items?.slice(-1)[0]?.style
           }`}
           onClick={() => navigate("/items/new")}
+          style={{ marginBottom: "2rem" }} // Added margin-bottom
         >
-          {<i aria-hidden="true" className="add big icon text-blue-400 pt-2"></i>}
+          {
+            <i
+              aria-hidden="true"
+              className="add big icon text-blue-400 pt-2"
+            ></i>
+          }
           <p className="mb-4 mt-3 text-white">New Item</p>
         </div>
 
@@ -61,7 +67,12 @@ const Items = () => {
                     to={"/items/" + id}
                     className="no-underline hover:no-underline"
                   >
-                    {<i aria-hidden="true" className={img_url + " big icon"}></i>}
+                    {
+                      <i
+                        aria-hidden="true"
+                        className={img_url + " big icon"}
+                      ></i>
+                    }
 
                     <p className="mt-4 text-white">{name}</p>
                   </Link>

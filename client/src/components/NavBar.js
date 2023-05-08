@@ -22,6 +22,7 @@ const NavBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     navigate("/search/" + searchRef.current.value, { replace: true });
+    //window.location.reload();
   };
 
   return (
@@ -42,6 +43,7 @@ const NavBar = () => {
                   <input
                     type="text"
                     name="search"
+                    required
                     ref={searchRef}
                     placeholder="Search"
                     className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"

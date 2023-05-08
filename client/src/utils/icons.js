@@ -197,9 +197,9 @@ const itemIconOptions = [
     text: "videogame",
   },
   {
-    key: "lemon",
-    value: "lemon",
-    icon: "lemon",
+    key: "lemon icon",
+    value: "lemon icon",
+    icon: "lemon icon",
     text: "lemon",
   },
   {

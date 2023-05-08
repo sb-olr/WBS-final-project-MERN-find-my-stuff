@@ -7,10 +7,10 @@ import { spaceIconOptions } from "../utils/icons";
 
 const AddNewSpace = () => {
   const { token } = useAuth();
-  const navigate = useNavigate(); 
-  const nameRef = useRef(); 
-  const { id } = useParams(); 
-  const [icon, setIcon] = useState(null); 
+  const navigate = useNavigate();
+  const nameRef = useRef();
+  const { id } = useParams();
+  const [icon, setIcon] = useState(null);
 
   const handleIconChange = (event, { value }) => {
     setIcon(value);
@@ -46,7 +46,7 @@ const AddNewSpace = () => {
 
     navigate("/spaces"); // Redirect to the spaces page after submission
 
-    navigate("/spaces/details/${id}"); 
+    // navigate("/spaces/details/${id}");
   };
 
   useEffect(() => {

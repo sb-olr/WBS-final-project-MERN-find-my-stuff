@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import { Dropdown } from "semantic-ui-react";
@@ -7,6 +7,7 @@ import { itemIconOptions } from "../utils/icons";
 
 const AddNewItem = () => {
   const { token } = useAuth();
+
   const navigate = useNavigate();
   const [spaces, setSpaces] = useState([]);
   const nameRef = useRef();
@@ -16,7 +17,8 @@ const AddNewItem = () => {
   const descriptionRef = useRef();
   const { id } = useParams();
   const [icon, setIcon] = useState(null);
-  
+  const [searchParams] = useSearchParams();
+  const space_id = searchParams.get("space_id");
 
   const handleIconChange = (event, { value }) => {
     setIcon(value);
@@ -64,7 +66,7 @@ const AddNewItem = () => {
       },
     });
 
-    navigate("/items");
+    navigate("/spaces/details/" + spaceRef.current.value);
   };
 
   useEffect(() => {
@@ -136,7 +138,15 @@ const AddNewItem = () => {
                   >
                     {spaces &&
                       spaces.map((space) => (
-                        <option value={space.id}> {space.name}</option>
+                        <option
+                          value={space.id}
+                          selected={
+                            parseInt(space_id) == space.id ? "selected" : ""
+                          }
+                        >
+                          &nbsp;
+                          {space.name}
+                        </option>
                       ))}
                   </select>
                 </div>
