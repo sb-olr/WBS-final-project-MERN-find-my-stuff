@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import addnew from "../Assets/AddNew.png";
-import { useItems } from "../context/useContext";
+// import addnew from "../Assets/AddNew.png";
+// import { useItems } from "../context/useContext";
 import { Link, useNavigate, useParams } from "react-router-dom";
 
 import axios from "axios";
@@ -40,12 +40,12 @@ const Items = () => {
     >
       <div className="w-3/4 mx-auto p-4 mt-10 flex flex-col text-white">
         <div
-          className={`shadow-md hover:scale-105 duration-500 rounded-full shadow-yellow-500 flex flex-col items-center mx-6 w-32 my-16" hover:cursor-pointer ${
+          className={`shadow-md hover:scale-105 duration-500 rounded-full shadow-yellow-500 flex flex-col items-center mx-6 w-40 my-16" hover:cursor-pointer ${
             items?.slice(-1)[0]?.style
           }`}
           onClick={() => navigate("/items/new")}
         >
-          {<i aria-hidden="true" class="add big icon"></i>}
+          {<i aria-hidden="true" className="add big icon text-blue-400 pt-2"></i>}
           <p className="mb-4 mt-3 text-white">New Item</p>
         </div>
 
@@ -61,7 +61,7 @@ const Items = () => {
                     to={"/items/" + id}
                     className="no-underline hover:no-underline"
                   >
-                    {<i aria-hidden="true" class={img_url + " big icon"}></i>}
+                    {<i aria-hidden="true" className={img_url + " big icon"}></i>}
 
                     <p className="mt-4 text-white">{name}</p>
                   </Link>

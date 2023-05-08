@@ -33,6 +33,19 @@ const spaceIconOptions = [
     text: "Kitchen",
   },
   {
+    key: "home",
+    value: "home",
+    icon: "home",
+    text: "home",
+  },
+
+  {
+    key: "food",
+    value: "food",
+    icon: "food",
+    text: "Kitchen",
+  },
+  {
     key: "question",
     value: "question circle",
     icon: "question circle",
@@ -42,12 +55,7 @@ const spaceIconOptions = [
 
 const itemIconOptions = [
   { key: "box", value: "box", icon: "box", text: "Box" },
-  {
-    key: "warehouse",
-    value: "warehouse",
-    icon: "warehouse",
-    text: "warehouse",
-  },
+
   { key: "boxes", value: "boxes", icon: "boxes", text: "boxes" },
 
   {
@@ -72,7 +80,7 @@ const itemIconOptions = [
     key: "food",
     value: "food",
     icon: "food",
-    text: "Kitchen",
+    text: "food",
   },
   {
     key: "calculator",
@@ -151,6 +159,213 @@ const itemIconOptions = [
     value: "paint brush",
     icon: "paint brush",
     text: "paint brush",
+  },
+  {
+    key: "camera",
+    value: "camera",
+    icon: "camera",
+    text: "camera",
+  },
+  {
+    key: "beer",
+    value: "beer",
+    icon: "beer",
+    text: "beer glass",
+  },
+  {
+    key: "bicycle",
+    value: "bicycle",
+    icon: "bicycle",
+    text: "bicycle",
+  },
+  {
+    key: "binoculars",
+    value: "binoculars",
+    icon: "binoculars",
+    text: "binoculars",
+  },
+  {
+    key: "car",
+    value: "car",
+    icon: "car",
+    text: "car",
+  },
+  {
+    key: "gamepad",
+    value: "gamepad",
+    icon: "gamepad",
+    text: "videogame",
+  },
+  {
+    key: "lemon outline",
+    value: "lemon outline",
+    icon: "lemon outline",
+    text: "lemon",
+  },
+  {
+    key: "lightbulb",
+    value: "lightbulb",
+    icon: "lightbulb",
+    text: "lightbulb",
+  },
+
+  {
+    key: "motorcycle",
+    value: "motorcycle",
+    icon: "motorcycle",
+    text: "motorcycle",
+  },
+  {
+    key: "plug",
+    value: "plug",
+    icon: "plug",
+    text: "charger",
+  },
+  {
+    key: "umbrella",
+    value: "umbrella",
+    icon: "umbrella",
+    text: "umbrella",
+  },
+  {
+    key: "wrench",
+    value: "wrench",
+    icon: "wrench",
+    text: "wrench",
+  },
+  {
+    key: "shopping bag",
+    value: "shopping bag",
+    icon: "shopping bag",
+    text: "bag",
+  },
+  {
+    key: "utensil spoon",
+    value: "utensil spoon",
+    icon: "utensil spoon",
+    text: "spoon",
+  },
+  {
+    key: "band aid",
+    value: "band aid",
+    icon: "band aid",
+    text: "band aid",
+  },
+  {
+    key: "thermometer",
+    value: "thermometer",
+    icon: "thermometer",
+    text: "thermometer",
+  },
+  {
+    key: "first aid",
+    value: "first aid",
+    icon: "first aid",
+    text: "first aid",
+  },
+  {
+    key: "weight",
+    value: "weight",
+    icon: "weight",
+    text: "weight",
+  },
+  {
+    key: "syringe",
+    value: "syringe",
+    icon: "syringe",
+    text: "syringe",
+  },
+  {
+    key: "pills",
+    value: "pills",
+    icon: "pills",
+    text: "pills",
+  },
+
+  {
+    key: "eye dropper",
+    value: "eye dropper",
+    icon: "eye dropper",
+    text: "eye dropper",
+  },
+  {
+    key: "book",
+    value: "book",
+    icon: "book",
+    text: "book",
+  },
+  {
+    key: "cut",
+    value: "cut",
+    icon: "cut",
+    text: "scissor",
+  },
+  {
+    key: "futbol",
+    value: "futbol",
+    icon: "futbol",
+    text: "football",
+  },
+  {
+    key: "volleyball ball",
+    value: "volleyball ball",
+    icon: "volleyball ball",
+    text: "volleyball ball",
+  },
+  {
+    key: "table tennis",
+    value: "table tennis",
+    icon: "table tennis",
+    text: "table tennis",
+  },
+  {
+    key: "golf ball",
+    value: "golf ball",
+    icon: "golf ball",
+    text: "golf ball",
+  },
+  {
+    key: "lock",
+    value: "lock",
+    icon: "lock",
+    text: "lock",
+  },
+  {
+    key: "hdd",
+    value: "hdd",
+    icon: "hdd",
+    text: "hdd",
+  },
+
+  {
+    key: "mobile alternate",
+    value: "mobile alternate",
+    icon: "mobile alternate",
+    text: "mobile",
+  },
+  {
+    key: "tablet alternate",
+    value: "tablet alternate",
+    icon: "tablet alternate",
+    text: "tablet",
+  },
+  {
+    key: "address book outline",
+    value: "address book outline",
+    icon: "address book outline",
+    text: "address book",
+  },
+  {
+    key: "address card outline",
+    value: "address card outline",
+    icon: "address card outline",
+    text: "address card",
+  },
+  {
+    key: "puzzle",
+    value: "puzzle",
+    icon: "puzzle",
+    text: "puzzle",
   },
   {
     key: "question",

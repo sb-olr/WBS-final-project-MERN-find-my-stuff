@@ -25,18 +25,14 @@ const Spaces = () => {
   return (
     <>
       <div className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen pt-10">
-        <div className="w-3/4 mx-auto p-4 flex flex-col text-white">
+        <div className="w-3/4 mx-auto p-4 flex flex-col text-white ">
           <div
-            className={`shadow-md hover:scale-105 duration-500 rounded-full shadow-blue-800 flex flex-col items-center mx-6 w-32 my-16 ${
+            className={`shadow-md hover:scale-105 duration-500 rounded-full shadow-blue-800 flex flex-col items-center mx-6 w-40 my-16 ${
               spaces?.slice(-1)[0]?.style
             }`}
-            onClick={() => navigate("/spaces/new")}
-          >
-            <img
-              src={addnew}
-              alt="Add New Space"
-              className="w-18 h-18 mx-auto object-cover"
-            />
+            onClick={() => navigate("/spaces/new")}>
+              
+            {<i aria-hidden="true" className="add big icon text-blue-400 pt-2 "></i>}
             <p className="mb-4 mt-3 text-white">New Space</p>
           </div>
 
@@ -52,7 +48,7 @@ const Spaces = () => {
                       to={`/spaces/details/${id}`}
                       className="no-underline hover:no-underline"
                     >
-                      {<i aria-hidden="true" class={img_url + " big icon"}></i>}
+                      {<i aria-hidden="true" className={img_url + " big icon"}></i>}
                       <p className="mt-4 text-white">{name}</p>
                     </Link>
                   </div>
