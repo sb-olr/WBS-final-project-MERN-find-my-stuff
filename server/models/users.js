@@ -7,11 +7,15 @@ const getUsers = async () => {
 };
 
 const addUser = async (name, email, password) => {
-  const { rows: user } = await pool.query(
-    "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
-    [name, email, password]
-  );
-  return user;
+  try {
+    const { rows } = await pool.query(
+      "INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *",
+      [name, email, password]
+    );
+    return rows[0];
+  } catch (error) {
+    console.error(error.message);
+  }
 };
 
 const loginUser = async (email, password) => {
