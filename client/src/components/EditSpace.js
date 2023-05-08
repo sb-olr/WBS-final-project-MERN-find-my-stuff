@@ -7,15 +7,19 @@ import { spaceIconOptions } from "../utils/icons";
 
 const AddNewSpace = () => {
   const { token } = useAuth();
-  const navigate = useNavigate(); 
-  const nameRef = useRef(); 
-  const { id } = useParams(); 
-  const [icon, setIcon] = useState(null); 
+  const navigate = useNavigate();
+  const nameRef = useRef();
+  const { id } = useParams();
+  const [icon, setIcon] = useState(null);
+  const [isInputClicked, setIsInputClicked] = useState(false); // Track if any input field has been clicked
 
   const handleIconChange = (event, { value }) => {
     setIcon(value);
   };
 
+ const handleInputClick = () => {
+   setIsInputClicked(true);
+ };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -46,7 +50,7 @@ const AddNewSpace = () => {
 
     navigate("/spaces"); // Redirect to the spaces page after submission
 
-    navigate("/spaces/details/${id}"); 
+    navigate("/spaces/details/${id}");
   };
 
   useEffect(() => {
@@ -82,6 +86,7 @@ const AddNewSpace = () => {
                     className="form-control"
                     id="inputSpaces"
                     placeholder="Space Name"
+                    onClick={handleInputClick} // Track if the input field has been clicked
                   />
                 </div>
                 <div>
@@ -103,6 +108,7 @@ const AddNewSpace = () => {
                     onClick={handleSubmit}
                     type="submit"
                     className="btn btn-primary px-8 bg-gradient-to-b from-green-900 to-green-800"
+                    disabled={!isInputClicked} // Disable the button if no input field has been clicked
                   >
                     Save
                   </button>

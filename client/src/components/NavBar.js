@@ -14,6 +14,7 @@ const NavBar = () => {
   const links = [
     { id: 3, link: "Spaces", path: "/spaces" },
     { id: 4, link: "Items", path: "/items" },
+    { id: 5, link: "ItemDetails", path: "/ItemDetails" },
   ];
   const handleSignout = () => {
     setShowDropdown(false);
@@ -43,6 +44,7 @@ const NavBar = () => {
                     type="text"
                     name="search"
                     ref={searchRef}
+                    required
                     placeholder="Search"
                     className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
                     style={{ marginRight: "0.5rem" }}

@@ -10,6 +10,8 @@ import SignUp from "./components/SignUp";
 import AddNewSpace from "./components/EditSpace";
 import EditItem from "./components/EditItem";
 import SpacesDetails from "./components/SpaceDetails";
+import ItemDetails from "./components/ItemDetails";
+
 import { ItemsProvider } from "./context/useContext";
 // import { SpacesProvider } from "./context/useContextSpace";
 import Layout from "./components/Layout";
@@ -45,6 +47,8 @@ const App = () => {
                 <Route path="/search/:term" element={<Items />} />
 
                 <Route path="/SignIn" element={<SignIn />} />
+                <Route path="/ItemDetails" element={<ItemDetails />} />
+
                 <Route path="/SignUp" element={<SignUp />} />
 
                 {/* <Route path="/SpacesItems" element={<Layout />}>
