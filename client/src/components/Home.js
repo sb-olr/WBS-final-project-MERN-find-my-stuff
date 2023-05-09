@@ -15,7 +15,8 @@ const Home = () => {
         <img
           src={homeing}
           alt="img"
-          className="absolute top-0 left-0 -z-10 h-[55rem] sm:h-[32rem] lg:h-[60rem] object-cover mt-20 w-full opacity-80"
+          className="absolute top-0 left-0 -z-10 h-[60rem] sm:h-[6
+            2rem] lg:h-[60rem] object-cover mt-20 w-full opacity-80"
         />
         <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center h-full px-4 pt-40 md:flex-row">
           <div className="flex flex-col justify-center h-full">
