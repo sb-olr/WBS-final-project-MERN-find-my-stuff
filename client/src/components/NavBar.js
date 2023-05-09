@@ -52,7 +52,7 @@ const NavBar = () => {
                   />
                   <button
                     type="submit"
-                    className="btn btn-primary px-2 py-1 bg-gradient-to-b from-gray-900 to-black-800"
+                    className="btn btn-primary px-8 bg-gradient-to-b from-green-900 to-green-800"
                     style={{ fontSize: "0.8rem" }}
                   >
                     Search

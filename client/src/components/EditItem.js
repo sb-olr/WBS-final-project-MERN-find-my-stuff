@@ -17,6 +17,10 @@ const AddNewItem = () => {
   const { id } = useParams();
   const [icon, setIcon] = useState(null);
 
+  let action = "new";
+  if (id) {
+    action = "edit";
+  }
   const handleIconChange = (event, { value }) => {
     setIcon(value);
   };
@@ -53,7 +57,7 @@ const AddNewItem = () => {
     };
     let method = "post";
 
-    if (id) {
+    if (action === "edit") {
       url += id;
       method = "put";
     }
@@ -106,8 +110,10 @@ const AddNewItem = () => {
       >
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col mt-5 justify-center w-full h-full text-white">
           <div className="space-y-12">
+            <h1 class="text-center">
+              {action === "new" ? "Create New Item" : "Edit Item"}
+            </h1>
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
-              <h4>New Item</h4>
               <form onSubmit={handleSubmit} className="row g-3">
                 <div className="col-md-6">
                   <label htmlFor="inputSpaces" className="form-label">
