@@ -101,7 +101,7 @@ const NavBar = () => {
                     name="search"
                     required
                     ref={searchRef}
-                    placeholder="Search"
+                    placeholder=""
                     className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
                     style={{ marginRight: "0.5rem" }}
                   />

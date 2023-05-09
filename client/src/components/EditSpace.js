@@ -12,6 +12,11 @@ const AddNewSpace = () => {
   const { id } = useParams();
   const [icon, setIcon] = useState(null);
 
+  let action = "new";
+  if (id) {
+    action = "edit";
+  }
+
   const handleIconChange = (event, { value }) => {
     setIcon(value);
   };
@@ -29,7 +34,7 @@ const AddNewSpace = () => {
 
       let method = "post";
 
-      if (id) {
+      if (action === "edit") {
         url += id;
         method = "put";
       }
@@ -50,7 +55,7 @@ const AddNewSpace = () => {
   };
 
   useEffect(() => {
-    if (id) {
+    if (action === "edit") {
       // If editing an existing space, fetch its data from the API
       axios
         .get(process.env.REACT_APP_API_URL + "/spaces/" + id, {
@@ -68,18 +73,22 @@ const AddNewSpace = () => {
   return (
     <>
       <div className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen flex items-center justify-center">
-        <div className="max-w-screen-lg mx-auto p-4 flex flex-col mt-5 justify-center w-full h-full text-white">
+        <div className="max-w-screen-lg mx-auto p-4 flex flex-col justify-center w-full h-full text-white">
           <div className="space-y-12">
+            <h1 class="text-center">
+              {action === "new" ? "Create New Space" : "Edit Space"}
+            </h1>
             <div className="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
-              <h4>New Space</h4>
               <form onSubmit={handleSubmit} className="row g-3">
                 <div>
-                  <label htmlFor="inputSpaces" className="form-label"></label>
+                  <label htmlFor="inputSpaces" className="form-label">
+                    Name
+                  </label>
                   <input
                     ref={nameRef}
                     name="spacename"
                     type="text"
-                    className="form-control"
+                    className="form-control placeholder-gray-300"
                     id="inputSpaces"
                     placeholder="Space Name"
                   />

@@ -20,6 +20,11 @@ const AddNewItem = () => {
   const [searchParams] = useSearchParams();
   const space_id = searchParams.get("space_id");
 
+  let action = "new";
+  if (id) {
+    action = "edit";
+  }
+
   const handleIconChange = (event, { value }) => {
     setIcon(value);
   };
@@ -56,7 +61,7 @@ const AddNewItem = () => {
     };
     let method = "post";
 
-    if (id) {
+    if (action === "edit") {
       url += id;
       method = "put";
     }
@@ -81,7 +86,7 @@ const AddNewItem = () => {
       })
       .catch((error) => console.error(error));
 
-    if (id) {
+    if (action === "edit") {
       axios
         .get(process.env.REACT_APP_API_URL + "/items/" + id, {
           headers: {
@@ -108,8 +113,10 @@ const AddNewItem = () => {
       >
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col mt-5 justify-center w-full h-full text-white">
           <div className="space-y-12">
+            <h1 class="text-center">
+              {action === "new" ? "Create New Item" : "Edit Item"}
+            </h1>
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
-              <h4>Item Details</h4>
               <form onSubmit={handleSubmit} className="row g-3">
                 <div className="col-md-6">
                   <label htmlFor="inputSpaces" className="form-label">
@@ -119,9 +126,9 @@ const AddNewItem = () => {
                     name="name"
                     ref={nameRef}
                     type="text"
-                    className="form-control"
+                    className="form-control placeholder-gray-300"
                     id="inputSpaces"
-                    placeholder="item name"
+                    placeholder="Item name"
                   />
                 </div>
                 <div className="col-md-6">
@@ -158,8 +165,9 @@ const AddNewItem = () => {
                     ref={quantityRef}
                     name="quantity"
                     type="number"
-                    className="form-control"
+                    className="form-control placeholder-gray-300"
                     id="inputQuantity"
+                    placeholder="Quantity"
                   />
                 </div>
                 <div className="col-md-6">
@@ -170,9 +178,9 @@ const AddNewItem = () => {
                     ref={valueRef}
                     name="value"
                     type="number"
-                    className="form-control"
+                    className="form-control placeholder-gray-300"
                     id="inputValue"
-                    placeholder="value"
+                    placeholder="Value"
                   />
                 </div>
                 <div className="col-12">
@@ -183,7 +191,7 @@ const AddNewItem = () => {
                     ref={descriptionRef}
                     name="description"
                     type="text"
-                    className="form-control"
+                    className="form-control placeholder-gray-300"
                     id="inputDescription"
                     placeholder="Item description"
                   />

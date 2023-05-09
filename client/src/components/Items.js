@@ -12,9 +12,14 @@ const Items = () => {
   const navigate = useNavigate();
   const { term } = useParams();
 
+  let action = "list";
+  if (term) {
+    action = "search";
+  }
+
   useEffect(() => {
     let params = {};
-    if (term) {
+    if (action === "search") {
       params = {
         term: term,
       };
@@ -55,6 +60,9 @@ const Items = () => {
           <p className="mb-4 mt-3 text-white">New Item</p>
         </div>
 
+        <h1 className="ml-5">
+          {action === "list" ? "All Items" : "Search " + term}
+        </h1>
         <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-8 text-center py-8 px-4 pt-5 sm:px-0">
           {items &&
             items.map(({ id, img_url, name, style }) => (
