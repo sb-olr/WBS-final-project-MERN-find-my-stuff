@@ -14,9 +14,9 @@ const Footer = () => {
     >
       <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto h-full">
         <div>
-          <h4 className="text-4xl font-bold pt-10 sm:pt-8 inline border-b-1 border-gray-500">
+          <h2 className="text-4xl font-bold pt-10 sm:pt-8 inline border-b-1 border-gray-500">
             Feedback
-          </h4>
+          </h2>
           <p className="py-3">We appreciate your feedback </p>
         </div>
         <div className="flex justify-center items-center">

@@ -16,18 +16,18 @@ const Home = () => {
           src={homeing}
           alt="img"
           className="absolute top-0 left-0 -z-10 h-[60rem] sm:h-[6
-            2rem] lg:h-[60rem] object-cover mt-20 w-full opacity-80"
+            2rem] lg:h-[60rem] object-cover mt-20 w-full opacity-70"
         />
-        <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center h-full px-4 pt-40 md:flex-row">
+        <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center h-full px-4 pt-30 md:flex-row">
           <div className="flex flex-col justify-center h-full">
-            <h2 className="text-4xl sm:text-7xl font-bold text-gray">
+            <h1 className="text-4xl sm:text-7xl font-bold text-black">
               Home Inventory
-            </h2>
-            <p className="text-gray-800 py-4 max-w-md">
+            </h1>
+            <h4 className="text-black-800 pb-2 max-w-md">
               Lorem ITEMS, dolor sit amet consectetur adipisicing elit. Amet
               iusto quisquam eius enim, deleniti assumenda rem sed fuga labore
               commodi.
-            </p>
+            </h4>
             <div className="mb-20 md:mb-32 xl:mb-48">
               <Link
                 to="feature"

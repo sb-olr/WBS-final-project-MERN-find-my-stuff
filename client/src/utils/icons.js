@@ -55,7 +55,7 @@ const spaceIconOptions = [
     key: "question",
     value: "question circle",
     icon: "question circle",
-    text: "?no space",
+    text: "Deafult",
   },
 ];
 
@@ -407,7 +407,7 @@ const itemIconOptions = [
     key: "question",
     value: "question circle",
     icon: "question circle",
-    text: "no space",
+    text: "Deafult",
   },
 ];
 

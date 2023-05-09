@@ -10,8 +10,7 @@ const NavBar = () => {
 
   const [nav, setNav] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  // const [searchResults, setSearchResults] = useState([]); // State variable for search results
-  // const [items, setItems] = useState([]);
+
 
   const links = [
     { id: 3, link: "Spaces", path: "/spaces" },
@@ -31,7 +30,7 @@ const NavBar = () => {
       <div className="flex justify-between items-cebter w-full h-20 pt-2 px-4 text-white bg-black fixed z-10">
         <div>
           <div>
-            <h1 className="text-5xl font-signature ml-2">My Stuff</h1>
+            <h1 className="text-4xl font-signature ml-2">My Stuff</h1>
           </div>
         </div>
 
@@ -52,8 +51,8 @@ const NavBar = () => {
                   />
                   <button
                     type="submit"
-                    className="btn btn-primary px-8 bg-gradient-to-b from-green-900 to-green-800"
-                    style={{ fontSize: "0.8rem" }}
+                    className="btn btn-primary px-4 bg-gradient-to-b from-cyan-500 to-blue-500"
+                    style={{ fontSize: "0.9rem" }}
                   >
                     Search
                   </button>
