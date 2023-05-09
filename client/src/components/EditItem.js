@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import useAuth from "../hooks/useAuth";
 import { Dropdown } from "semantic-ui-react";
@@ -7,7 +7,6 @@ import { itemIconOptions } from "../utils/icons";
 
 const AddNewItem = () => {
   const { token } = useAuth();
-
   const navigate = useNavigate();
   const [spaces, setSpaces] = useState([]);
   const nameRef = useRef();
@@ -17,13 +16,6 @@ const AddNewItem = () => {
   const descriptionRef = useRef();
   const { id } = useParams();
   const [icon, setIcon] = useState(null);
-  const [searchParams] = useSearchParams();
-  const space_id = searchParams.get("space_id");
-
-  let action = "new";
-  if (id) {
-    action = "edit";
-  }
 
   const handleIconChange = (event, { value }) => {
     setIcon(value);
@@ -61,7 +53,7 @@ const AddNewItem = () => {
     };
     let method = "post";
 
-    if (action === "edit") {
+    if (id) {
       url += id;
       method = "put";
     }
@@ -71,7 +63,7 @@ const AddNewItem = () => {
       },
     });
 
-    navigate("/spaces/details/" + spaceRef.current.value);
+    navigate("/items");
   };
 
   useEffect(() => {
@@ -86,7 +78,7 @@ const AddNewItem = () => {
       })
       .catch((error) => console.error(error));
 
-    if (action === "edit") {
+    if (id) {
       axios
         .get(process.env.REACT_APP_API_URL + "/items/" + id, {
           headers: {
@@ -107,16 +99,15 @@ const AddNewItem = () => {
 
   return (
     <>
+      {id ? console.log(id) : console.log("no id")}
       <div
         name="spaces"
         className="bg-gradient-to-b from-gray-800 to-black w-full min-h-screen flex items-center justify-center"
       >
         <div className="max-w-screen-lg mx-auto p-4 flex flex-col mt-5 justify-center w-full h-full text-white">
           <div className="space-y-12">
-            <h1 class="text-center">
-              {action === "new" ? "Create New Item" : "Edit Item"}
-            </h1>
             <div class="bg-white  text-gray-600 rounded-lg p-8 shadow-md mt-8 ml-40 mr-40">
+              <h4>New Item</h4>
               <form onSubmit={handleSubmit} className="row g-3">
                 <div className="col-md-6">
                   <label htmlFor="inputSpaces" className="form-label">
@@ -126,9 +117,9 @@ const AddNewItem = () => {
                     name="name"
                     ref={nameRef}
                     type="text"
-                    className="form-control placeholder-gray-300"
+                    className="form-control"
                     id="inputSpaces"
-                    placeholder="Item name"
+                    placeholder="item name"
                   />
                 </div>
                 <div className="col-md-6">
@@ -145,15 +136,7 @@ const AddNewItem = () => {
                   >
                     {spaces &&
                       spaces.map((space) => (
-                        <option
-                          value={space.id}
-                          selected={
-                            parseInt(space_id) == space.id ? "selected" : ""
-                          }
-                        >
-                          &nbsp;
-                          {space.name}
-                        </option>
+                        <option value={space.id}> {space.name}</option>
                       ))}
                   </select>
                 </div>
@@ -165,9 +148,8 @@ const AddNewItem = () => {
                     ref={quantityRef}
                     name="quantity"
                     type="number"
-                    className="form-control placeholder-gray-300"
+                    className="form-control"
                     id="inputQuantity"
-                    placeholder="Quantity"
                   />
                 </div>
                 <div className="col-md-6">
@@ -178,9 +160,9 @@ const AddNewItem = () => {
                     ref={valueRef}
                     name="value"
                     type="number"
-                    className="form-control placeholder-gray-300"
+                    className="form-control"
                     id="inputValue"
-                    placeholder="Value"
+                    placeholder="value"
                   />
                 </div>
                 <div className="col-12">
@@ -191,7 +173,7 @@ const AddNewItem = () => {
                     ref={descriptionRef}
                     name="description"
                     type="text"
-                    className="form-control placeholder-gray-300"
+                    className="form-control"
                     id="inputDescription"
                     placeholder="Item description"
                   />
@@ -230,21 +212,24 @@ const AddNewItem = () => {
                     Save
                   </button>
                   <span style={{ margin: "0 10px" }}></span>
-                  <button
-                    onClick={() => navigate("/spaces/details/" + space_id)}
-                    type="submit"
-                    className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
-                  >
-                    Cancel
-                  </button>
-                  <span style={{ margin: "0 10px" }}></span>
-                  <button
-                    onClick={handleDelete}
-                    type="submit"
-                    className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
-                  >
-                    Delete
-                  </button>
+                  {!id ? (
+                    <button
+                      onClick={() => navigate("/items")}
+                      type="submit"
+                      className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
+                    >
+                      Cancel
+                    </button>
+                  ) : (
+                    // (<span style={{ margin: "0 10px" }}></span>
+                    <button
+                      onClick={handleDelete}
+                      type="submit"
+                      className="btn btn-primary px-6 bg-gradient-to-b from-red-900 to-red-800"
+                    >
+                      Delete
+                    </button>
+                  )}
                 </div>
               </form>
             </div>

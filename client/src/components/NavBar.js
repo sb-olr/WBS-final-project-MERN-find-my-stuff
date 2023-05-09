@@ -26,26 +26,6 @@ const NavBar = () => {
     navigate("/search/" + searchRef.current.value, { replace: true });
   };
 
-  // const performSearch = (searchTerm) => {
-  //   // Convert the search term to lowercase for case-insensitive search
-  //   const lowercaseSearchTerm = searchTerm.toLowerCase();
-
-  //   // Filter the items array based on the search term
-  //   const searchResults = items.filter((item) =>
-  //     item.name.toLowerCase().includes(lowercaseSearchTerm)
-  //   );
-
-  //   return searchResults;
-  // };
-
-  // const handleSearch = (e) => {
-  //   e.preventDefault();
-  //   const searchTerm = searchRef.current.value;
-  //   navigate("/search/" + searchTerm, { replace: true });
-  //   const results = performSearch(searchTerm);
-  //   setSearchResults(results);
-  // };
-
   return (
     <>
       <div className="flex justify-between items-cebter w-full h-20 pt-2 px-4 text-white bg-black fixed z-10">
@@ -54,39 +34,6 @@ const NavBar = () => {
             <h1 className="text-5xl font-signature ml-2">My Stuff</h1>
           </div>
         </div>
-
-        {/* {isAuthenticated && (
-          <div className="search pt-2 max-w-sm">
-            <label>
-              <form onSubmit={handleSearch}>
-                <div className="flex gap-2">
-                  {/* Added a container div with flex and gap */}
-        {/* <input
-                    type="text"
-                    name="search"
-                    required
-                    ref={searchRef}
-                    placeholder="Search"
-                    className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
-                    style={{ marginRight: "0.5rem" }}
-                  /> */}
-        {/* <button
-                    type="submit"
-                    className="btn btn-primary px-2 py-1 bg-gradient-to-b from-gray-900 to-black-800"
-                    style={{ fontSize: "0.8rem" }}
-                  >
-                    Search
-                  </button>
-                </div>
-              </form>
-            </label>
-          </div>
-        )} */}
-
-        {/* Display "Item not found" message when no search results */}
-        {/* {searchResults.length === 0 && (
-          <div className="text-white">Item not found</div>
-        )}  */}
 
         {isAuthenticated && (
           <div className="search pt-2 max-w-sm">
