@@ -10,7 +10,7 @@ const NavBar = () => {
 
   const [nav, setNav] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
-  const [searchResults, setSearchResults] = useState([]); // State variable for search results
+  // const [searchResults, setSearchResults] = useState([]); // State variable for search results
   // const [items, setItems] = useState([]);
 
   const links = [
@@ -24,28 +24,27 @@ const NavBar = () => {
   const handleSearch = (e) => {
     e.preventDefault();
     navigate("/search/" + searchRef.current.value, { replace: true });
-    // window.location.reload();
   };
-  
-// const performSearch = (searchTerm) => {
-//   // Convert the search term to lowercase for case-insensitive search
-//   const lowercaseSearchTerm = searchTerm.toLowerCase();
 
-//   // Filter the items array based on the search term
-//   const searchResults = items.filter((item) =>
-//     item.name.toLowerCase().includes(lowercaseSearchTerm)
-//   );
+  // const performSearch = (searchTerm) => {
+  //   // Convert the search term to lowercase for case-insensitive search
+  //   const lowercaseSearchTerm = searchTerm.toLowerCase();
 
-//   return searchResults;
-// };
+  //   // Filter the items array based on the search term
+  //   const searchResults = items.filter((item) =>
+  //     item.name.toLowerCase().includes(lowercaseSearchTerm)
+  //   );
 
-// const handleSearch = (e) => {
-//   e.preventDefault();
-//   const searchTerm = searchRef.current.value;
-//   navigate("/search/" + searchTerm, { replace: true });
-//   const results = performSearch(searchTerm);
-//   setSearchResults(results);
-// };
+  //   return searchResults;
+  // };
+
+  // const handleSearch = (e) => {
+  //   e.preventDefault();
+  //   const searchTerm = searchRef.current.value;
+  //   navigate("/search/" + searchTerm, { replace: true });
+  //   const results = performSearch(searchTerm);
+  //   setSearchResults(results);
+  // };
 
   return (
     <>
@@ -62,7 +61,7 @@ const NavBar = () => {
               <form onSubmit={handleSearch}>
                 <div className="flex gap-2">
                   {/* Added a container div with flex and gap */}
-                  {/* <input
+        {/* <input
                     type="text"
                     name="search"
                     required
@@ -71,7 +70,7 @@ const NavBar = () => {
                     className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
                     style={{ marginRight: "0.5rem" }}
                   /> */}
-                  {/* <button
+        {/* <button
                     type="submit"
                     className="btn btn-primary px-2 py-1 bg-gradient-to-b from-gray-900 to-black-800"
                     style={{ fontSize: "0.8rem" }}
@@ -89,7 +88,6 @@ const NavBar = () => {
           <div className="text-white">Item not found</div>
         )}  */}
 
-        
         {isAuthenticated && (
           <div className="search pt-2 max-w-sm">
             <label>

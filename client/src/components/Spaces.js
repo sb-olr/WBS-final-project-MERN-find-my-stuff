@@ -40,6 +40,7 @@ const Spaces = () => {
             }
             <p className="mb-4 mt-3 text-white">New Space</p>
           </div>
+          <h1 className="ml-6">All Spaces</h1>
 
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-8 text-center py-8 px-4 pt-5 sm:px-0">
             {spaces &&

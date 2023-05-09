@@ -8,9 +8,9 @@ import useAuth from "../hooks/useAuth.js";
 
 const Items = () => {
   const { token } = useAuth();
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]); 
   const navigate = useNavigate();
-  const { term } = useParams();
+  const { term } = useParams(); // Get the search term from the URL parameter
 
   let action = "list";
   if (term) {
@@ -28,15 +28,15 @@ const Items = () => {
     axios
       .get(process.env.REACT_APP_API_URL + "/items/all", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Include the token in the request headers
         },
-        params: params,
+        params: params, // Include the search term as a query parameter for searching
       })
       .then(({ data }) => {
-        setItems(data);
+        setItems(data); // Update the items state with the response data
       })
       .catch((error) => console.error(error));
-  }, [term]);
+  }, [term]); // Trigger the effect whenever the search term changes
 
   return (
     <div
