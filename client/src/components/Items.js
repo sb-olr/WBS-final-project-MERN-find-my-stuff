@@ -47,7 +47,12 @@ const Items = () => {
         <div>
           <Link to={"/items/" + id} className="no-underline hover:no-underline">
             {<i aria-hidden="true" className={img_url + " big icon"}></i>}
-            <p className="mt-4 text-white">{name} - {quantity}</p>
+            <p className="mt-4 text-white flex items-center">
+              {name}
+              <span className="bg-black text-white rounded-full w-6 h-6 flex items-center justify-center ml-2">
+                {quantity}
+              </span>
+            </p>
           </Link>
         </div>
       </div>
