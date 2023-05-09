@@ -46,6 +46,12 @@ const spaceIconOptions = [
     text: "Kitchen",
   },
   {
+    key: "puzzle",
+    value: "puzzle",
+    icon: "puzzle",
+    text: "game room",
+  },
+  {
     key: "question",
     value: "question circle",
     icon: "question circle",
@@ -197,9 +203,9 @@ const itemIconOptions = [
     text: "videogame",
   },
   {
-    key: "lemon",
-    value: "lemon",
-    icon: "lemon",
+    key: "lemon icon",
+    value: "lemon icon",
+    icon: "lemon icon",
     text: "lemon",
   },
   {
@@ -331,6 +337,18 @@ const itemIconOptions = [
     text: "lock",
   },
   {
+    key: "clock",
+    value: "clock",
+    icon: "clock ",
+    text: "clock ",
+  },
+  {
+    key: "battery full",
+    value: "battery full",
+    icon: "battery full",
+    text: "battery",
+  },
+  {
     key: "hdd",
     value: "hdd",
     icon: "hdd",
@@ -366,6 +384,24 @@ const itemIconOptions = [
     value: "puzzle",
     icon: "puzzle",
     text: "puzzle",
+  },
+  {
+    key: "chess board",
+    value: "chess board",
+    icon: "chess board",
+    text: "chess board",
+  },
+  {
+    key: "shower icon",
+    value: " shower icon",
+    icon: " shower icon",
+    text: "shower",
+  },
+  {
+    key: "briefcase",
+    value: "briefcase",
+    icon: "briefcase",
+    text: "bag",
   },
   {
     key: "question",

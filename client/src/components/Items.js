@@ -8,13 +8,18 @@ import useAuth from "../hooks/useAuth.js";
 
 const Items = () => {
   const { token } = useAuth();
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState([]); 
   const navigate = useNavigate();
-  const { term } = useParams();
+  const { term } = useParams(); // Get the search term from the URL parameter
+
+  let action = "list";
+  if (term) {
+    action = "search";
+  }
 
   useEffect(() => {
     let params = {};
-    if (term) {
+    if (action === "search") {
       params = {
         term: term,
       };
@@ -23,15 +28,15 @@ const Items = () => {
     axios
       .get(process.env.REACT_APP_API_URL + "/items/all", {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Include the token in the request headers
         },
-        params: params,
+        params: params, // Include the search term as a query parameter for searching
       })
       .then(({ data }) => {
-        setItems(data);
+        setItems(data); // Update the items state with the response data
       })
       .catch((error) => console.error(error));
-  }, []);
+  }, [term]); // Trigger the effect whenever the search term changes                  
 
   return (
     <div
@@ -44,30 +49,49 @@ const Items = () => {
             items?.slice(-1)[0]?.style
           }`}
           onClick={() => navigate("/items/new")}
+          style={{ marginBottom: "2rem" }} // Added margin-bottom
         >
-          {<i aria-hidden="true" className="add big icon text-blue-400 pt-2"></i>}
+          {
+            <i
+              aria-hidden="true"
+              className="add big icon text-blue-400 pt-2"
+            ></i>
+          }
           <p className="mb-4 mt-3 text-white">New Item</p>
         </div>
 
+        <h1 className="ml-5">
+          {action === "list" ? "All Items" : "Search " + term}
+        </h1>
         <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-8 text-center py-8 px-4 pt-5 sm:px-0">
           {items &&
             items.map(({ id, img_url, name, style }) => (
-              <div
+             <div
                 key={id}
                 className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center`}
               >
-                <div>
+                 <div>
                   <Link
                     to={"/items/" + id}
                     className="no-underline hover:no-underline"
                   >
-                    {<i aria-hidden="true" className={img_url + " big icon"}></i>}
+                    {
+                      <i
+                        aria-hidden="true"
+                        className={img_url + " big icon"}
+                      ></i>
+                    }
 
                     <p className="mt-4 text-white">{name}</p>
                   </Link>
                 </div>
               </div>
             ))}
+            {!items.length &&
+            (<div>
+                <p>Item not found</p>
+                </div>)
+            }
         </div>
       </div>
     </div>

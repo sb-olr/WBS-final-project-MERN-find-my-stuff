@@ -5,11 +5,13 @@ import { FaBars, FaTimes } from "react-icons/fa";
 
 const NavBar = () => {
   const searchRef = useRef();
-  const { isAuthenticated, logout, loginUser } = useAuth();
+  const { isAuthenticated, logout, loggedInUser } = useAuth();
   const navigate = useNavigate();
 
   const [nav, setNav] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  // const [searchResults, setSearchResults] = useState([]); // State variable for search results
+  // const [items, setItems] = useState([]);
 
   const links = [
     { id: 3, link: "Spaces", path: "/spaces" },
@@ -42,14 +44,15 @@ const NavBar = () => {
                   <input
                     type="text"
                     name="search"
+                    required
                     ref={searchRef}
-                    placeholder="Search"
+                    placeholder="Search here"
                     className="02 bg-transparent border-2 rounded-md text-white placeholder:focus:outline-none"
                     style={{ marginRight: "0.5rem" }}
                   />
                   <button
                     type="submit"
-                    className="btn btn-primary px-2 py-1 bg-gradient-to-b from-gray-900 to-black-800"
+                    className="btn btn-primary px-8 bg-gradient-to-b from-green-900 to-green-800"
                     style={{ fontSize: "0.8rem" }}
                   >
                     Search
@@ -143,7 +146,15 @@ const NavBar = () => {
                   tabIndex="-1"
                 >
                   <button
-                    className="block px-5 bg-white py-1 text-sm text-gray-500"
+                    className="block px-5 bg-white py-1 text-sm text-gray-500 "
+                    role="menuitem"
+                    tabIndex="-1"
+                    id="user-menu-item-1"
+                  >
+                    {loggedInUser.name}
+                  </button>
+                  <button
+                    className="block px-5 bg-white py-1 text-sm text-gray-500 "
                     role="menuitem"
                     tabIndex="-1"
                     id="user-menu-item-1"

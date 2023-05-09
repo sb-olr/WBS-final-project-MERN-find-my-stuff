@@ -8,7 +8,7 @@ const getItems = async (id, term = null) => {
   const queryParams = [id];
 
   if (term) {
-    query += " AND items.name LIKE $2";
+    query += " AND items.name ILIKE $2";
     queryParams.push("%" + term + "%");
   }
 

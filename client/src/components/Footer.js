@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import twitter from "../Assets/twitter.png";
 import facebook from "../Assets/facebook.png";
 import linkedin from "../Assets/linkedin.png";
@@ -11,7 +12,7 @@ const Footer = () => {
       name="Feedback"
       className="bg-gradient-to-b from-black to-gray-800 p-4 text-white"
     >
-      <div className="flex flex-col p-4  justify-center max-w-screen-lg mx-auto h-full">
+      <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto h-full">
         <div>
           <h4 className="text-4xl font-bold pt-10 sm:pt-8 inline border-b-1 border-gray-500">
             Feedback
@@ -28,7 +29,7 @@ const Footer = () => {
               type="text"
               name="name"
               placeholder="Enter your name"
-              className="my-3 p02 bg-transparent border-2 rounded-md text-white focus:outline-none"
+              className="my-3 p-1 bg-transparent border-2 rounded-md text-white focus:outline-none"
             ></input>
 
             <textarea
@@ -43,10 +44,18 @@ const Footer = () => {
           </form>
         </div>
         <div className="flex flex-row p-4 justify-center max-w-screen-lg mx-auto h-full">
-          <img src={twitter} alt="Twitter" className="h-8 mx-2" />
-          <img src={facebook} alt="Facebook" className="h-8 mx-2" />
-          <img src={instagram} alt="instagram" className="h-8 mx-2" />
-          <img src={linkedin} alt="Linkedin" className="h-8 mx-2" />
+          <a href="/" className="mx-2">
+            <img src={twitter} alt="Twitter" className="h-8" />
+          </a>
+          <a href="/" className="mx-2">
+            <img src={facebook} alt="Facebook" className="h-8" />
+          </a>
+          <a href="/" className="mx-2">
+            <img src={instagram} alt="Instagram" className="h-8" />
+          </a>
+          <a href="/" className="mx-2">
+            <img src={linkedin} alt="LinkedIn" className="h-8" />
+          </a>
         </div>
       </div>
     </div>
