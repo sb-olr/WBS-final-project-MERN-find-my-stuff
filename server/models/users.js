@@ -15,6 +15,7 @@ const addUser = async (name, email, password) => {
     return rows[0];
   } catch (error) {
     console.error(error.message);
+    throw error;
   }
 };
 
