@@ -10,7 +10,7 @@ const getAllUsers = async (req, res) => {
     return res.json(rows);
   } catch (err) {
     console.error(err);
-    return res.status(500);
+    return res.status(500).json({ error: "Could not get users" });
   }
 };
 
@@ -25,18 +25,18 @@ const addUser = async (req, res) => {
     const user = await userModel.addUser(name, email, password);
     if (user) {
     const space = await spaceModel.addSpace(
-      "no space",
+      "None",
       user.id,
-      "Default User Space",
+      "Default space",
       "question circle"
-    )} else {
+    );} else {
       return res.status(500).json({ error: "User could not be created!" });
     }
 
     //sign a token with user Id
     const token = Jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
-     res.status(201).json({token});
+    return res.status(201).json({token});
   } catch (err) {
     console.error(err);
     return res.status(500).json({ error: "User could not be created!" });
@@ -57,10 +57,10 @@ const loginUser = async (req, res) => {
 
     //sign a token with user Id
     const token = Jwt.sign({ id: user.id }, process.env.JWT_SECRET);
-    res.json({ token });
+    return res.json({ token });
   } catch (err) {
     console.error(err);
-    return res.sendStatus(500);
+    return res.status(500).json({ error: "User could not be logged in!" });
   }
 };
 
@@ -69,10 +69,10 @@ const getUser = async (req, res) => {
   try {
     const { id } = req.user;
     const user = await userModel.getUser(id);
-    res.json(user);
+    return res.json(user);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    return res.status(500).json({ error: "Could not get user" });
   }
 };
 
@@ -80,10 +80,10 @@ const getUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.user;
-    res.status(200).json("message", "User deleted successfully");
+    return res.json("message", "User deleted successfully");
   } catch (err) {
     console.error(err);
-    res.status(500);
+    return res.status(500).json({ error: "Could not delete user" });
   }
 };
 
@@ -94,13 +94,13 @@ const updateUser = async (req, res) => {
     const { name, email, password } = req.body;
 
     if (!name || !email || !password)
-      return res.json({ error: "missing data" });
+      return res.status(500).json({ error: "missing data" });
 
     const user = await userModel.editUser(id, name, email, password);
-    res.status(200).json(user);
+    return res.json(user);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    return res.status(500).json({ error: "Could not update user" });
   }
 };
 
