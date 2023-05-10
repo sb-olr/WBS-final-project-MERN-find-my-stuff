@@ -83,7 +83,7 @@ const AuthStateContext = ({ children }) => {
   };
 
   const logout = (goHome = false) => {
-    console.log("login out");
+    // console.log("login out");
     localStorage.removeItem("token");
     setToken(null);
     setIsAuthenticated(false);

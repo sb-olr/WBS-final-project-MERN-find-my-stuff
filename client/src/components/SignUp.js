@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../styles.css";
+import useAuth from "../hooks/useAuth";
 
-function SignUp({ setToken }) {
+
+function SignUp() {
   const [errorMessages, setErrorMessages] = useState({});
   const [isSubmitted, setIsSubmitted] = useState(false);
   const navigate = useNavigate();
+    const { loading, error, signUpUser, logout } = useAuth();
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -14,48 +18,52 @@ function SignUp({ setToken }) {
     const { name, email, pass } = event.target.elements;
     console.log(email.value);
 
-    try {
-      const response = await axios.post(
-        "http://localhost:8000/api/users/signup",
-        {
-          name: name.value,
-          email: email.value,
-          password: pass.value,
-        }
-      );
+    await signUpUser(name.value, email.value, pass.value);
 
-      const { token } = response.data;
 
-      if (token) {
-        localStorage.setItem("token", token);
-        setIsSubmitted(true);
-        setToken(localStorage.getItem("token"));
-        navigate("/");
-      }
-    } catch (error) {
-      const { message } = error.response.data;
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:8000/api/users/signup",
+  //       {
+  //         name: name.value,
+  //         email: email.value,
+  //         password: pass.value,
+  //       }
+  //     );
 
-      if (message === "username taken") {
-        setErrorMessages({
-          name: "email",
-          message: "This email is already taken. Please use a different email.",
-        });
-      } else if (message === "invalid email format") {
-        setErrorMessages({
-          name: "email",
-          message: "Invalid email format. Please use a valid email address.",
-        });
-      } else {
-        setErrorMessages({
-          name: "pass",
-          message: "An unexpected error occurred. Please try again later.",
-        });
-      }
-    }
+  //     const { token } = response.data;
+
+  //     if (token) {
+  //       localStorage.setItem("token", token);
+  //       setIsSubmitted(true);
+  //       // setToken(localStorage.getItem("token"));
+  //       navigate("/");
+  //     }
+  //   } catch (error) {
+  //     console.log(error)
+  //     const { message } = error.response.data;
+
+  //     if (message === "username taken") {
+  //       setErrorMessages({
+  //         name: "email",
+  //         message: "This email is already taken. Please use a different email.",
+  //       });
+  //     } else if (message === "invalid email format") {
+  //       setErrorMessages({
+  //         name: "email",
+  //         message: "Invalid email format. Please use a valid email address.",
+  //       });
+  //     } else {
+  //       setErrorMessages({
+  //         name: "pass",
+  //         message: "An unexpected error occurred. Please try again later.",
+  //       });
+  //     }
+  //   }
   };
 
   const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
+    errorMessages && name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
     );
 
