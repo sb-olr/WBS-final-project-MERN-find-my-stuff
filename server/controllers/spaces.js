@@ -8,7 +8,7 @@ const getAllSpaces = async (req, res) => {
     res.json(rows);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -28,7 +28,7 @@ const addSpace = async (req, res) => {
     res.status(201).json(newSpace);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -43,7 +43,7 @@ const getSpace = async (req, res) => {
     res.json(space);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.status(500).json({ error: err.message });
   }
 };
 
@@ -71,7 +71,7 @@ const updateSpace = async (req, res) => {
     res.json(newSpace);
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.status(500).json({ error: err.message });
   }
 };
 

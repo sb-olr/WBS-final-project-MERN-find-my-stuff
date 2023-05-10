@@ -5,7 +5,7 @@ const getSpaces = async (user_id) => {
   //TODO: add sort so None first
   const { rows } = await pool.query(
     "SELECT * FROM spaces where user_id = $1 ORDER BY CASE WHEN name = 'None' THEN 1 ELSE 2 END",
-    [user_id]
+    [parseInt(user_id)]
   );
   return rows;
 };
@@ -37,12 +37,12 @@ const deleteSpace = async (id) => {
   if (items.length !== 0) {
     await pool.query(
       "UPDATE items SET space_id = (SELECT id FROM spaces WHERE name = 'None' AND user_id = $1 ) WHERE space_id = $2",
-      [space.user_id, id]
+      [parseInt(space.user_id), parseInt(id)]
     );
   }
 
   await pool.query("DELETE FROM spaces WHERE id = $1 AND name != 'None'", [
-    id,
+    parseInt(id),
   ]);
 
   return true;
@@ -51,7 +51,7 @@ const deleteSpace = async (id) => {
 const updateSpace = async (id, name, description, icon) => {
   const { rows } = await pool.query(
     "UPDATE spaces SET name = $1, description = $2, img_url = $3, updated_at = NOW() WHERE id = $4 RETURNING *",
-    [name, description, icon, id]
+    [name, description, icon, parseInt(id)]
   );
   return rows[0];
 };

@@ -99,7 +99,7 @@ const Items = () => {
 
           {Object.keys(items).length === 0 && (
             <div>
-              <p>No Item Found</p>
+              <p>No Items Found</p>
             </div>
           )}
         </div>
