@@ -123,7 +123,7 @@ const AddNewItem = () => {
                     name="name"
                     ref={nameRef}
                     type="text"
-                    className="form-control"
+                    className="form-control  placeholder-gray-300"
                     id="inputSpaces"
                     placeholder="item name"
                   />
@@ -136,7 +136,7 @@ const AddNewItem = () => {
                     ref={spaceRef}
                     name="space_id"
                     type="text"
-                    className="form-control"
+                    className="form-control  placeholder-gray-300"
                     id="inputSpace_id"
                     placeholder="Space name"
                   >
@@ -154,8 +154,9 @@ const AddNewItem = () => {
                     ref={quantityRef}
                     name="quantity"
                     type="number"
-                    className="form-control"
+                    className="form-control  placeholder-gray-300"
                     id="inputQuantity"
+                    placeholder="Quantity"
                   />
                 </div>
                 <div className="col-md-6">
@@ -166,7 +167,7 @@ const AddNewItem = () => {
                     ref={valueRef}
                     name="value"
                     type="number"
-                    className="form-control"
+                    className="form-control placeholder-gray-300"
                     id="inputValue"
                     placeholder="value"
                   />
@@ -179,7 +180,7 @@ const AddNewItem = () => {
                     ref={descriptionRef}
                     name="description"
                     type="text"
-                    className="form-control"
+                    className="form-control  placeholder-gray-300"
                     id="inputDescription"
                     placeholder="Item description"
                   />

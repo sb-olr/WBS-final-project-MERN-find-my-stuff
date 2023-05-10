@@ -21,7 +21,7 @@ const Features = () => {
     {
       id: 3,
       src: takephoto,
-      title: "Easy Upload",
+      title: "Create your own space",
       style: "shadow-blue-600",
     },
 
