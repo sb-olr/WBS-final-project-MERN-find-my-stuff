@@ -14,6 +14,7 @@ const AddNewItem = () => {
   const quantityRef = useRef();
   const valueRef = useRef();
   const descriptionRef = useRef();
+  const dateRef = useRef();
   const { id } = useParams();
   const [icon, setIcon] = useState(null);
 
@@ -53,6 +54,8 @@ const AddNewItem = () => {
       quantity: quantityRef.current.value,
       value: valueRef.current.value,
       description: descriptionRef.current.value,
+      date: dateRef.current.value,
+
       icon: icon,
     };
     let method = "post";
@@ -95,6 +98,8 @@ const AddNewItem = () => {
           quantityRef.current.value = data.quantity;
           valueRef.current.value = data.value;
           descriptionRef.current.value = data.description;
+          dateRef.current.value = data.date;
+
           setIcon(data.img_url);
         })
         .catch((error) => console.error(error));
@@ -197,18 +202,15 @@ const AddNewItem = () => {
                     value={icon}
                   />
                 </div>
-                {/* <div class="col-md-6">
-                  <label for="inputDate" class="form-label">
-                    Date
-                  </label>
+                <div class="col-md-6">
                   <input
                     ref={dateRef}
                     name="date"
                     type="date"
-                    class="form-control"
+                    class="form-control placeholder-gray-300"
                     id="inputDate"
                   />
-                </div> */}
+                </div>
 
                 <div className="col-12">
                   <button
