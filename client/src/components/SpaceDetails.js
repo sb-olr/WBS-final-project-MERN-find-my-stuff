@@ -30,7 +30,7 @@ export default function SpaceDetails() {
         // Navigate to the "/spaces" route after  deletion
         navigate("/spaces");
       } catch (error) {
-        console.error(error);
+        console.log(error);
       }
     }
   };
@@ -105,7 +105,7 @@ export default function SpaceDetails() {
            <p className="mb-4 mt-3 text-white">New Item</p>
          </div>
          {spaceItems &&
-           spaceItems.map(({ id, name, img_url, space_id }) => (
+           spaceItems.map(({ id, name, img_url, space_id, quantity }) => (
              <div
                key={id}
                className="shadow-md hover:scale-105 duration-500 rounded-full shadow-yellow-500 flex flex-col items-center mx-6 w-52 my-16"
@@ -115,7 +115,12 @@ export default function SpaceDetails() {
                  className="no-underline hover:no-underline my-1"
                >
                  <i aria-hidden="true" className={img_url + " big icon"}></i>
-                 <p className="mb-4 mt-3 text-center text-white">{name}</p>
+                 <p className="mb-4 mt-3 text-center text-white">
+                   {name}
+                   <span className="bg-black text-white rounded-full w-6 h-6 flex items-center justify-center ml-2">
+                     {quantity}
+                   </span>
+                 </p>
                </Link>
              </div>
            ))}
