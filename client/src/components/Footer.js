@@ -57,6 +57,17 @@ const Footer = () => {
             <img src={linkedin} alt="LinkedIn" className="h-8" />
           </a>
         </div>
+        {/* <div className="flex flex-row justify-center">
+          <p className="flex flex-row items-center p-4 max-w-screen-lg mx-auto">
+            <span className="mr-2">Icons courtesy of Icon8</span>© 2023
+          </p>
+        </div> */}
+        <div className="container mx-auto text-center mt-3">
+          <p className="text-sm text-gray-500">Images courtesy - Icon8</p>
+          <p className="text-xs text-gray-400">
+            © 2023 My Stuff. All rights reserved.
+          </p>
+        </div>
       </div>
     </div>
   );

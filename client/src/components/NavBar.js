@@ -51,7 +51,7 @@ const NavBar = () => {
                   />
                   <button
                     type="submit"
-                    className="btn btn-primary px-4 bg-gradient-to-b from-cyan-500 to-blue-500"
+                    className="btn btn-primary px-3 bg-gradient-to-b from-cyan-500 to-blue-500"
                     style={{ fontSize: "0.9rem" }}
                   >
                     Search

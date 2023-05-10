@@ -93,14 +93,13 @@ const Items = () => {
         <h1 className="text-center">
           {action === "list" ? "All Items" : "Search: '" + term + "'"}
         </h1>
-        {/* <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-8 text-center py-8 px-4 pt-5 sm:px-0"> */}
         <div>
           {items &&
             Object.keys(items).map((spaceName) => renderItems(spaceName))}
 
           {Object.keys(items).length === 0 && (
             <div>
-              <p>Item not found</p>
+              <p>No Item Found</p>
             </div>
           )}
         </div>
