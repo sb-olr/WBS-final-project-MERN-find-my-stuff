@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import twitter from "../Assets/twitter.png";
 import facebook from "../Assets/facebook.png";
 import linkedin from "../Assets/linkedin.png";
