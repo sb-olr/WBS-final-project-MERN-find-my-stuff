@@ -13,7 +13,7 @@ CREATE TABLE users
 CREATE TABLE spaces
 (
   id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL UNIQUE,
+  name TEXT NOT NULL ,
   description TEXT,
   img_url TEXT,
   user_id INTEGER REFERENCES users(id),
@@ -41,7 +41,7 @@ INSERT INTO users (email, password, name, active, admin
 );
 
 INSERT INTO spaces (name, description, user_id) VALUES
-('no space', 'Items without a home go here', 1),
+('None', 'Items without a home go here', 1),
 ('Kitchen', 'The kitchen is the heart of the home', 1
 ),
 ('Living Room', 'The living room is the place to relax', 1),
