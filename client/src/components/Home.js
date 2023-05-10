@@ -15,14 +15,16 @@ const Home = () => {
         <img
           src={homeing}
           alt="img"
-          className="absolute top-0 left-0 -z-10 h-[55rem] sm:h-[32rem] lg:h-[60rem] object-cover mt-20 w-full opacity-80"
+          className="absolute top-0 left-0 -z-10 h-[60rem] sm:h-[6
+            2rem] lg:h-[60rem] object-cover mt-20 w-full opacity-80"
         />
-        <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center h-full px-4 pt-40 md:flex-row">
+        <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center h-full px-4 pt-30 md:flex-row">
           <div className="flex flex-col justify-center h-full">
-            <h2 className="text-4xl sm:text-7xl font-bold text-gray">
+            <h1 className="text-4xl sm:text-7xl font-bold text-black pt-40 font-serif">
               Home Inventory
-            </h2>
-            <p className="text-gray-800 py-4 max-w-md">
+            </h1>
+
+            <p className="text-black-800 pb-2 max-w-md font-sans">
               Lorem ITEMS, dolor sit amet consectetur adipisicing elit. Amet
               iusto quisquam eius enim, deleniti assumenda rem sed fuga labore
               commodi.

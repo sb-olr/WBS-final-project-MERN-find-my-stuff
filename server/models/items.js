@@ -1,7 +1,7 @@
 const pool = require("../db/pg");
 
 const getItems = async (id, term = null) => {
-  let query = `SELECT items.* FROM items
+  let query = `SELECT items.* , spaces.name AS spaceName FROM items
     JOIN spaces ON items.space_id = spaces.id 
     WHERE  (spaces.user_id = $1 )`;
 
@@ -12,10 +12,20 @@ const getItems = async (id, term = null) => {
     queryParams.push("%" + term + "%");
   }
 
-  console.log(queryParams);
   const { rows } = await pool.query(query, queryParams);
 
-  return rows;
+  let groupedItems = {};
+
+  rows.forEach((row) => {
+    if (!groupedItems.hasOwnProperty(row.spacename)) {
+      groupedItems[row.spacename] = [];
+    }
+    groupedItems[row.spacename].push(row);
+  });
+
+
+  
+  return groupedItems;
 };
 
 const getItemsBySpaceId = async (spaceId) => {

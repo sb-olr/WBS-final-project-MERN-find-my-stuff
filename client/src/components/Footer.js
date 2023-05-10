@@ -14,9 +14,9 @@ const Footer = () => {
     >
       <div className="flex flex-col p-4 justify-center max-w-screen-lg mx-auto h-full">
         <div>
-          <h4 className="text-4xl font-bold pt-10 sm:pt-8 inline border-b-1 border-gray-500">
+          <h2 className="text-4xl font-bold pt-10 sm:pt-8 inline border-b-1 border-gray-500">
             Feedback
-          </h4>
+          </h2>
           <p className="py-3">We appreciate your feedback </p>
         </div>
         <div className="flex justify-center items-center">
@@ -56,6 +56,17 @@ const Footer = () => {
           <a href="/" className="mx-2">
             <img src={linkedin} alt="LinkedIn" className="h-8" />
           </a>
+        </div>
+        {/* <div className="flex flex-row justify-center">
+          <p className="flex flex-row items-center p-4 max-w-screen-lg mx-auto">
+            <span className="mr-2">Icons courtesy of Icon8</span>© 2023
+          </p>
+        </div> */}
+        <div className="container mx-auto text-center mt-3">
+          <p className="text-sm text-gray-500">Images courtesy - Google</p>
+          <p className="text-xs text-gray-400">
+            © 2023 My Stuff. All rights reserved.
+          </p>
         </div>
       </div>
     </div>

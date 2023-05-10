@@ -8,7 +8,7 @@ import useAuth from "../hooks/useAuth.js";
 
 const Items = () => {
   const { token } = useAuth();
-  const [items, setItems] = useState([]); 
+  const [items, setItems] = useState([]);
   const navigate = useNavigate();
   const { term } = useParams(); // Get the search term from the URL parameter
 
@@ -36,7 +36,39 @@ const Items = () => {
         setItems(data); // Update the items state with the response data
       })
       .catch((error) => console.error(error));
-  }, [term]); // Trigger the effect whenever the search term changes                  
+  }, [term]); // Trigger the effect whenever the search term changes
+
+  const renderItem = ({ id, img_url, name, style, quantity }) => {
+    return (
+      <div
+        key={id}
+        className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-400 flex flex-col items-center`}
+      >
+        <div>
+          <Link to={"/items/" + id} className="no-underline hover:no-underline">
+            {<i aria-hidden="true" className={img_url + " big icon"}></i>}
+            <p className="mt-4 text-white flex items-center">
+              {name}
+              <span className="bg-black text-white rounded-full w-6 h-6 flex items-center justify-center ml-2">
+                {quantity}
+              </span>
+            </p>
+          </Link>
+        </div>
+      </div>
+    );
+  }; 
+
+  const renderItems = (spaceName) => {
+    return (
+      <div>
+        <h2 className="ml-6">{spaceName}</h2>
+        <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-8 text-center py-8 px-4 pt-5 sm:px-0">
+          {items[spaceName].map((item) => renderItem(item))}
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div
@@ -45,9 +77,7 @@ const Items = () => {
     >
       <div className="w-3/4 mx-auto p-4 mt-10 flex flex-col text-white">
         <div
-          className={`shadow-md hover:scale-105 duration-500 rounded-full shadow-yellow-500 flex flex-col items-center mx-6 w-40 my-16" hover:cursor-pointer ${
-            items?.slice(-1)[0]?.style
-          }`}
+          className={`shadow-md hover:scale-105 duration-500 rounded-full shadow-yellow-400 flex flex-col items-center mx-6 w-40 my-16" hover:cursor-pointer `}
           onClick={() => navigate("/items/new")}
           style={{ marginBottom: "2rem" }} // Added margin-bottom
         >
@@ -60,38 +90,18 @@ const Items = () => {
           <p className="mb-4 mt-3 text-white">New Item</p>
         </div>
 
-        <h1 className="ml-5">
-          {action === "list" ? "All Items" : "Search " + term}
+        <h1 className="text-center">
+          {action === "list" ? "All Items" : "Search: '" + term + "'"}
         </h1>
-        <div className="w-full grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5 sm:gap-8 text-center py-8 px-4 pt-5 sm:px-0">
+        <div>
           {items &&
-            items.map(({ id, img_url, name, style }) => (
-             <div
-                key={id}
-                className={`shadow-md hover:scale-105 duration-500 py-2 rounded-full shadow-yellow-500 flex flex-col items-center`}
-              >
-                 <div>
-                  <Link
-                    to={"/items/" + id}
-                    className="no-underline hover:no-underline"
-                  >
-                    {
-                      <i
-                        aria-hidden="true"
-                        className={img_url + " big icon"}
-                      ></i>
-                    }
+            Object.keys(items).map((spaceName) => renderItems(spaceName))}
 
-                    <p className="mt-4 text-white">{name}</p>
-                  </Link>
-                </div>
-              </div>
-            ))}
-            {!items.length &&
-            (<div>
-                <p>Item not found</p>
-                </div>)
-            }
+          {Object.keys(items).length === 0 && (
+            <div>
+              <p>No Item Found</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
