@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import addnew from "../Assets/AddNew.png";
 import axios from "axios";
 import useAuth from "../hooks/useAuth.js";
 

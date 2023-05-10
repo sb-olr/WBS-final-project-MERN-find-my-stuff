@@ -20,21 +20,21 @@ const Home = () => {
         />
         <div className="max-w-screen-lg mx-auto flex flex-col items-center justify-center h-full px-4 pt-30 md:flex-row">
           <div className="flex flex-col justify-center h-full">
-            <h1 className="text-4xl sm:text-7xl font-bold text-black pt-40 font-serif">
-              Home Inventory
-            </h1>
+            <h3 className="text-4xl text-blue-400 sm:text-7xl font-bold pt-40 font-serif">
+              Manage your stuff before it manages you!
+            </h3>
 
-            <p className="text-black-800 pb-2 max-w-md font-sans">
-              Lorem ITEMS, dolor sit amet consectetur adipisicing elit. Amet
-              iusto quisquam eius enim, deleniti assumenda rem sed fuga labore
-              commodi.
+            <p className="text-black-400 pb-2 max-w-md font-serif">
+              My Stuff allows you to catalog, organize and track your
+              possessions. You can create a comprehensive list of all your
+              belongings.
             </p>
             <div className="mb-20 md:mb-32 xl:mb-48">
               <Link
                 to="feature"
                 smooth
                 duration={500}
-                className="group text-white w-fit px-6 py-2 my-2 flex items-center rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 cursor-pointer"
+                className="group text-white w-fit px-6 py-2  ml-[8rem] my-2 flex items-center rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 cursor-pointer"
                 style={{ textDecoration: "none" }}
               >
                 Features

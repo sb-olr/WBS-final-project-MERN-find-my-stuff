@@ -7,6 +7,12 @@ const spaceIconOptions = [
     text: "warehouse",
   },
   { key: "boxes", value: "boxes", icon: "boxes", text: "boxes" },
+  {
+    key: "home icon",
+    value: "home icon",
+    icon: "home icon",
+    text: "home",
+  },
 
   {
     key: "bed",
