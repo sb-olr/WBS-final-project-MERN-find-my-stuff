@@ -63,7 +63,7 @@ const Footer = () => {
           </p>
         </div> */}
         <div className="container mx-auto text-center mt-3">
-          <p className="text-sm text-gray-500">Images courtesy - Icon8</p>
+          <p className="text-sm text-gray-500">Images courtesy - Google</p>
           <p className="text-xs text-gray-400">
             © 2023 My Stuff. All rights reserved.
           </p>
