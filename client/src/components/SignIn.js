@@ -45,7 +45,7 @@ function SignIn({ setToken }) {
 
   // Define a helper function to render error messages for form fields
   const renderErrorMessage = (name) =>
-    name === errorMessages.name && (
+    errorMessages && name === errorMessages.name && (
       <div className="error">{errorMessages.message}</div>
     );
 
