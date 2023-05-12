@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./index.css";
 import NavBar from "./components/NavBar";
@@ -18,7 +18,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 
 
 const App = () => {
-  const [token, setToken] = useState(localStorage.getItem("token"));
+  const token=localStorage.getItem("token");
 
   return (
     <Router>
